@@ -1,10 +1,10 @@
-import { list } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
+import { list } from '@keystone-6/core'
+import { allowAll } from '@keystone-6/core/access'
 import {
   text,
   relationship,
-} from '@keystone-6/core/fields';
-import { document } from '@keystone-6/fields-document';
+} from '@keystone-6/core/fields'
+import { document } from '@keystone-6/fields-document'
 
 export default list({
   // WARNING
@@ -70,4 +70,4 @@ export default list({
       },
     }),
   },
-});
+})

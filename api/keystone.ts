@@ -5,17 +5,17 @@
 // Keystone imports the default export of this file, expecting a Keystone configuration object
 //   you can find out more at https://keystonejs.com/docs/apis/config
 
-import { config } from '@keystone-6/core';
+import { config } from '@keystone-6/core'
 
 // schema
-import User from './schema/user';
-import Post from './schema/post';
-import Tag from './schema/tag';
-import Movie from './schema/movie';
+import User from './schema/user'
+import Post from './schema/post'
+import Tag from './schema/tag'
+import Movie from './schema/movie'
 
 // authentication is configured separately here too, but you might move this elsewhere
 // when you write your list-level access control functions, as they typically rely on session data
-import { withAuth, session } from './auth';
+import { withAuth, session } from './auth'
 
 export default withAuth(
   config({
@@ -33,5 +33,5 @@ export default withAuth(
       Movie,
     },
     session,
-  })
-);
+  }),
+)
