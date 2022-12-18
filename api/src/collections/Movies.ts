@@ -26,7 +26,7 @@ const Posts: CollectionConfig = {
       label: 'Publication Year',
       type: 'number',
     },
-  ]
-}
+  ],
+};
 
 export default Posts;

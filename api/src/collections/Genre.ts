@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 
-const Directors: CollectionConfig = {
-  slug: 'directors',
+const Genres: CollectionConfig = {
+  slug: 'genres',
   admin: {
     group: 'Movies',
     defaultColumns: ['name'],
@@ -44,4 +44,4 @@ const Directors: CollectionConfig = {
   ],
 };
 
-export default Directors;
+export default Genres;
