@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload/types';
 const FilmFormats: CollectionConfig = {
   slug: 'film-formats',
   admin: {
-    group: 'Media',
+    group: 'Copies',
     defaultColumns: ['name'],
     useAsTitle: 'name',
   },

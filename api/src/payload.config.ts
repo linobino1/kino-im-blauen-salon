@@ -8,6 +8,8 @@ import Languages from './collections/Languages';
 import Screenings from './collections/Screenings';
 import FilmRolls from './collections/FilmRolls';
 import FilmFormats from './collections/FilmFormats';
+import Media from './collections/Media';
+import Site from './globals/Site';
 
 export default buildConfig({
   serverURL: 'http://127.0.0.1:3000',
@@ -25,12 +27,20 @@ export default buildConfig({
     Genres,
     Languages,
 
-    // media
+    // film copies
     FilmRolls,
     FilmFormats,
 
     // screenings
     Screenings,
+
+    // media
+    Media,
+
+  ],
+  globals: [
+    // site
+    Site,
   ],
   localization: {
     locales: [

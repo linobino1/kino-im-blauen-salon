@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload/types';
 const FilmRolls: CollectionConfig = {
   slug: 'film-rolls',
   admin: {
-    group: 'Media',
+    group: 'Copies',
     defaultColumns: ['movie', 'filmFormat'],
     useAsTitle: 'movie.title',
   },

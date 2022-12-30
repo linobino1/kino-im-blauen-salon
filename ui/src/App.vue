@@ -1,10 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
-import { provide } from 'vue';
-import { DefaultApolloClient } from '@vue/apollo-composable';
-import apollo from '@/apollo';
-
-provide(DefaultApolloClient, apollo);
 </script>
 
 <template>
