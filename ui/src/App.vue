@@ -2,8 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router';
 import { provide } from 'vue';
 import { DefaultApolloClient } from '@vue/apollo-composable';
+import apollo from '@/apollo';
 import HelloWorld from './components/HelloWorld.vue';
-import apollo from '@/apollo.js';
 
 provide(DefaultApolloClient, apollo);
 </script>

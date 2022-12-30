@@ -9,9 +9,15 @@ module.exports = {
     '@vue/eslint-config-airbnb',
   ],
   settings: {
-    resolve: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.vue'],
+      },
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        // as defined in vite.config.js
+        map: [
+          ['@', './ui/src'],
+        ],
       },
     },
   },
