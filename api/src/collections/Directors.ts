@@ -13,7 +13,7 @@ const Directors: CollectionConfig = {
   fields: [
     {
       name: 'name',
-      type: 'text'
+      type: 'text',
     },
     {
       name: 'dateOfBirth',

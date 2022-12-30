@@ -1,9 +1,10 @@
 import { CollectionConfig } from 'payload/types';
+import t from '../translations';
 
-const Posts: CollectionConfig = {
+const Movies: CollectionConfig = {
   slug: 'movies',
   admin: {
-    group: 'Movies',
+    group: t('Movies'),
     defaultColumns: ['title', 'director', 'year'],
     useAsTitle: 'title',
   },
@@ -26,7 +27,14 @@ const Posts: CollectionConfig = {
       label: 'Publication Year',
       type: 'number',
     },
+    {
+      name: 'genres',
+      label: 'Genre',
+      type: 'relationship',
+      relationTo: 'genres',
+      hasMany: true,
+    },
   ],
 };
 
-export default Posts;
+export default Movies;
