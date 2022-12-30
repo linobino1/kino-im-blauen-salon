@@ -3,23 +3,16 @@ import { RouterLink, RouterView } from 'vue-router';
 import { provide } from 'vue';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 import apollo from '@/apollo';
-import HelloWorld from './components/HelloWorld.vue';
 
 provide(DefaultApolloClient, apollo);
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/movies">Movies</RouterLink>
-      </nav>
-    </div>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/movies">Movies</RouterLink>
+    </nav>
   </header>
 
   <RouterView />
@@ -29,11 +22,6 @@ provide(DefaultApolloClient, apollo);
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
 }
 
 nav {
