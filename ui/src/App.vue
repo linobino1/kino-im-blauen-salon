@@ -1,11 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 import { provide } from 'vue';
-import HelloWorld from './components/HelloWorld.vue'
+import { DefaultApolloClient } from '@vue/apollo-composable';
+import HelloWorld from './components/HelloWorld.vue';
 import apollo from '@/apollo.js';
-
-import { DefaultApolloClient } from '@vue/apollo-composable'
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
 provide(DefaultApolloClient, apollo);
 </script>
