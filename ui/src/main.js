@@ -12,6 +12,8 @@ import router from './router';
 
 import './assets/main.css';
 
+log.setLevel(log.levels.DEBUG);
+
 const conf = (await apollo.query({
   query: gql`
     query Site {
@@ -25,7 +27,7 @@ const conf = (await apollo.query({
     }
   `,
 })).data;
-log.debug(conf);
+log.debug('Site conf loaded', conf);
 
 const icon = useFavicon();
 icon.value = conf.Site.favicon?.url;
@@ -35,6 +37,8 @@ const head = createHead({
   title: conf.Site.title,
 });
 
+// app.config.globalProperties.conf = conf;
+app.provide('conf', conf);
 app.use(head);
 app.use(createPinia());
 app.use(router);

@@ -1,6 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MovieList from '@/views/MovieList.vue';
 import HomeView from '@/views/HomeView.vue';
+import LoginView from '@/views/LoginView.vue';
+import MeView from '@/views/MeView.vue';
+import apollo from '@/apollo';
+import gql from 'graphql-tag';
+
+const pages = (await apollo.query({
+  query: gql`
+    query RouterPages {
+      Pages {
+        docs {
+          title
+          slug 
+        }
+      }
+    }
+  `,
+})).data;
+
+// const componentMap = {
+//   static: undefined,
+//   screenings: ScreeningsList,
+// };
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,6 +32,20 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
+    {
+      path: '/auth/login',
+      name: 'login',
+      component: LoginView,
+    },
+    {
+      path: '/auth/me',
+      name: 'me',
+      component: MeView,
+    },
+    // {
+    //   path: '/:key',
+    //   name: 'page',
+    // },
     // {
     //   path: '/about',
     //   name: 'about',

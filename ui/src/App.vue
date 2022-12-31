@@ -1,73 +1,114 @@
 <script setup>
+import { inject } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
+import gql from 'graphql-tag';
+import { useQuery } from '@vue/apollo-composable';
+import MainNavigation from '@/components/MainNavigation.vue';
+import MeStatus from './components/MeStatus.vue';
+
+const conf = inject('conf');
+// const page = useQuery(gql`
+//   query Pages {
+//     Pages {
+//       docs {
+//         title
+//         type
+//       }
+//     }
+//   }
+// `);
+// const title = page.result.value.title;
+const pageImage = { url: undefined };
+
+const title = 'Page Title';
 </script>
 
 <template>
   <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/movies">Movies</RouterLink>
-    </nav>
+    <div class="header-section menu">
+      <div class="menu-section start">
+        <img class="header-logo" :src="conf.Site.favicon.url" alt="logo" />
+      </div>
+      <div class="menu-section middle">
+        <MainNavigation />
+      </div>
+      <div class="menu-section end">
+        <MeStatus />
+      </div>
+    </div>
+    <div class="header-section image">
+      <img src="pageImage.url" alt="non informative image" />
+    </div>
+    <div class="header-section title">
+      <h1>{{ title }}</h1>
+    </div>
   </header>
 
-  <RouterView />
+  <div class="main-wrapper">
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.header-section {
+  display: flex;
+  flex-direction: row;
+}
+.header-section.menu {
+  display: flex;
+  padding-left: 7vw;
+  padding-right: 7vw;
+}
+.header-section.image img {
+  min-width: 100%;
+  height: auto;
+  min-height: 2rem;
+}
+.header-section.title {
+  color: var(--color-black);
+  background: var(--color-white);
+  display: flex;
+  justify-content: center;
+}
+.header-section.title h1 {
+  margin: 0;
+}
+.header-logo {
+  width: 8rem;
+  height: auto;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.menu-section {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+  padding: .5rem;
+  font-size: var(--font-size-small);
+}
+.menu-section.middle {
+  width: 85%;
+  border-left: 1px solid var(--color-light-grey);
+  border-right: 1px solid var(--color-light-grey);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.main-wrapper {
+  display: flex;
+  background-color: var(--color-theme);
+  min-height: 100vh;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+main {
+  width: var(--page-max-width);
+  margin: 0 auto;
+  margin-top: 3rem;
+  color: var(--color-white);
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>

@@ -1,35 +1,57 @@
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
 
-  font-weight: normal;
+:root {
+  --page-max-width: 1000px;
+
+  --color-theme: #283587;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-theme-contrast: #f6cd03;
+  --color-light-grey: #dcdcdc;
+
+  --color-font-light: rgb(132, 132, 132);
+
+  --font-size-xxx-big: 1.9rem;
+  --font-size-normal: 1rem;
+  --font-size-small: .9rem;
+  --font-size-x-small: .8rem;
+
+  --font-weight-bold: 600;
+  --font-weight-normal: 400;
+
+  --line-height-xxx-big: 5.4rem;
+  --line-height-normal: 1.4rem;
+
+  --letter-spacing-big: 3px;
+}
+html {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
-a,
-.green {
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
 }
 
+h1 {
+  font-size: var(--font-size-xxx-big);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-xxx-big);
+  letter-spacing: var(--letter-spacing-big);
+  text-transform: uppercase;
+}
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
 
 @media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
 }
