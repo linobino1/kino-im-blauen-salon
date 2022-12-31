@@ -1,5 +1,7 @@
 import express from 'express';
 import payload from 'payload';
+import https from 'https';
+import fs from 'fs';
 
 require('dotenv').config();
 
@@ -16,10 +18,17 @@ payload.init({
   mongoURL: process.env.MONGODB_URI,
   express: app,
   onInit: () => {
-    payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+    payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
   },
-})
+});
 
 // Add your own express routes here
 
-app.listen(3000);
+const httpsServer = https.createServer({
+  key: fs.readFileSync('cert/key.pem'),
+  cert: fs.readFileSync('cert/cert.pem'),
+  passphrase: 'linobino1',
+}, app);
+
+httpsServer.listen(3000);
+// app.listen(3000);
