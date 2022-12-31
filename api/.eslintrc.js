@@ -15,4 +15,10 @@ module.exports = {
     ecmaVersion: 'latest',
     project: ['./api/tsconfig.json'],
   },
+  rules: {
+    'import/extensions': [0, {
+      js: 'never',
+      ts: 'never',
+    }],
+  },
 };
