@@ -1,8 +1,8 @@
 <script setup>
 import { inject } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
-import gql from 'graphql-tag';
-import { useQuery } from '@vue/apollo-composable';
+import { RouterView } from 'vue-router';
+// import gql from 'graphql-tag';
+// import { useQuery } from '@vue/apollo-composable';
 import MainNavigation from '@/components/MainNavigation.vue';
 import MeStatus from './components/MeStatus.vue';
 
@@ -17,10 +17,6 @@ const conf = inject('conf');
 //     }
 //   }
 // `);
-// const title = page.result.value.title;
-const pageImage = { url: undefined };
-
-const title = 'Page Title';
 </script>
 
 <template>
@@ -36,17 +32,11 @@ const title = 'Page Title';
         <MeStatus />
       </div>
     </div>
-    <div class="header-section image">
-      <img src="pageImage.url" alt="non informative image" />
-    </div>
-    <div class="header-section title">
-      <h1>{{ title }}</h1>
-    </div>
   </header>
 
   <div class="main-wrapper">
     <main>
-      <RouterView />
+      <RouterView ref="page" />
     </main>
   </div>
 </template>
@@ -64,20 +54,6 @@ header {
   display: flex;
   padding-left: 7vw;
   padding-right: 7vw;
-}
-.header-section.image img {
-  min-width: 100%;
-  height: auto;
-  min-height: 2rem;
-}
-.header-section.title {
-  color: var(--color-black);
-  background: var(--color-white);
-  display: flex;
-  justify-content: center;
-}
-.header-section.title h1 {
-  margin: 0;
 }
 .header-logo {
   width: 8rem;

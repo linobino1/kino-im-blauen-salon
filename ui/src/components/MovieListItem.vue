@@ -12,7 +12,7 @@ const props = defineProps({
   <div
     class="movie-item"
   >
-    <RouterLink :to="{ name: 'movie-detail', params: { id: props.movie.id } }">
+    <RouterLink :to="{ name: 'movie-detail', params: { slug: props.movie.slug } }">
       <div>{{ props.movie.director.name }} - {{ props.movie.title }}</div>
     </RouterLink>
 

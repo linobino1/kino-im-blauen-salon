@@ -3,48 +3,66 @@ import gql from 'graphql-tag';
 import useUserStore from '@/stores/user';
 import { useRoute } from 'vue-router';
 import { useQuery } from '@vue/apollo-composable';
+import { computed, provide } from 'vue';
+import HeaderTitle from '../components/HeaderTitle.vue';
 
 const userStore = useUserStore();
 const isInsider = userStore.isInsider();
 
 const variables = {
-  id: useRoute().params.id,
+  slug: useRoute().params.slug,
 };
 let query = gql`
-  query MovieDetailInsider ($id: String!) {
-    Movie(id: $id) {
-      title
-      director {
-        name
-        dateOfBirth
-        dateOfDeath
-      }
-    }
-  }
-`;
-if (isInsider) {
-  query = gql`
-    query MovieDetailPublic ($id: String!) {
-      Movie(id: $id) {
+  query MovieDetailInsider ($slug: String!) {
+    Movies(limit: 1 where: {slug: { equals: $slug } }) {
+      docs {
         title
         director {
           name
           dateOfBirth
           dateOfDeath
         }
-        mediaUrl
+      }
+    }
+  }
+`;
+if (isInsider) {
+  query = gql`
+    query MovieDetailPublic ($slug: String!) {
+      Movies(limit: 1 where: {slug: { equals: $slug } }) {
+        docs {
+          title
+          director {
+            name
+            dateOfBirth
+            dateOfDeath
+          }
+          mediaUrl
+        }
       }
     }
   `;
 }
 
-const { result } = useQuery(query, variables);
+const { result, loading, error } = useQuery(query, variables);
+const movie = computed(() => result?.value?.Movies?.docs[0]);
+
+provide('pageTitle', computed(() => movie.value.title));
+defineExpose({
+  pageTitle: computed(() => movie.value.title),
+});
+
 </script>
 
 <template>
-  <h2>{{ result.Movie.title }}</h2>
+  <div v-if="loading">Loading...</div>
+  <div v-if="error">Error</div>
+  <div v-if="movie">
+    <HeaderTitle :title="movie.title" />
+    <h2>{{ movie.title }}</h2>
 
-  <div v-if="isInsider">{{ result.Movie.mediaUrl }}</div>
+    <div v-if="isInsider">{{ movie.mediaUrl }}</div>
+  </div>
 </template>
 
 <style scoped>
