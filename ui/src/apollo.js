@@ -5,7 +5,7 @@ const cache = new InMemoryCache({
   addTypename: false,
 });
 
-const apolloClient = new ApolloClient({
+const apollo = new ApolloClient({
   cache,
   link: new HttpLink({
     uri: `${import.meta.env.VITE_APP_API_URL}/api/graphql`,
@@ -13,6 +13,6 @@ const apolloClient = new ApolloClient({
   }),
 });
 
-provideApolloClient(apolloClient);
+provideApolloClient(apollo);
 
-export default apolloClient;
+export default apollo;
