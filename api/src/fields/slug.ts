@@ -5,6 +5,8 @@ function createSlugField(forField: string): Field {
     name: 'slug',
     type: 'text',
     required: true,
+    unique: true,
+    index: true,
     hooks: {
       beforeChange: [
         // 'value' is this field's specific incoming value
