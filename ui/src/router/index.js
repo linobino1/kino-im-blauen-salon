@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MovieList from '@/views/MovieList.vue';
+import MovieDetail from '@/views/MovieDetail.vue';
 import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
 import MeView from '@/views/MeView.vue';
@@ -58,6 +59,11 @@ const router = createRouter({
       path: '/movies',
       name: 'movies',
       component: MovieList,
+    },
+    {
+      path: '/movies/:id',
+      name: 'movie-detail',
+      component: MovieDetail,
     },
   ],
 });

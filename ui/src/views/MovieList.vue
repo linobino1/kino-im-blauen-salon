@@ -1,16 +1,17 @@
 <script setup>
 import gql from 'graphql-tag';
 import { useQuery } from '@vue/apollo-composable';
-import MovieItem from '@/components/MovieItem.vue';
+import MovieListItem from '@/components/MovieListItem.vue';
 
 const query = gql`
   query AllMovies {
     Movies {
       docs {
-          title
-          director {
-            name
-          }
+        id
+        title
+        director {
+          name
+        }
       }
     }
   }
@@ -28,7 +29,7 @@ const { result, loading, error } = useQuery(query);
     v-for="movie in result.Movies.docs"
     :key="movie"
   >
-    <MovieItem :movie="movie" />
+    <MovieListItem :movie="movie" />
   </div>
 </template>
 
