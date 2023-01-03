@@ -2,8 +2,11 @@ import express from 'express';
 import payload from 'payload';
 import https from 'https';
 import fs from 'fs';
+import logger from './logger';
 
 require('dotenv').config();
+
+logger.level = 'debug';
 
 const app = express();
 
@@ -31,4 +34,3 @@ const httpsServer = https.createServer({
 }, app);
 
 httpsServer.listen(3000);
-// app.listen(3000);
