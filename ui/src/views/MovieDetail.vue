@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import useUserStore from '@/stores/user';
 import { useRoute } from 'vue-router';
 import { useQuery } from '@vue/apollo-composable';
-import { computed, provide } from 'vue';
+import { computed } from 'vue';
 import HeaderTitle from '../components/HeaderTitle.vue';
 
 const userStore = useUserStore();
@@ -46,12 +46,6 @@ if (isInsider) {
 
 const { result, loading, error } = useQuery(query, variables);
 const movie = computed(() => result?.value?.Movies?.docs[0]);
-
-provide('pageTitle', computed(() => movie.value.title));
-defineExpose({
-  pageTitle: computed(() => movie.value.title),
-});
-
 </script>
 
 <template>
