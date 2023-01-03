@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import t from '../translations';
+import createSlugField from '../fields/slug';
 
 const Movies: CollectionConfig = {
   slug: 'movies',
@@ -12,9 +13,21 @@ const Movies: CollectionConfig = {
     read: () => true,
   },
   fields: [
+    createSlugField('title'),
     {
       name: 'title',
       type: 'text',
+    },
+    {
+      name: 'mediaUrl',
+      type: 'text',
+      access: {
+        // create: ({ req: { user } }) => { ... },
+        read: ({ req: { user } }) => true,
+        // update: ({ req: { user } }) => { ... },
+        // delete: ({ req: { user } }) => { ... },
+        // admin: ({ req: { user } }) => { ... },
+      },
     },
     {
       name: 'director',
