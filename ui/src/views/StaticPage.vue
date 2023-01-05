@@ -2,7 +2,6 @@
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
 import { computed } from 'vue';
-import log from 'loglevel';
 import HeaderTitle from '../components/HeaderTitle.vue';
 import RichTextRender from '../components/RichTextRender.vue';
 
