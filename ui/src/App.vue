@@ -36,7 +36,7 @@ const conf = inject('conf');
 
   <div class="main-wrapper">
     <main>
-      <RouterView ref="page" />
+      <RouterView ref="page" :key="$route.fullPath" />
     </main>
   </div>
 </template>
