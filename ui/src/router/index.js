@@ -7,7 +7,6 @@ import LoginView from '@/views/LoginView.vue';
 import MeView from '@/views/MeView.vue';
 import apollo from '@/apollo';
 import gql from 'graphql-tag';
-import log from 'loglevel';
 
 const pages = (await apollo.query({
   query: gql`
@@ -21,11 +20,6 @@ const pages = (await apollo.query({
     }
   `,
 })).data;
-
-// const componentMap = {
-//   static: undefined,
-//   screenings: ScreeningsList,
-// };
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,19 +39,6 @@ const router = createRouter({
       name: 'me',
       component: MeView,
     },
-    // {
-    //   path: '/:slug',
-    //   name: 'page',
-    //   component: StaticPage,
-    // },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue'),
-    // },
     {
       path: '/movies',
       name: 'movies',
@@ -81,11 +62,9 @@ pages.Pages.docs.forEach((page) => {
   switch (page.type) {
     default:
       route.component = StaticPage;
-      // route.name = page.slug;
       break;
   }
   router.addRoute(route);
-  log.debug('added route', route);
 });
 
 export default router;
