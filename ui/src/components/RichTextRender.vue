@@ -3,7 +3,6 @@
 import { Fragment } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
-import log from 'loglevel';
 
 const props = defineProps({
   input: {
@@ -14,7 +13,6 @@ const props = defineProps({
 
 const serialize = (children) => children.map((node, i) => {
   if (Text.isText(node)) {
-    log.debug(node);
     let text = <span>{node.text}</span>;
 
     if (node.bold) {
