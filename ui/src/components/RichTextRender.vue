@@ -119,7 +119,10 @@ const serialize = (children) => children.map((node, i) => {
   }
 });
 
-const render = () => serialize(props.input);
+const render = () => {
+  if (!props.input) return '';
+  return serialize(props.input);
+};
 </script>
 
 <template>
