@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import StaticPage from '@/views/StaticPage.vue';
 import MovieList from '@/views/MovieList.vue';
 import MovieDetail from '@/views/MovieDetail.vue';
 import HomeView from '@/views/HomeView.vue';
@@ -6,13 +7,14 @@ import LoginView from '@/views/LoginView.vue';
 import MeView from '@/views/MeView.vue';
 import apollo from '@/apollo';
 import gql from 'graphql-tag';
+import log from 'loglevel';
 
 const pages = (await apollo.query({
   query: gql`
     query RouterPages {
       Pages {
         docs {
-          title
+          id
           slug 
         }
       }
@@ -44,8 +46,9 @@ const router = createRouter({
       component: MeView,
     },
     // {
-    //   path: '/:key',
+    //   path: '/:slug',
     //   name: 'page',
+    //   component: StaticPage,
     // },
     // {
     //   path: '/about',
@@ -66,6 +69,23 @@ const router = createRouter({
       component: MovieDetail,
     },
   ],
+});
+
+pages.Pages.docs.forEach((page) => {
+  const route = {
+    path: `/${page.slug}`,
+    props: {
+      id: page.id,
+    },
+  };
+  switch (page.type) {
+    default:
+      route.component = StaticPage;
+      // route.name = page.slug;
+      break;
+  }
+  router.addRoute(route);
+  log.debug('added route', route);
 });
 
 export default router;

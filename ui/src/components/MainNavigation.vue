@@ -1,5 +1,33 @@
+<script setup>
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
+
+const query = gql`
+  query MainNavigation {
+    Navigations(where: {type: { equals: main } }) {
+      docs {
+        items {
+          page {
+            id
+            slug
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+const { result } = useQuery(query);
+</script>
 <template>
   <nav>
+    <RouterLink
+      v-for="{ page } in result?.Navigations.docs[0].items"
+      :key="page"
+      :to="`/${page.slug}`"
+    >
+      {{ page.title }}
+    </RouterLink>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/movies">Movies</RouterLink>
   </nav>

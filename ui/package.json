@@ -11,15 +11,18 @@
   "dependencies": {
     "@apollo/client": "^3.7.3",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vue/apollo-composable": "^4.0.0-beta.1",
     "@vueuse/core": "^9.9.0",
     "@vueuse/head": "^1.0.22",
     "axios": "^1.2.2",
+    "escape-html": "^1.0.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "loglevel": "^1.8.1",
     "pinia": "^2.0.28",
     "react": "^18.2.0",
+    "slate": "^0.87.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
