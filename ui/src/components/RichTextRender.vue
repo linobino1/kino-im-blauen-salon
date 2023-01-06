@@ -3,6 +3,7 @@
 import { Fragment } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
+import log from 'loglevel';
 
 const props = defineProps({
   input: {
@@ -106,6 +107,15 @@ const serialize = (children) => children.map((node, i) => {
         >
           {serialize(node.children)}
         </a>
+      );
+    case 'upload':
+      log.debug(node);
+      return (
+        <img
+          style={{ width: '100%' }}
+          src={node.value.sizes.tablet.url}
+          alt={node.value.filename}
+        />
       );
 
     default:
