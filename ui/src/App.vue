@@ -1,22 +1,10 @@
 <script setup>
 import { inject } from 'vue';
 import { RouterView } from 'vue-router';
-// import gql from 'graphql-tag';
-// import { useQuery } from '@vue/apollo-composable';
 import MainNavigation from '@/components/MainNavigation.vue';
 import MeStatus from './components/MeStatus.vue';
 
 const conf = inject('conf');
-// const page = useQuery(gql`
-//   query Pages {
-//     Pages {
-//       docs {
-//         title
-//         type
-//       }
-//     }
-//   }
-// `);
 </script>
 
 <template>
@@ -41,7 +29,7 @@ const conf = inject('conf');
   </div>
 </template>
 
-<style scoped>
+<style>
 header {
   display: flex;
   flex-direction: column;
@@ -63,7 +51,7 @@ header {
 .menu-section {
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: center;
   justify-content: end;
   padding: .5rem;
   font-size: var(--font-size-small);
@@ -80,10 +68,7 @@ header {
   min-height: 100vh;
 }
 main {
-  width: var(--page-max-width);
-  margin: 0 auto;
-  margin-top: 3rem;
-  color: var(--color-white);
+  width: 100%;
 }
 @media (min-width: 1024px) {
 }
