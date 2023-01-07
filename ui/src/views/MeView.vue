@@ -2,6 +2,8 @@
 import { useRouter } from 'vue-router';
 import useUserStore from '@/stores/user';
 import log from 'loglevel';
+import HeaderTitle from '../components/HeaderTitle.vue';
+import MainContent from '../components/MainContent.vue';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -18,10 +20,13 @@ function logout() {
 </script>
 
 <template>
-  <button
-    @click="logout()"
-    type="button"
-  >Logout</button>
+  <HeaderTitle title="My Account" />
+  <MainContent>
+    <button
+      @click="logout()"
+      type="button"
+    >Logout</button>
+  </MainContent>
 </template>
 
 <style scoped>

@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router';
 import { useQuery } from '@vue/apollo-composable';
 import { computed } from 'vue';
 import HeaderTitle from '../components/HeaderTitle.vue';
+import MainContent from '../components/MainContent.vue';
 
 const userStore = useUserStore();
 const isInsider = userStore.isInsider();
@@ -53,9 +54,10 @@ const movie = computed(() => result?.value?.Movies?.docs[0]);
   <div v-if="error">Error</div>
   <div v-if="movie">
     <HeaderTitle :title="movie.title" />
-    <h2>{{ movie.title }}</h2>
-
-    <div v-if="isInsider">{{ movie.mediaUrl }}</div>
+    <MainContent>
+      <h2>{{ movie.title }}</h2>
+      <div v-if="isInsider">{{ movie.mediaUrl }}</div>
+    </MainContent>
   </div>
 </template>
 

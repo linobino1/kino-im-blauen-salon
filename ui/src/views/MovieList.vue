@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@vue/apollo-composable';
 import MovieListItem from '@/components/MovieListItem.vue';
 import HeaderTitle from '../components/HeaderTitle.vue';
+import MainContent from '../components/MainContent.vue';
 
 const query = gql`
   query AllMovies {
@@ -24,16 +25,18 @@ const { result, loading, error } = useQuery(query);
 
 <template>
   <HeaderTitle title="Movies" />
-  <p v-if="error">Something went wrong...</p>
-  <p v-if="loading">Loading...</p>
-  <div
-    class="movies-list"
-    v-else
-    v-for="movie in result.Movies.docs"
-    :key="movie"
-  >
-    <MovieListItem :movie="movie" />
-  </div>
+  <MainContent>
+    <p v-if="error">Something went wrong...</p>
+    <p v-if="loading">Loading...</p>
+    <div
+      class="movies-list"
+      v-else
+      v-for="movie in result.Movies.docs"
+      :key="movie"
+    >
+      <MovieListItem :movie="movie" />
+    </div>
+  </MainContent>
 </template>
 
 <style scoped>

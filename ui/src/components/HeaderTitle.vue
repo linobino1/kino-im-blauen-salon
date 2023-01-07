@@ -11,12 +11,15 @@ const props = defineProps({
   <h1 class="page-header-title">{{ props?.title }}</h1>
 </template>
 
-<style scoped>
+<style>
 .page-header-title {
   color: var(--color-black);
   background: var(--color-white);
   display: flex;
   justify-content: center;
   margin: 0;
+}
+.page-header-title:first-child {
+  margin-top: 2rem;
 }
 </style>
