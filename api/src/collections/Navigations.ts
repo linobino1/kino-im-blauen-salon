@@ -70,6 +70,7 @@ const Navigations: CollectionConfig = {
           name: 'page',
           type: 'relationship',
           relationTo: 'pages',
+          required: true,
           admin: {
             condition: (data, siblingData) => siblingData.type === 'internal',
           },
@@ -87,7 +88,6 @@ const Navigations: CollectionConfig = {
           name: 'icon',
           type: 'upload',
           relationTo: 'media',
-          required: true,
           admin: {
             condition: (data, siblingData) => siblingData.type === 'external',
           },
