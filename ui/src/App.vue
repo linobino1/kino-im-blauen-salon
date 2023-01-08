@@ -22,11 +22,9 @@ const conf = inject('conf');
     </div>
   </header>
 
-  <div class="main-wrapper">
-    <main>
-      <RouterView ref="page" :key="$route.fullPath" />
-    </main>
-  </div>
+  <main>
+    <RouterView ref="page" :key="$route.fullPath" />
+  </main>
 </template>
 
 <style>
@@ -62,12 +60,12 @@ header {
   border-right: 1px solid var(--color-light-grey);
 }
 
-.main-wrapper {
+main {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--color-theme);
   min-height: 100vh;
-}
-main {
   width: 100%;
 }
 @media (min-width: 1024px) {
