@@ -8,7 +8,7 @@ import MainContent from '../components/MainContent.vue';
 import RichTextRender from '../components/RichTextRender.vue';
 
 const props = defineProps({
-  id: {
+  pageId: {
     default: undefined,
   },
 });
@@ -26,7 +26,7 @@ const query = gql`
   }
 `;
 const variables = {
-  id: props.id,
+  id: props.pageId,
 };
 const { result, error, loading } = useQuery(query, variables);
 

@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import createSlugField from '../fields/slug';
 
 const Screenings: CollectionConfig = {
   slug: 'screenings',
@@ -15,6 +16,7 @@ const Screenings: CollectionConfig = {
       name: 'title',
       type: 'text',
     },
+    createSlugField('title'),
     {
       name: 'date',
       type: 'date',

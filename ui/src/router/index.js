@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import StaticPage from '@/views/StaticPage.vue';
 import MovieList from '@/views/MovieList.vue';
 import MovieDetail from '@/views/MovieDetail.vue';
+import ScreeningsList from '@/views/ScreeningsList.vue';
 import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
 import MeView from '@/views/MeView.vue';
@@ -13,6 +14,7 @@ const pages = (await apollo.query({
     query RouterPages {
       Pages {
         docs {
+          type
           id
           slug 
         }
@@ -49,6 +51,11 @@ const router = createRouter({
       name: 'movie-detail',
       component: MovieDetail,
     },
+    {
+      path: '/screening/:slug',
+      name: 'screening-detail',
+      component: MovieDetail,
+    },
   ],
 });
 
@@ -57,10 +64,15 @@ pages.Pages.docs.forEach((page) => {
   const route = {
     path: `/${page.slug}`,
     props: {
-      id: page.id,
+      pageId: page.id,
     },
   };
   switch (page.type) {
+    case 'screenings_list':
+      route.component = ScreeningsList;
+      break;
+
+    case 'static':
     default:
       route.component = StaticPage;
       break;

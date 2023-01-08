@@ -16,6 +16,7 @@
     "@vueuse/core": "^9.9.0",
     "@vueuse/head": "^1.0.22",
     "axios": "^1.2.2",
+    "date-fns": "^2.29.3",
     "escape-html": "^1.0.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",

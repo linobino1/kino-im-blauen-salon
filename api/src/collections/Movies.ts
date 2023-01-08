@@ -19,6 +19,11 @@ const Movies: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'header',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       name: 'mediaUrl',
       type: 'text',
       access: {
