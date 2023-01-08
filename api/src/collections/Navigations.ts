@@ -23,44 +23,85 @@ const Navigations: CollectionConfig = {
           label: 'Footer',
           value: 'footer',
         },
+        {
+          label: 'Social Media',
+          value: 'social',
+        },
       ],
     },
     {
       name: 'items',
       type: 'array',
       required: true,
+      minRows: 1,
       maxRows: 8,
+      admin: {
+        components: {
+          RowLabel: ({ data }) => data.name,
+        },
+      },
       fields: [
+        {
+          name: 'type',
+          type: 'radio',
+          defaultValue: 'internal',
+          options: [
+            {
+              label: 'Internal Link',
+              value: 'internal',
+            },
+            {
+              label: 'External Link',
+              value: 'external',
+            },
+            {
+              label: 'Submenu',
+              value: 'submenu',
+            },
+          ],
+        },
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+        },
+        // internal link
         {
           name: 'page',
           type: 'relationship',
           relationTo: 'pages',
-          required: true,
-          unique: true,
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'internal',
+          },
         },
-      ],
-    },
-    // Footer specific
-    {
-      name: 'socialLinks',
-      type: 'array',
-      fields: [
+        // external link
         {
-          name: 'item',
+          name: 'url',
+          type: 'text',
+          required: true,
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'external',
+          },
+        },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'external',
+          },
+        },
+        // submenu
+        {
+          name: 'submenu',
           type: 'relationship',
-          relationTo: 'socialLinks',
+          relationTo: 'navigations',
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'submenu',
+          },
         },
       ],
-      admin: {
-        condition: (data) => data.type === 'footer',
-      },
-    },
-    {
-      name: 'adress',
-      type: 'richText',
-      admin: {
-        condition: (data) => data.type === 'footer',
-      },
     },
   ],
 };

@@ -15,11 +15,6 @@ const Site: GlobalConfig = {
       relationTo: 'media',
     },
     {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
       name: 'title',
       type: 'text',
     },
@@ -27,6 +22,10 @@ const Site: GlobalConfig = {
       name: 'homePage',
       type: 'relationship',
       relationTo: 'pages',
+    },
+    {
+      name: 'adress',
+      type: 'richText',
     },
   ],
 };

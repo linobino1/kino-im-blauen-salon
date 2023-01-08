@@ -1,9 +1,9 @@
 <script setup>
 import { inject } from 'vue';
 import { RouterView } from 'vue-router';
-import MainNavigation from '@/components/MainNavigation.vue';
 import MeStatus from './components/MeStatus.vue';
 import MainFooter from './components/MainFooter.vue';
+import DynamicNavigation from './components/DynamicNavigation.vue';
 
 const conf = inject('conf');
 </script>
@@ -17,7 +17,7 @@ const conf = inject('conf');
         </RouterLink>
       </div>
       <div class="menu-section middle">
-        <MainNavigation />
+        <DynamicNavigation type="main" />
       </div>
       <div class="menu-section end">
         <MeStatus />
@@ -65,6 +65,26 @@ header {
   border-right: 1px solid var(--color-light-grey);
 }
 
+/* Main Navigation  ************************************************************/
+nav.main {
+  justify-self: end;
+}
+nav.main a.router-link-exact-active {
+  color: var(--color-black);
+}
+nav.main a.router-link-exact-active:hover {
+  color: inherit;
+}
+nav.main a {
+  display: inline-block;
+  padding: .5rem 1rem;
+  color: var(--color-font-light);
+  text-transform: uppercase;
+}
+nav.main a:hover {
+  color: var(--color-theme-contrast);
+}
+/* Main Navigation End   *******************************************************/
 main {
   display: flex;
   flex-direction: column;
