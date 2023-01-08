@@ -4,11 +4,10 @@ function createSlugField(forField: string): Field {
   return {
     name: 'slug',
     type: 'text',
-    required: true,
     unique: true,
     index: true,
     hooks: {
-      beforeChange: [
+      beforeValidate: [
         // 'value' is this field's specific incoming value
         // 'data' is all of the incoming values for the document
         async ({ value, data }) => data?.[forField]?.replace(/ /g, '-').toLowerCase() ?? value,
