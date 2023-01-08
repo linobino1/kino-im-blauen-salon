@@ -3,7 +3,6 @@
 import { Fragment } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
-import log from 'loglevel';
 
 const props = defineProps({
   input: {
@@ -109,7 +108,6 @@ const serialize = (children) => children.map((node, i) => {
         </a>
       );
     case 'upload':
-      log.debug(node);
       return (
         <img
           style={{ width: '100%' }}
