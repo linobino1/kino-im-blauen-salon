@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <header v-if="props.image">
+  <header class="main" v-if="props.image">
     <img
       class="page-header-image"
       :src="props.image?.url"
@@ -18,13 +18,13 @@ const props = defineProps({
     />
     <div class="page-header-image-overlay">
       <button type="button" class="back-button" aria-label="back" />
-      <DynamicNavigation type="social" />
+      <DynamicNavigation type="social" class="header" />
     </div>
   </header>
 </template>
 
-<style scoped>
-header {
+<style>
+header.main {
   width: 100vw;
   aspect-ratio: 845 / 380;
   overflow: hidden;
@@ -46,6 +46,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 .back-button {
   appearance: none;
@@ -61,5 +62,11 @@ header {
 nav.social {
   display: flex;
   flex-direction: row;
+}
+header.main .back-button:hover,
+nav.social.header a:hover {
+  cursor: pointer;
+  filter: brightness(0.5);
+  transition: filter 0.4s;
 }
 </style>

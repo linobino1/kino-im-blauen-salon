@@ -20,7 +20,7 @@ const { result } = useQuery(query);
       <RichTextRender :input="result?.Site?.adress" />
     </div>
     <div class="footer-center">
-      <DynamicNavigation type="social" />
+      <DynamicNavigation type="social" class="footer" />
       <DynamicNavigation type="footer" />
     </div>
     <div class="footer-newsletter">
@@ -67,7 +67,7 @@ nav.social a img {
   height: 100%;
   width: auto;
 }
-nav.social a::before {
+nav.social.footer a::before {
   content: ' ';
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -76,7 +76,7 @@ nav.social a::before {
   opacity: 0;
   transition: opacity .4s;
 }
-nav.social a:hover::before {
+nav.social.footer a:hover::before {
   opacity: 1;
 }
 
