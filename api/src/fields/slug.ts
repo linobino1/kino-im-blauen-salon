@@ -1,4 +1,5 @@
 import { Field } from 'payload/types';
+import slugify from 'slugify';
 
 function createSlugField(forField: string): Field {
   return {
@@ -10,7 +11,7 @@ function createSlugField(forField: string): Field {
       beforeValidate: [
         // 'value' is this field's specific incoming value
         // 'data' is all of the incoming values for the document
-        async ({ value, data }) => data?.[forField]?.replace(/ /g, '-').toLowerCase() ?? value,
+        async ({ value, data }) => (data?.[forField] ? slugify(data[forField]) : value),
       ],
     },
     admin: {
