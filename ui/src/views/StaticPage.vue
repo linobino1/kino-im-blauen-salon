@@ -36,7 +36,7 @@ const page = computed(() => result?.value?.Page);
 <template>
   <div v-if="loading">Loading...</div>
   <div v-if="error">Error</div>
-  <div v-if="page">
+  <div v-if="page" style="display: contents;">
     <HeaderImage :image="page.header" />
     <HeaderTitle :title="page.title" />
     <MainContent>
