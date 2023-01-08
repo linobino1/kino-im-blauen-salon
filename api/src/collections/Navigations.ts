@@ -4,6 +4,8 @@ const Navigations: CollectionConfig = {
   slug: 'navigations',
   admin: {
     group: 'Site',
+    useAsTitle: 'type',
+    defaultColumns: ['type'],
   },
   access: {
     read: () => true,
@@ -37,6 +39,28 @@ const Navigations: CollectionConfig = {
           unique: true,
         },
       ],
+    },
+    // Footer specific
+    {
+      name: 'socialLinks',
+      type: 'array',
+      fields: [
+        {
+          name: 'item',
+          type: 'relationship',
+          relationTo: 'socialLinks',
+        },
+      ],
+      admin: {
+        condition: (data) => data.type === 'footer',
+      },
+    },
+    {
+      name: 'adress',
+      type: 'richText',
+      admin: {
+        condition: (data) => data.type === 'footer',
+      },
     },
   ],
 };

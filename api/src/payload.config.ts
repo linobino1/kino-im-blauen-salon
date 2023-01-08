@@ -12,6 +12,7 @@ import Media from './collections/Media';
 import Site from './globals/Site';
 import Pages from './collections/Pages';
 import Navigations from './collections/Navigations';
+import SocialLinks from './collections/SocialLinks';
 
 export default buildConfig({
   serverURL: 'https://127.0.0.1:3000',
@@ -49,6 +50,7 @@ export default buildConfig({
     // site
     Pages,
     Navigations,
+    SocialLinks,
   ],
   globals: [
     // site

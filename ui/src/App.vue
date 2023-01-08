@@ -3,6 +3,7 @@ import { inject } from 'vue';
 import { RouterView } from 'vue-router';
 import MainNavigation from '@/components/MainNavigation.vue';
 import MeStatus from './components/MeStatus.vue';
+import MainFooter from './components/MainFooter.vue';
 
 const conf = inject('conf');
 </script>
@@ -11,7 +12,9 @@ const conf = inject('conf');
   <header>
     <div class="header-section menu">
       <div class="menu-section start">
-        <img class="header-logo" :src="conf.Site.favicon.url" alt="logo" />
+        <RouterLink :to="{ name: 'home' }">
+          <img class="header-logo" :src="conf.Site.favicon.url" alt="logo" />
+        </RouterLink>
       </div>
       <div class="menu-section middle">
         <MainNavigation />
@@ -25,6 +28,8 @@ const conf = inject('conf');
   <main>
     <RouterView ref="page" :key="$route.fullPath" />
   </main>
+
+  <MainFooter />
 </template>
 
 <style>
