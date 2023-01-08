@@ -8,4 +8,6 @@ const logger = pino({
   },
 });
 
+logger.info(`loglevel: ${logger.level}`);
+
 export default logger;
