@@ -20,6 +20,7 @@ const mmm = format(dateDT, 'MMM');
 <template>
   <RouterLink
     :to="{ name: 'screening-detail', params: { slug: props.screening.slug } }"
+    class="link-theme"
   >
     <div
       class="screening-list-item"
@@ -42,17 +43,28 @@ const mmm = format(dateDT, 'MMM');
         <div class="screening-title">
           {{ screening.title }}
         </div>
-        <div class="footer">More Info</div>
+        <div class="footer">
+          <RouterLink
+            :to="{ name: 'screening-detail', params: { slug: props.screening.slug } }"
+          >
+            More Info
+          </RouterLink>
+        </div>
       </div>
     </div>
   </RouterLink>
 </template>
 
 <style>
+.link-theme:hover {
+  transition: all .3s ease-in-out;
+  transform: translate(0px, -2%);
+}
 .screening-list-item {
   position: relative;
   width: 100%;
   background-color: var(--color-white);
+  color: var(--color-black);
   box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 50%);
   display: flex;
   flex-direction: column;
@@ -92,8 +104,8 @@ const mmm = format(dateDT, 'MMM');
 }
 .screening-date {
   position: absolute;
-  left: 1rem;
-  top: -.2rem;
+  left: 0.5rem;
+  top: -0.6rem;
   font-family: "Tahoma", Sans-serif;
   text-transform: uppercase;
   text-shadow: 0px 0px 10px rgb(0 0 0 / 30%);

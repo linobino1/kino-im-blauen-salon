@@ -32,6 +32,7 @@
 }
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 html {
   font-family: 'DM Sans', sans-serif;
@@ -55,6 +56,11 @@ h1 {
   line-height: var(--line-height-xxx-big);
   letter-spacing: var(--letter-spacing-big);
   text-transform: uppercase;
+}
+.link-theme,
+.link-theme a {
+  text-decoration: none;
+  color: inherit;
 }
 @media (hover: hover) {
   a:hover {
