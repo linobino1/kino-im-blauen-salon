@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <header>
+  <header v-if="props.image">
     <img
       class="page-header-image"
       :src="props.image?.url"
