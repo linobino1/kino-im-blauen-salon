@@ -5,6 +5,7 @@ import { computed } from 'vue';
 import ScreeningListItem from '../components/ScreeningListItem.vue';
 import HeaderTitle from '../components/HeaderTitle.vue';
 import MainContent from '../components/MainContent.vue';
+import HeaderImage from '../components/HeaderImage.vue';
 
 const props = defineProps({
   pageId: {
@@ -55,6 +56,7 @@ const screenings = computed(() => result?.value?.Screenings?.docs);
   <p v-if="error">Something went wrong...</p>
   <p v-if="loading">Loading...</p>
   <div v-else style="display: contents;">
+    <HeaderImage :image="page.header" />
     <HeaderTitle :title="page.title" />
     <MainContent>
       <div
