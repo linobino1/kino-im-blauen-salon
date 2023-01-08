@@ -3,13 +3,12 @@ import StaticPage from '@/views/StaticPage.vue';
 import MovieList from '@/views/MovieList.vue';
 import MovieDetail from '@/views/MovieDetail.vue';
 import ScreeningsList from '@/views/ScreeningsList.vue';
-import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
 import MeView from '@/views/MeView.vue';
 import apollo from '@/apollo';
 import gql from 'graphql-tag';
 
-const pages = (await apollo.query({
+const result = (await apollo.query({
   query: gql`
     query RouterPages {
       Pages {
@@ -17,6 +16,11 @@ const pages = (await apollo.query({
           type
           id
           slug 
+        }
+      }
+      Site {
+        homePage {
+          slug
         }
       }
     }
@@ -29,7 +33,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      redirect: result.Site.homePage.slug,
     },
     {
       path: '/auth/login',
@@ -60,7 +64,7 @@ const router = createRouter({
 });
 
 // add dynamic pages
-pages.Pages.docs.forEach((page) => {
+result.Pages.docs.forEach((page) => {
   const route = {
     path: `/${page.slug}`,
     props: {

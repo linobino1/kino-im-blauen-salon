@@ -23,6 +23,11 @@ const Site: GlobalConfig = {
       name: 'title',
       type: 'text',
     },
+    {
+      name: 'homePage',
+      type: 'relationship',
+      relationTo: 'pages',
+    },
   ],
 };
 

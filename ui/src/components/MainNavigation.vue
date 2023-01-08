@@ -28,7 +28,6 @@ const { result } = useQuery(query);
     >
       {{ page.title }}
     </RouterLink>
-    <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/movies">Movies</RouterLink>
   </nav>
 </template>
