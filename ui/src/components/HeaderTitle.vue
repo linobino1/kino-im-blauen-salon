@@ -13,6 +13,7 @@ const props = defineProps({
 
 <style>
 .page-header-title {
+  width: 100%;
   color: var(--color-black);
   background: var(--color-white);
   display: flex;
