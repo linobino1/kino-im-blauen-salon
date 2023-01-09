@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 import createSlugField from '../fields/slug';
 
-const Directors: CollectionConfig = {
+const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     group: 'Site',
@@ -47,4 +47,4 @@ const Directors: CollectionConfig = {
   ],
 };
 
-export default Directors;
+export default Pages;
