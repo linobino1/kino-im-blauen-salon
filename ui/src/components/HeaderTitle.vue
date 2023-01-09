@@ -19,6 +19,12 @@ const props = defineProps({
   display: flex;
   justify-content: center;
   margin: 0;
+  font-size: var(--font-size-xxx-big);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-big);
+  text-transform: uppercase;
+  padding: 1rem .5rem;
 }
 .page-header-title:first-child {
   margin-top: 2rem;

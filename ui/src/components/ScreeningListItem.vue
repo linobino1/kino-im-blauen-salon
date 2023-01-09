@@ -124,8 +124,8 @@ const mmm = format(dateDT, 'MMM');
   line-height: var(--font-size-normal);
 }
 .screening-date .dd {
-  font-size: var(--font-size-xxxx-big);
+  font-size: 2.5rem;
   font-weight: var(--font-weight-bold);
-  line-height: var(--font-size-xxxx-big);
+  line-height: 2.5rem;
 }
 </style>

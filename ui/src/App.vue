@@ -9,20 +9,12 @@ const conf = inject('conf');
 </script>
 
 <template>
-  <header>
-    <div class="header-section menu">
-      <div class="menu-section start">
-        <RouterLink :to="{ name: 'home' }">
-          <img class="header-logo" :src="conf.Site.favicon.url" alt="logo" />
-        </RouterLink>
-      </div>
-      <div class="menu-section middle">
-        <DynamicNavigation type="main" />
-      </div>
-      <div class="menu-section end">
-        <MeStatus />
-      </div>
-    </div>
+  <header class="main">
+    <RouterLink :to="{ name: 'home' }">
+      <img class="main-logo" :src="conf.Site.favicon.url" alt="logo" />
+    </RouterLink>
+    <DynamicNavigation type="main" />
+    <MeStatus />
   </header>
 
   <main>
@@ -33,36 +25,34 @@ const conf = inject('conf');
 </template>
 
 <style>
-header {
-  display: flex;
-  flex-direction: column;
-}
-.header-section {
+header.main {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  padding: 0 10%;
+  font-size: var(--font-size-small);
 }
-.header-section.menu {
-  display: flex;
-  padding-left: 7vw;
-  padding-right: 7vw;
-}
-.header-logo {
-  width: 8rem;
-  height: auto;
-}
-
-.menu-section {
+header.main > * {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: end;
   padding: .5rem;
-  font-size: var(--font-size-small);
 }
-.menu-section.middle {
+header.main > *:first-child {
+  padding-left: 0;
+}
+header.main > *:last-child {
+  padding-right: 0;
+}
+nav.main {
   width: 85%;
   border-left: 1px solid var(--color-light-grey);
   border-right: 1px solid var(--color-light-grey);
+}
+.main-logo {
+  width: 8rem;
+  height: auto;
 }
 
 /* Main Navigation  ************************************************************/
