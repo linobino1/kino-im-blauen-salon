@@ -132,5 +132,7 @@ const render = () => {
 </script>
 
 <template>
-  <render />
+  <div>
+    <render />
+  </div>
 </template>

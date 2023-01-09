@@ -29,6 +29,10 @@ const Pages: CollectionConfig = {
           label: 'Screenings List',
           value: 'screenings_list',
         },
+        {
+          label: 'Blog',
+          value: 'posts_list',
+        },
       ],
       defaultValue: 'static',
     },

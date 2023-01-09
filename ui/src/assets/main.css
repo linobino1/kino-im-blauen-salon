@@ -6,15 +6,15 @@
   --color-theme: #283587;
   --color-white: #FFFFFF;
   --color-black: #000000;
-  --color-theme-contrast: #f6cd03;
+  --color-theme-contrast: #F6CD03;
+  --color-theme-contrast-light: #FF9EE6;
   --color-theme-contrast-dark: #D63312;
   --color-light-grey: #dcdcdc;
   --color-light-grey-readable: #C1C1C1;
 
   --color-font-light: rgb(132, 132, 132);
 
-  --font-size-xxxx-big: 2.5rem;
-  --font-size-xxx-big: 1.9rem;
+  --font-size-xxx-big: 2.5rem;
   --font-size-big: 1.25rem;
   --font-size-normal: 1rem;
   --font-size-small: .9rem;
@@ -24,11 +24,21 @@
   --font-weight-normal: 400;
   --font-weight-light: 200;
 
-  --line-height-xxx-big: 5.4rem;
-  --line-height-big: 1.5rem;
-  --line-height-normal: 1.4rem;
+  --line-height-xxx-big: 2em;
+  --line-height-big: 1.5em;
+  --line-height-normal: 1.4em;
 
-  --letter-spacing-big: 3px;
+  --letter-spacing-big: .1em;
+  --letter-spacing-x-big: .11em;
+}
+@media (max-width: 768px) {
+  :root {
+    --font-size-xxx-big: 1.9rem;
+    --font-size-big: 1.25rem;
+    --font-size-normal: 1rem;
+    --font-size-small: .9rem;
+    --font-size-x-small: .8rem;
+  }
 }
 * {
   box-sizing: border-box;
@@ -50,12 +60,10 @@ a {
   transition: 0.4s;
 }
 
-h1 {
-  font-size: var(--font-size-xxx-big);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-xxx-big);
-  letter-spacing: var(--letter-spacing-big);
-  text-transform: uppercase;
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-font-light);
+  outline: 0;
 }
 .link-theme,
 .link-theme a {
