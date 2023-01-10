@@ -5,7 +5,7 @@ const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     group: 'Blog',
-    defaultColumns: ['title', '_status'],
+    defaultColumns: ['date', 'title', '_status'],
     useAsTitle: 'title',
   },
   access: {
