@@ -22,7 +22,7 @@ const query = gql`
         filename
       }
     }
-    Posts {
+    Posts(sort: "-date") {
       docs {
         title
         slug
@@ -52,16 +52,15 @@ const posts = computed(() => result?.value?.Posts?.docs);
     <HeaderImage :image="page.header" />
     <HeaderTitle :title="page.title" />
     <MainContent>
-      <template v-if="posts.length">
+      <div v-if="posts.length" class="posts-list">
         <div
           v-for="post in posts"
           :key="post"
-          class="posts-list"
         >
           <PostsListItem :post="post" />
           <hr />
         </div>
-      </template>
+      </div>
       <div v-else class="posts-empty">No posts.</div>
     </MainContent>
   </div>
@@ -79,5 +78,8 @@ const posts = computed(() => result?.value?.Posts?.docs);
   align-items: center;
   width: 100%;
   height: 20rem;
+}
+.posts-list hr {
+
 }
 </style>

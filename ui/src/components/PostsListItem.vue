@@ -11,13 +11,6 @@ const props = defineProps({
 
 const dateDT = new Date(props.post.date);
 const date = format(dateDT, 'PPP', { locale: de });
-const postRoute = {
-  name: 'post-detail',
-  params: {
-    slug: props.post.slug,
-  },
-};
-
 </script>
 
 <template>
@@ -28,7 +21,7 @@ const postRoute = {
       <div class="img-wrapper">
         <RouterLink
           v-if="post.link"
-          :to="postRoute"
+          :to="post.link"
           class="link-theme"
         >
           <img
@@ -49,6 +42,9 @@ const postRoute = {
 </template>
 
 <style>
+.post-list-item {
+  padding-top: 2rem;
+}
 .post-list-item .date {
   color: var(--color-theme-contrast-light);
   font-size: var(--font-size-small);
@@ -86,6 +82,5 @@ const postRoute = {
     grid-template-columns: 1fr;
     row-gap: 1.2rem;
   }
-  
 }
 </style>
