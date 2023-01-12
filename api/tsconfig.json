@@ -6,22 +6,17 @@
       "dom.iterable",
       "esnext"
     ],
-    // "allowJs": true,
+    "allowJs": true,
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react",
-    // "paths": {
-    //   "@/*": [
-    //     "./src/*",
-    //   ],
-    // },
   },
   "include": [
     "src",
-    "./.eslintrc.js",
+    // ".eslintrc.js",
   ],
   "exclude": [
     "node_modules",

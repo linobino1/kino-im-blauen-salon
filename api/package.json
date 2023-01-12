@@ -1,8 +1,8 @@
 {
-  "name": "payload-template-ts-blog",
-  "description": "Payload project created from ts-blog template",
+  "name": "kino-im-blauen-salon-api",
+  "description": "PayloadCMS backend for kino-im-blauen-salon-ui",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "dist/server.ts",
   "license": "MIT",
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
@@ -15,6 +15,8 @@
     "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema"
   },
   "dependencies": {
+    "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "payload": "^1.3.4",
@@ -24,7 +26,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.0.0",
-    "cross-env": "^7.0.3",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
