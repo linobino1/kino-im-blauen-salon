@@ -15,13 +15,11 @@ import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
 
 export default buildConfig({
-  serverURL: 'https://127.0.0.1:3000',
+  serverURL: 'https://localhost:3000',
   cors: [
-    'https://127.0.0.1:5173',
     'https://localhost:5173',
   ],
   csrf: [
-    'https://127.0.0.1:5173',
     'https://localhost:5173',
   ],
   admin: {

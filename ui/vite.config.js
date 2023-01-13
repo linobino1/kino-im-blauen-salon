@@ -12,8 +12,8 @@ export default defineConfig({
     vueJsx(),
   ],
   server: {
-    host: '127.0.0.1',
-    https: true,
+    host: true, // necessary for docker port mapping
+    https: process.env.NODE_ENV === 'development',
     port: 5173,
     cors: '*',
   },
