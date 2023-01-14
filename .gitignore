@@ -5,4 +5,3 @@
 # docker volumes
 certbot/
 data/
-etc/
