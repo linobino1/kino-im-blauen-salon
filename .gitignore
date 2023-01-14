@@ -1,1 +1,5 @@
 .vscode
+
+# docker volumes
+certbot/
+data/

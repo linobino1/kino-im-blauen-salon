@@ -1,25 +1,28 @@
+# build stage
 FROM node:18-alpine as base
 
-FROM base as builder
+FROM base as build-stage
 
 WORKDIR /home/node
 COPY package*.json ./
 
+RUN yarn install
 COPY . .
-RUN yarn install --production
 RUN yarn build
 
-FROM base as runtime
+# production stage
+FROM base as production-stage
 
-ENV NODE_ENV=development
+ENV PAYLOAD_CONFIG_PATH=/home/node/dist/payload.config.js
 
-WORKDIR /api
+WORKDIR /home/node
 COPY package*.json  ./
 
 RUN yarn install --production
-COPY --from=builder /api/dist ./dist
-COPY --from=builder /api/build ./build
+COPY --from=build-stage /home/node/dist ./dist
+COPY --from=build-stage /home/node/cert ./cert
+COPY --from=build-stage /home/node/build ./build
 
 EXPOSE 3000
 
-CMD ["node", "src/server.ts"]
+CMD ["node", "dist/server.js"]

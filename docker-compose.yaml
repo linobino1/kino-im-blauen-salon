@@ -1,0 +1,25 @@
+services:
+
+  api:
+    container_name: api
+    build: api/
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/payload
+
+  ui:
+    container_name: ui
+    build: ui
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - ./data:/data/db
+    logging:
+      driver: none

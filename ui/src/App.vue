@@ -11,7 +11,7 @@ const conf = inject('conf');
 <template>
   <header class="main">
     <RouterLink :to="{ name: 'home' }">
-      <img class="main-logo" :src="conf.Site.favicon.url" alt="logo" />
+      <img class="main-logo" :src="conf.Site.favicon?.url" alt="logo" />
     </RouterLink>
     <DynamicNavigation type="main" />
     <MeStatus />

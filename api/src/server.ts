@@ -1,10 +1,11 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import payload from 'payload';
 import https from 'https';
 import fs from 'fs';
 import logger from './logger';
 
-require('dotenv').config();
+dotenv.config();
 
 logger.level = 'debug';
 
@@ -27,10 +28,14 @@ payload.init({
 
 // Add your own express routes here
 
-const httpsServer = https.createServer({
-  key: fs.readFileSync('cert/key.pem'),
-  cert: fs.readFileSync('cert/cert.pem'),
-  passphrase: 'linobino1',
-}, app);
+if (process.env.NODE_ENV === 'development') {
+  const httpsServer = https.createServer({
+    key: fs.readFileSync('cert/key.pem'),
+    cert: fs.readFileSync('cert/cert.pem'),
+    passphrase: 'linobino1',
+  }, app);
 
-httpsServer.listen(3000);
+  httpsServer.listen(3000);
+} else {
+  app.listen(3000);
+}
