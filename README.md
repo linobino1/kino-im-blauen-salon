@@ -49,5 +49,5 @@ DOMAIN=<your-domain.com>
 ```
 
 ```
-docker-compose -f docker-compose.yaml -f  docker-compose.production.yaml up 
+docker compose -f docker compose.yaml -f  docker compose.production.yaml up 
 ```
