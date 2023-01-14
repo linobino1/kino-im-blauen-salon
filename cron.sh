@@ -9,5 +9,5 @@ else
 fi
  
 # renew certbot certificate
-docker compose -f /root/matomo/docker compose.yaml run --rm certbot
-docker compose -f /root/matomo/docker compose.yaml exec nginx nginx -s reload
+docker compose -f /root/matomo/docker-compose.yaml run --rm certbot
+docker compose -f /root/matomo/docker-compose.yaml exec nginx nginx -s reload
