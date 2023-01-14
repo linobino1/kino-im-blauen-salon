@@ -9,7 +9,6 @@ services:
       NODE_ENV: production
       PORT: 3000
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-
     
   ui:
     # do not publish any ports, will be reverse-proxied by nginx
