@@ -51,7 +51,8 @@ services:
     environment:
       - DOMAIN
     depends_on:
-      - matomo
+      - api
+      - ui
     ports:
       - 80:80
       - 443:443
@@ -59,6 +60,7 @@ services:
       - ./etc/nginx/templates:/etc/nginx/templates:ro
       - ./etc/letsencrypt:/etc/letsencrypt:ro
       - ./certbot/data:/var/www/certbot
+
   certbot:
     container_name: certbot
     image: certbot/certbot:latest

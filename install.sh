@@ -2,10 +2,7 @@
 # takes two paramters, the domain name and the email to be associated with the certificate
 DOMAIN=$1
 EMAIL=$2
- 
-echo MARIADB_USER=matomo > .env
-echo MARIADB_PASSWORD=`openssl rand 30 | base64 -w 0` >> .env
-echo MARIADB_ROOT_PASSWORD=`openssl rand 30 | base64 -w 0` >> .env
+
 echo DOMAIN=${DOMAIN} >> .env
 echo EMAIL=${EMAIL} >> .env
  
