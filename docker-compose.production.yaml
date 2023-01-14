@@ -40,7 +40,7 @@ services:
   #   volumes: 
   #     - ./certbot/conf:/etc/letsencrypt:rw
   #     - ./certbot/www:/var/www/certbot:rw
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL_ADMIN} -d ${DOMAIN} --agree-tos
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL} -d ${DOMAIN} --agree-tos
   #   depends_on:
   #     - nginx
 
