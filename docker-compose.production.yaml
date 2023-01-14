@@ -18,28 +18,56 @@ services:
     environment:
       NODE_ENV: production
 
+  # nginx:
+  #   container_name: nginx
+  #   image: nginx:latest
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - ./nginx/templates:/etc/nginx/templates/:ro
+  #     - ./certbot/conf:/etc/letsencrypt:rw
+  #     - ./certbot/www:/var/www/certbot:rw
+  #   environment:
+  #     - DOMAIN
+  #   depends_on:
+  #     - api
+  #     - ui
+  
+  # certbot:
+  #   container_name: certbot
+  #   image: certbot/certbot
+  #   volumes: 
+  #     - ./certbot/conf:/etc/letsencrypt:rw
+  #     - ./certbot/www:/var/www/certbot:rw
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL_ADMIN} -d ${DOMAIN} --agree-tos
+  #   depends_on:
+  #     - nginx
+
   nginx:
     container_name: nginx
     image: nginx:latest
+    restart: unless-stopped
+    environment:
+      - DOMAIN
+    depends_on:
+      - matomo
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/templates/nginx.conf:/etc/nginx/templates/nginx.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    environment:
-      DOMAIN: ${DOMAIN}
-    depends_on:
-      - api
-      - ui
-  
+      - ./etc/nginx/templates:/etc/nginx/templates:ro
+      - ./etc/letsencrypt:/etc/letsencrypt:ro
+      - ./certbot/data:/var/www/certbot
   certbot:
     container_name: certbot
-    image: certbot/certbot
-    volumes: 
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL_ADMIN} -d ${DOMAIN} --agree-tos
+    image: certbot/certbot:latest
     depends_on:
       - nginx
+    command: >-
+             certonly --reinstall --webroot --webroot-path=/var/www/certbot
+             --email ${EMAIL} --agree-tos --no-eff-email
+             -d ${DOMAIN}
+    volumes:
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/data:/var/www/certbot
