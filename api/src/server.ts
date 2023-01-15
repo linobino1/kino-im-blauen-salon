@@ -1,8 +1,15 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import payload from 'payload';
 import https from 'https';
 import fs from 'fs';
 import logger from './logger';
+
+dotenv.config();
+
+console.log('server.ts env', process.env)
+console.log('server.ts test', process.env.TEST_ENV)
+console.log('server.ts test public', process.env.PAYLOAD_PUBLIC_TEST_ENV)
 
 logger.level = 'debug';
 

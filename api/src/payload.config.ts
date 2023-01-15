@@ -17,6 +17,10 @@ import logger from './logger';
 
 logger.debug('PAYLOAD_PUBLIC_DOMAIN_API', process?.env?.PAYLOAD_PUBLIC_DOMAIN_API);
 
+console.log('server.ts env', process.env)
+console.log('server.ts test', process.env.TEST_ENV)
+console.log('server.ts test public', process.env.PAYLOAD_PUBLIC_TEST_ENV)
+
 export default buildConfig({
   serverURL: process?.env?.PAYLOAD_PUBLIC_DOMAIN_API
     ? `https://${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`
