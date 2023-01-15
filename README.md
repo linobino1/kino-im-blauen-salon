@@ -13,6 +13,8 @@ for quick reload.
 docker-compose -f docker-compose.yaml -f docker-compose.development.yaml up
 
 # wait until everything is installed...
+# ui: https://localhost:5173
+# api: https://localhost:3000
 ```
 
 ### Manually
