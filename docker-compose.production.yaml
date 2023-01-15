@@ -16,6 +16,7 @@ services:
       - VIRTUAL_HOST=${DOMAIN_API}
       - LETSENCRYPT_HOST=${DOMAIN_API}
       - LETSENCRYPT_EMAIL=${EMAIL}
+      - MONGODB_URI=mongodb://mongo:27017/payload_prod
     
   ui:
     # do not publish any ports, will be reverse-proxied
