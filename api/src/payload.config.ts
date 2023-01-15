@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import { buildConfig } from 'payload/config';
 import path from 'path';
 import Users from './collections/Users';
@@ -14,6 +15,8 @@ import Pages from './collections/Pages';
 import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
 import logger from './logger';
+
+dotenv.config();
 
 logger.debug('PAYLOAD_PUBLIC_DOMAIN_API', process?.env?.PAYLOAD_PUBLIC_DOMAIN_API);
 
