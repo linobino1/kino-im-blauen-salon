@@ -1,17 +1,36 @@
 services:
 
+  ui:
+    build:
+      target: build-stage
+    ports:
+      - "5173:5173"
+    volumes:
+      - './ui/:/home/node/app'
+      - '/home/node/app/node_modules'
+    environment:
+      NODE_ENV: development
+
   api:
-    # publish api on port 3000
+    image: node:18-alpine
     ports:
       - "3000:3000"
+    volumes:
+      - ./api/:/home/node/app
+      - ./api/node_modules:/home/node/app/node_modules
+    working_dir: /home/node/app/
+    command: sh -c "yarn install && yarn dev"
     environment:
+      MONGODB_URI: mongodb://mongo:27017/payload
       PORT: 3000
       NODE_ENV: development
       PAYLOAD_SECRET: TESTING
 
+  mongo:
+    volumes:
+      - data:/data/db
+
+volumes:
+  data:
+  api:
   ui:
-    # publish ui on port 8080
-    ports:
-      - "8080:80"
-    environment:
-      NODE_ENV: development
