@@ -3,8 +3,6 @@ FROM node:18-alpine as base
 
 FROM base as build-stage
 
-ENV PAYLOAD_PUBLIC_DOMAIN_API=${DOMAIN_API}
-
 WORKDIR /home/node
 COPY package*.json ./
 
