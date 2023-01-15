@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
 import { buildConfig } from 'payload/config';
+import dotenv from 'dotenv';
 import path from 'path';
 import Users from './collections/Users';
 import Movies from './collections/Movies';
@@ -18,14 +18,10 @@ import logger from './logger';
 
 dotenv.config();
 
-logger.debug('PAYLOAD_PUBLIC_DOMAIN_API', process?.env?.PAYLOAD_PUBLIC_DOMAIN_API);
-
-console.log('server.ts env', process.env)
-console.log('server.ts test', process.env.TEST_ENV)
-console.log('server.ts test public', process.env.PAYLOAD_PUBLIC_TEST_ENV)
+logger.debug(`serverURL: ${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`);
 
 export default buildConfig({
-  serverURL: process?.env?.PAYLOAD_PUBLIC_DOMAIN_API
+  serverURL: process.env.PAYLOAD_PUBLIC_DOMAIN_API
     ? `https://${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`
     : 'https://localhost:3000',
   cors: [

@@ -11,8 +11,6 @@ services:
       context: api/
     depends_on:
       - mongo
-    environment:
-      MONGODB_URI: mongodb://mongo:27017/payload
 
   mongo:
     container_name: mongo

@@ -16,8 +16,6 @@ services:
       - VIRTUAL_HOST=${DOMAIN_API}
       - LETSENCRYPT_HOST=${DOMAIN_API}
       - LETSENCRYPT_EMAIL=${EMAIL}
-      - TEST_ENV=test
-      - PAYLOAD_PUBLIC_TEST_ENV=testpublic
     
   ui:
     # do not publish any ports, will be reverse-proxied
