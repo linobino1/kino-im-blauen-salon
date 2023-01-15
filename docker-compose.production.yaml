@@ -28,7 +28,7 @@ services:
     env_file:
       - .env
     environment:
-      - VITE_APP_DOMAIN_API=${DOMAIN_API}
+      - VITE_DOMAIN_API=${DOMAIN_API}
       - VIRTUAL_HOST=${DOMAIN_UI}
       - LETSENCRYPT_HOST=${DOMAIN_UI}
       - LETSENCRYPT_EMAIL=${EMAIL}
