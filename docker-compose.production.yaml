@@ -8,6 +8,8 @@ services:
     networks:
       - net
       - default
+    env_file:
+      - .env
     environment:
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
       - VIRTUAL_HOST=${DOMAIN_API}
@@ -21,6 +23,8 @@ services:
     networks:
       - net
       - default
+    env_file:
+      - .env
     environment:
       - VITE_APP_DOMAIN_API=${DOMAIN_API}
       - VIRTUAL_HOST=${DOMAIN_UI}

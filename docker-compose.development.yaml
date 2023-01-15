@@ -9,6 +9,8 @@ services:
       - /home/node/app/node_modules
     working_dir: /home/node/app/
     command: sh -c "npm install && npm run dev --host 0.0.0.0"
+    env_file:
+      - .env
     environment:
       NODE_ENV: development
 
@@ -21,6 +23,8 @@ services:
       - /home/node/app/node_modules
     working_dir: /home/node/app/
     command: sh -c "yarn install && yarn dev"
+    env_file:
+      - .env
     environment:
       MONGODB_URI: mongodb://mongo:27017/payload
       NODE_ENV: development
