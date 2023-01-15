@@ -12,7 +12,6 @@ services:
     # do not publish any ports, will be reverse-proxied by nginx
     expose:
       - 80
-    environment:
 
   nginx:
     container_name: nginx
