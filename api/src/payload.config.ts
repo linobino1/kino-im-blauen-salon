@@ -1,5 +1,6 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
+import dotenv from 'dotenv';
 import Users from './collections/Users';
 import Movies from './collections/Movies';
 import Directors from './collections/Directors';
@@ -14,13 +15,21 @@ import Pages from './collections/Pages';
 import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
 
+dotenv.config();
+
 export default buildConfig({
-  serverURL: 'https://localhost:3000',
+  serverURL: process?.env?.PAYLOAD_PUBLIC_DOMAIN_API
+    ? `https://${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`
+    : 'https://localhost:3000',
   cors: [
-    'https://localhost:5173',
+    process?.env?.DOMAIN_API
+      ? `https://${process.env.DOMAIN_UI}`
+      : 'https://localhost:5173',
   ],
   csrf: [
-    'https://localhost:5173',
+    process?.env?.DOMAIN_API
+      ? `https://${process.env.DOMAIN_UI}`
+      : 'https://localhost:5173',
   ],
   admin: {
     user: Users.slug,
