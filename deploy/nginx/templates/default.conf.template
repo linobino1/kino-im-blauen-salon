@@ -21,7 +21,7 @@ server {
     server_name $DOMAIN_API;
     
     location / {
-      proxy_pass http://api:80;
+      proxy_pass http://api:3000;
     }
 }
  
