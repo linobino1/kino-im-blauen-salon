@@ -9,7 +9,6 @@ services:
       - net
       - default
     environment:
-      - PAYLOAD_PUBLIC_DOMAIN_API=${DOMAIN_API}
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
       - VIRTUAL_HOST=${DOMAIN_API}
       - LETSENCRYPT_HOST=${DOMAIN_API}
