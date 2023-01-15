@@ -13,6 +13,9 @@ import Site from './globals/Site';
 import Pages from './collections/Pages';
 import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
+import logger from './logger';
+
+logger.debug('PAYLOAD_PUBLIC_DOMAIN_API', process?.env?.PAYLOAD_PUBLIC_DOMAIN_API);
 
 export default buildConfig({
   serverURL: process?.env?.PAYLOAD_PUBLIC_DOMAIN_API
