@@ -1,6 +1,12 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core';
 import { provideApolloClient } from '@vue/apollo-composable';
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const apiHost = import.meta.env?.VITE_APP_DOMAIN_API
+  ? `https://${import.meta.env.VITE_APP_DOMAIN_API}`
+  : 'https://localhost:3000';
 const cache = new InMemoryCache({
   addTypename: false,
 });
@@ -8,7 +14,7 @@ const cache = new InMemoryCache({
 const apollo = new ApolloClient({
   cache,
   link: new HttpLink({
-    uri: `${import.meta.env.VITE_APP_API_URL}/api/graphql`,
+    uri: apiHost,
     credentials: 'include',
   }),
 });

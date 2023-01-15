@@ -23,6 +23,7 @@ services:
       - net
       - default
     environment:
+      - VITE_APP_DOMAIN_API=${DOMAIN_API}
       - VIRTUAL_HOST=${DOMAIN_UI}
       - LETSENCRYPT_HOST=${DOMAIN_UI}
       - LETSENCRYPT_EMAIL=${EMAIL}
