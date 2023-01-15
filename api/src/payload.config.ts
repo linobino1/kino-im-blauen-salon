@@ -1,6 +1,5 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
-import dotenv from 'dotenv';
 import Users from './collections/Users';
 import Movies from './collections/Movies';
 import Directors from './collections/Directors';
@@ -14,8 +13,6 @@ import Site from './globals/Site';
 import Pages from './collections/Pages';
 import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
-
-dotenv.config();
 
 export default buildConfig({
   serverURL: process?.env?.PAYLOAD_PUBLIC_DOMAIN_API

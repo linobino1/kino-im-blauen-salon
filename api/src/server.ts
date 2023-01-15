@@ -1,11 +1,8 @@
-import dotenv from 'dotenv';
 import express from 'express';
 import payload from 'payload';
 import https from 'https';
 import fs from 'fs';
 import logger from './logger';
-
-dotenv.config();
 
 logger.level = 'debug';
 
