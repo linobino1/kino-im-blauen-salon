@@ -4,7 +4,7 @@ services:
     build: api/
     # do not publish any ports, will be reverse-proxied by nginx
     expose:
-      - 80
+      - 3000
     environment:
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
     
@@ -18,6 +18,9 @@ services:
     image: nginx:latest
     volumes:
       - ./deploy/nginx/templates:/etc/nginx/templates:ro
+    environment:
+      - DOMAIN_UI
+      - DOMAIN_API
 
   # nginx:
   #   container_name: nginx
