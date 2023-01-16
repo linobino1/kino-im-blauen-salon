@@ -1,11 +1,8 @@
-// import 'dotenv/config';
 import dotenv from 'dotenv';
 import express from 'express';
 import payload from 'payload';
 import https from 'https';
 import fs from 'fs';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// import _unused from './env';
 import logger from './logger';
 
 logger.level = 'debug';

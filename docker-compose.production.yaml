@@ -7,20 +7,24 @@ services:
     networks:
       - net
       - default
-    env_file:
-      - .env
+    env_file: .env
+    build:
+      args:
+        PAYLOAD_PUBLIC_DOMAIN_API: ${DOMAIN_API}
     environment:
-      - NODE_ENV
-      - DOMAIN_UI
-      - DOMAIN_API
-      - PAYLOAD_PUBLIC_DOMAIN_API=${DOMAIN_API}
-      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
-      - VIRTUAL_HOST=${DOMAIN_API}
-      - LETSENCRYPT_HOST=${DOMAIN_API}
-      - LETSENCRYPT_EMAIL=${EMAIL}
-      - MONGODB_URI=mongodb://mongo:27017/payload_prod
+      NODE_ENV:
+      DOMAIN_UI:
+      DOMAIN_API:
+      PAYLOAD_PUBLIC_DOMAIN_API: ${DOMAIN_API}
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      VIRTUAL_HOST: ${DOMAIN_API}
+      LETSENCRYPT_HOST: ${DOMAIN_API}
+      LETSENCRYPT_EMAIL: ${EMAIL}
+      MONGODB_URI: mongodb://mongo:27017/payload_prod
     
   mongo:
+    volumes:
+      - data:/data/db
     expose:
       - 27017
     
@@ -34,11 +38,11 @@ services:
     env_file:
       - .env
     environment:
-      - NODE_ENV
-      - VITE_DOMAIN_API=${DOMAIN_API}
-      - VIRTUAL_HOST=${DOMAIN_UI}
-      - LETSENCRYPT_HOST=${DOMAIN_UI}
-      - LETSENCRYPT_EMAIL=${EMAIL}
+      NODE_ENV:
+      VITE_DOMAIN_API: ${DOMAIN_API}
+      VIRTUAL_HOST: ${DOMAIN_UI}
+      LETSENCRYPT_HOST: ${DOMAIN_UI}
+      LETSENCRYPT_EMAIL: ${EMAIL}
 
   proxy:
     container_name: "proxy"
@@ -75,6 +79,7 @@ services:
         - "net"
 
 volumes:
+  data:
   certs:
   html:
   vhost:

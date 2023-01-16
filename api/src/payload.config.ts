@@ -1,5 +1,3 @@
-// import 'dotenv/config';
-import dotenv from 'dotenv';
 import { buildConfig } from 'payload/config';
 import path from 'path';
 import Users from './collections/Users';
@@ -17,26 +15,20 @@ import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
 import logger from './logger';
 
-dotenv.config({
-  path: path.resolve(__dirname, '../.env'),
-});
 logger.debug('payload.config.ts');
 logger.debug(process.env);
-
-logger.debug(`serverURL: ${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`);
-logger.debug(process.env.PAYLOAD_PUBLIC_DOMAIN_API ? 'good' : 'bad');
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_DOMAIN_API
     ? `https://${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`
     : 'https://localhost:3000',
   cors: [
-    process?.env?.DOMAIN_API
+    process?.env?.DOMAIN_UI
       ? `https://${process.env.DOMAIN_UI}`
       : 'https://localhost:5173',
   ],
   csrf: [
-    process?.env?.DOMAIN_API
+    process?.env?.DOMAIN_UI
       ? `https://${process.env.DOMAIN_UI}`
       : 'https://localhost:5173',
   ],
