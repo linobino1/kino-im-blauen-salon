@@ -1,4 +1,5 @@
-import 'dotenv/config';
+// import 'dotenv/config';
+import dotenv from 'dotenv';
 import express from 'express';
 import payload from 'payload';
 import https from 'https';
@@ -8,6 +9,10 @@ import fs from 'fs';
 import logger from './logger';
 
 logger.level = 'debug';
+
+dotenv.config();
+logger.debug('server.ts');
+logger.debug(process.env);
 
 const app = express();
 
