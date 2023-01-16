@@ -1,6 +1,7 @@
 services:
 
   api:
+    restart: always
     # do not publish any ports, will be reverse-proxied
     expose:
       - 3000
@@ -23,12 +24,14 @@ services:
       MONGODB_URI: mongodb://mongo:27017/payload_prod
     
   mongo:
+    restart: always
     volumes:
       - data:/data/db
     expose:
       - 27017
     
   ui:
+    restart: always
     # do not publish any ports, will be reverse-proxied
     expose:
       - 80
@@ -45,38 +48,37 @@ services:
       LETSENCRYPT_EMAIL: ${EMAIL}
 
   proxy:
-    container_name: "proxy"
-    image: "jwilder/nginx-proxy:latest" # alpine?
+    container_name: proxy
+    image: jwilder/nginx-proxy:latest # alpine?
     volumes:
-        - "html:/usr/share/nginx/html"
-        - "dhparam:/etc/nginx/dhparam"
-        - "vhost:/etc/nginx/vhost.d"
-        - "certs:/etc/nginx/certs"
-        - "/run/docker.sock:/tmp/docker.sock:ro"
-    restart: "always"
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:ro
+      - /run/docker.sock:/tmp/docker.sock:ro
+    restart: always
     networks: 
-        - "net"
+      - net
     ports:
-        - "80:80"
-        - "443:443"
+      - 80:80
+      - 443:443
   
   letsencrypt:
-    container_name: "letsencrypt"
-    image: "jrcs/letsencrypt-nginx-proxy-companion:latest"
+    container_name: letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
+    volumes_from:
+      - proxy
     volumes:
-        - "html:/usr/share/nginx/html"
-        - "dhparam:/etc/nginx/dhparam"
-        - "vhost:/etc/nginx/vhost.d"
-        - "certs:/etc/nginx/certs"
-        - "/run/docker.sock:/var/run/docker.sock:ro"
+      - certs:/etc/nginx/certs:rw
+      - /run/docker.sock:/var/run/docker.sock:ro
     environment:
-        NGINX_PROXY_CONTAINER: "proxy"
-        DEFAULT_EMAIL: ${EMAIL}
-    restart: "always"
+      NGINX_PROXY_CONTAINER: proxy
+      DEFAULT_EMAIL: ${EMAIL}
+    restart: always
     depends_on:
-        - "proxy"
+      - proxy
     networks: 
-        - "net"
+      - net
 
 volumes:
   data:
