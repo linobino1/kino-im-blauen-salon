@@ -60,25 +60,35 @@ services:
     networks: 
       - net
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
   
-  letsencrypt:
-    container_name: letsencrypt
-    image: jrcs/letsencrypt-nginx-proxy-companion:latest
+  # letsencrypt:
+  #   container_name: letsencrypt
+  #   image: jrcs/letsencrypt-nginx-proxy-companion:latest
+  #   volumes_from:
+  #     - proxy
+  #   volumes:
+  #     - certs:/etc/nginx/certs:rw
+  #     - /run/docker.sock:/var/run/docker.sock:ro
+  #   environment:
+  #     NGINX_PROXY_CONTAINER: proxy
+  #     DEFAULT_EMAIL: ${EMAIL}
+  #   restart: always
+  #   depends_on:
+  #     - proxy
+  #   networks: 
+  #     - net
+
+  certbot:
+    image: nginxproxy/acme-companion
+    container_name: certbot
     volumes_from:
       - proxy
     volumes:
       - certs:/etc/nginx/certs:rw
-      - /run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      NGINX_PROXY_CONTAINER: proxy
-      DEFAULT_EMAIL: ${EMAIL}
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
-    depends_on:
-      - proxy
-    networks: 
-      - net
 
 volumes:
   data:
@@ -89,3 +99,5 @@ volumes:
 
 networks:
   net:
+    external:
+      name: net
