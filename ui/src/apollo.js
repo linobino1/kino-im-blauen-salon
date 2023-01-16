@@ -1,6 +1,8 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core';
 import { provideApolloClient } from '@vue/apollo-composable';
 
+console.log('apollo url', import.meta.env);
+
 const apiHost = import.meta.env.VITE_DOMAIN_API
   ? `https://${import.meta.env.VITE_DOMAIN_API}`
   : 'https://localhost:3000';
