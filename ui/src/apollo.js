@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core';
 import { provideApolloClient } from '@vue/apollo-composable';
 
