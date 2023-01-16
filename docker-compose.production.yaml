@@ -63,30 +63,17 @@ services:
       - "80:80"
       - "443:443"
   
-  # letsencrypt:
-  #   container_name: letsencrypt
-  #   image: jrcs/letsencrypt-nginx-proxy-companion:latest
-  #   volumes_from:
-  #     - proxy
-  #   volumes:
-  #     - certs:/etc/nginx/certs:rw
-  #     - /run/docker.sock:/var/run/docker.sock:ro
-  #   environment:
-  #     NGINX_PROXY_CONTAINER: proxy
-  #     DEFAULT_EMAIL: ${EMAIL}
-  #   restart: always
-  #   depends_on:
-  #     - proxy
-  #   networks: 
-  #     - net
-
   certbot:
     image: nginxproxy/acme-companion
     container_name: certbot
     volumes_from:
       - proxy
+    environment:
+      DEFAULT_EMAIL: ${EMAIL}
+      # ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # staging
     volumes:
       - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
 
@@ -96,6 +83,7 @@ volumes:
   html:
   vhost:
   dhparam:
+  acme:
 
 networks:
   net:
