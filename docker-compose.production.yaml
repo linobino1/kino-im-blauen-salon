@@ -99,5 +99,5 @@ volumes:
 
 networks:
   net:
-    external:
-      name: net
+    name: net
+    external: true
