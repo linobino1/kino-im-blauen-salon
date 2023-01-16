@@ -20,6 +20,10 @@ services:
       - LETSENCRYPT_EMAIL=${EMAIL}
       - MONGODB_URI=mongodb://mongo:27017/payload_prod
     
+  mongo:
+    expose:
+      - 27017
+    
   ui:
     # do not publish any ports, will be reverse-proxied
     expose:

@@ -31,6 +31,8 @@ services:
       PAYLOAD_SECRET: TESTING
 
   mongo:
+    ports:
+      - "27017:27017"
     volumes:
       - data:/data/db
 
