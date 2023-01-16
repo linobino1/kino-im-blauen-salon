@@ -1,6 +1,9 @@
 # build stage
 FROM node:lts-alpine as build-stage
 
+ARG VITE_HOST_API
+ENV VITE_HOST_API=${VITE_HOST_API}
+
 WORKDIR /home/node
 
 COPY package*.json .

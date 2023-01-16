@@ -44,7 +44,7 @@ services:
       - .env
     environment:
       NODE_ENV:
-      VITE_DOMAIN_API: ${DOMAIN_API}
+      VITE_HOST_API: https://${DOMAIN_API}
       VIRTUAL_HOST: ${DOMAIN_UI}
       LETSENCRYPT_HOST: ${DOMAIN_UI}
       LETSENCRYPT_EMAIL: ${EMAIL}
