@@ -11,6 +11,8 @@ services:
     env_file:
       - .env
     environment:
+      - DOMAIN_UI
+      - DOMAIN_API
       - PAYLOAD_PUBLIC_DOMAIN_API=${DOMAIN_API}
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
       - VIRTUAL_HOST=${DOMAIN_API}
