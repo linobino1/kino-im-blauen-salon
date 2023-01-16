@@ -17,7 +17,9 @@ import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
 import logger from './logger';
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
 logger.debug('server.ts');
 logger.debug(process.env);
 
