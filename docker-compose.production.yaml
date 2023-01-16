@@ -8,8 +8,9 @@ services:
       - net
       - default
     env_file:
-      - .env
+      - ../.env
     environment:
+      - NODE_ENV
       - DOMAIN_UI
       - DOMAIN_API
       - PAYLOAD_PUBLIC_DOMAIN_API=${DOMAIN_API}
@@ -31,8 +32,9 @@ services:
       - net
       - default
     env_file:
-      - .env
+      - ../.env
     environment:
+      - NODE_ENV
       - VITE_DOMAIN_API=${DOMAIN_API}
       - VIRTUAL_HOST=${DOMAIN_UI}
       - LETSENCRYPT_HOST=${DOMAIN_UI}

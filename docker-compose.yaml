@@ -2,11 +2,11 @@ services:
 
   ui:
     container_name: ui
-    build: ui/
+    build: ./ui
 
   api:
     container_name: api
-    build: api/
+    build: ./api
     depends_on:
       - mongo
 
