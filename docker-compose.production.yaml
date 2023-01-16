@@ -1,3 +1,5 @@
+version: '3'
+
 services:
 
   api:
@@ -69,6 +71,7 @@ services:
     volumes_from:
       - proxy
     environment:
+      NGINX_PROXY_CONTAINER: proxy
       DEFAULT_EMAIL: ${EMAIL}
       # ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # staging
     volumes:
