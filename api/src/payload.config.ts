@@ -1,5 +1,5 @@
+import 'dotenv/config';
 import { buildConfig } from 'payload/config';
-import * as dotenv from 'dotenv';
 import path from 'path';
 import Users from './collections/Users';
 import Movies from './collections/Movies';
@@ -15,11 +15,6 @@ import Pages from './collections/Pages';
 import Navigations from './collections/Navigations';
 import Posts from './collections/Posts';
 import logger from './logger';
-
-dotenv.config();
-// dotenv.config({
-//   path: path.resolve(__dirname, '../.env'),
-// });
 
 logger.debug(`serverURL: ${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`);
 logger.debug(process.env.PAYLOAD_PUBLIC_DOMAIN_API ? 'good' : 'bad');
