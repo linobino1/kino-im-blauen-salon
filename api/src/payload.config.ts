@@ -20,7 +20,7 @@ import logger from './logger';
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 });
-logger.debug('server.ts');
+logger.debug('payload.config.ts');
 logger.debug(process.env);
 
 logger.debug(`serverURL: ${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`);
