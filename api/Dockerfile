@@ -20,7 +20,7 @@ COPY package*.json  ./
 
 RUN yarn install --production
 COPY --from=build-stage /home/node/dist ./dist
-COPY --from=build-stage /home/node/cert ./cert
+# COPY --from=build-stage /home/node/cert ./cert
 COPY --from=build-stage /home/node/build ./build
 
 EXPOSE 3000
