@@ -24,9 +24,15 @@ services:
       PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
       PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      EMAIL_FROM_ADDRESS:
+      EMAIL_FROM_NAME:
+      SMTP_HOST:
+      SMTP_PORT:
+      SMTP_USER:
+      SMTP_PASS:
       VIRTUAL_HOST: ${DOMAIN_API}
       LETSENCRYPT_HOST: ${DOMAIN_API}
-      LETSENCRYPT_EMAIL: ${EMAIL}
+      LETSENCRYPT_EMAIL: ${EMAIL_ADMIN}
       MONGODB_URI: mongodb://mongo:27017/payload_prod
     
   mongo:
@@ -54,7 +60,7 @@ services:
       VITE_HOST_API: https://${DOMAIN_API}
       VIRTUAL_HOST: ${DOMAIN_UI}
       LETSENCRYPT_HOST: ${DOMAIN_UI}
-      LETSENCRYPT_EMAIL: ${EMAIL}
+      LETSENCRYPT_EMAIL: ${EMAIL_ADMIN}
 
   proxy:
     container_name: proxy
@@ -79,7 +85,7 @@ services:
       - proxy
     environment:
       NGINX_PROXY_CONTAINER: proxy
-      DEFAULT_EMAIL: ${EMAIL}
+      DEFAULT_EMAIL: ${EMAIL_ADMIN}
       # ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # staging
     volumes:
       - certs:/etc/nginx/certs:rw
