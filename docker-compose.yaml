@@ -15,5 +15,3 @@ services:
     image: mongo:latest
     command:
       - --storageEngine=wiredTiger
-    logging:
-      driver: none
