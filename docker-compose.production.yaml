@@ -11,7 +11,7 @@ services:
       - net
       - default
     volumes:
-      - media:/media
+      - ./media:/media
     env_file: .env
     build:
       args:
@@ -94,7 +94,6 @@ services:
     restart: always
 
 volumes:
-  media:
   data:
   certs:
   html:
