@@ -17,6 +17,7 @@ services:
       args:
         PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
         PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
+        CORS_ALLOW: .${TOPLEVEL_DOMAIN}
         MEDIA_DIR: /media
     environment:
       NODE_ENV:

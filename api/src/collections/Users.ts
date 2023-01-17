@@ -1,12 +1,10 @@
 import { CollectionConfig } from 'payload/types';
 
-console.log('Users.ts', process.env);
-
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
     cookies: {
-      domain: process.env.CORS_ALLOW ?? '',
+      domain: process.env.CORS_ALLOW ?? 'localhost',
     },
   },
   admin: {
