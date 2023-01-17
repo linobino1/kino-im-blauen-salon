@@ -21,10 +21,10 @@ logger.debug(process.env);
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_HOST_API ?? 'https://localhost:3000',
   cors: [
-    process.env.HOST_UI ?? 'https://localhost:5173',
+    process.env.PAYLOAD_PUBLIC_HOST_UI ?? 'https://localhost:5173',
   ],
   csrf: [
-    process.env.HOST_UI ?? 'https://localhost:5173',
+    process.env.PAYLOAD_PUBLIC_HOST_UI ?? 'https://localhost:5173',
   ],
   admin: {
     user: Users.slug,
