@@ -89,6 +89,7 @@ services:
     restart: always
 
 volumes:
+  media:
   data:
   certs:
   html:
