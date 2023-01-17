@@ -19,18 +19,12 @@ logger.debug('payload.config.ts');
 logger.debug(process.env);
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_DOMAIN_API
-    ? `https://${process.env.PAYLOAD_PUBLIC_DOMAIN_API}`
-    : 'https://localhost:3000',
+  serverURL: process.env.PAYLOAD_PUBLIC_HOST_API ?? 'https://localhost:3000',
   cors: [
-    process?.env?.DOMAIN_UI
-      ? `https://${process.env.DOMAIN_UI}`
-      : 'https://localhost:5173',
+    process.env.HOST_UI ?? 'https://localhost:5173',
   ],
   csrf: [
-    process?.env?.DOMAIN_UI
-      ? `https://${process.env.DOMAIN_UI}`
-      : 'https://localhost:5173',
+    process.env.HOST_UI ?? 'https://localhost:5173',
   ],
   admin: {
     user: Users.slug,

@@ -4,9 +4,7 @@ const Users: CollectionConfig = {
   slug: 'users',
   auth: {
     cookies: {
-      domain: process.env.DOMAIN_UI
-        ? `${process.env.DOMAIN_UI}`
-        : '',
+      domain: process.env.CORS_ALLOW ?? '',
     },
   },
   admin: {

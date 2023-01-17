@@ -13,13 +13,12 @@ services:
     env_file: .env
     build:
       args:
-        DOMAIN_UI: ${DOMAIN_UI}
-        PAYLOAD_PUBLIC_DOMAIN_API: ${DOMAIN_API}
+        HOST_UI: https://${DOMAIN_UI}
+        PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
+        CORS_ALLOW: .${TOPLEVEL_DOMAIN}
     environment:
       NODE_ENV:
-      DOMAIN_UI:
-      DOMAIN_API:
-      PAYLOAD_PUBLIC_DOMAIN_API: ${DOMAIN_API}
+      PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
       VIRTUAL_HOST: ${DOMAIN_API}
       LETSENCRYPT_HOST: ${DOMAIN_API}
@@ -45,10 +44,10 @@ services:
       - .env
     build:
       args:
-        VITE_HOST_API: https://${DOMAIN_API}
+        VITE_HOST_API: https://${DOMAIN_UI}
     environment:
       NODE_ENV:
-      VITE_HOST_API: https://${DOMAIN_API}
+      VITE_HOST_API: https://${DOMAIN_UI}
       VIRTUAL_HOST: ${DOMAIN_UI}
       LETSENCRYPT_HOST: ${DOMAIN_UI}
       LETSENCRYPT_EMAIL: ${EMAIL}
