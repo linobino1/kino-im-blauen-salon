@@ -8,7 +8,7 @@ services:
       - ./ui/:/home/node/app
       - /home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "npm install && npm run dev --host 0.0.0.0"
+    command: sh -c "npm install && npm run dev"
     env_file:
       - .env
     environment:
@@ -28,7 +28,7 @@ services:
       - .env
     environment:
       MEDIA_DIR: /media
-      MONGODB_URI: mongodb://mongo:27017/payload
+      MONGODB_URI: mongodb://localhost:27017/app
       NODE_ENV: development
       PAYLOAD_SECRET: TESTING
 
@@ -75,6 +75,4 @@ services:
 volumes:
   data:
     external: false
-  api:
-  ui:
   mongo-backup:
