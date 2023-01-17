@@ -4,9 +4,9 @@ const Users: CollectionConfig = {
   slug: 'users',
   auth: {
     cookies: {
-      domain: process.env.AUTH_COOKIE_DOMAIN ?? 'https://localhost:3000',
-      sameSite: 'none',
-      secure: true,
+      domain: process.env.AUTH_COOKIE_DOMAIN || 'localhost',
+      sameSite: 'lax',
+      secure: false,
     },
   },
   admin: {
