@@ -4,7 +4,7 @@ const Users: CollectionConfig = {
   slug: 'users',
   auth: {
     cookies: {
-      domain: process.env.PAYLOAD_PUBLIC_HOST_API ?? 'https://localhost:3000',
+      domain: process.env.AUTH_COOKIE_DOMAIN ?? 'https://localhost:3000',
       sameSite: 'none',
       secure: true,
     },
