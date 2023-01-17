@@ -18,10 +18,10 @@ services:
         PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
         PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
         MEDIA_DIR: /media
-        CORS_ALLOW: .${TOPLEVEL_DOMAIN}
     environment:
       NODE_ENV:
       MEDIA_DIR: /media
+      CORS_ALLOW: .${TOPLEVEL_DOMAIN}
       PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
       PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}

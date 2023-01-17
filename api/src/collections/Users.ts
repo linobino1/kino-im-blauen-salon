@@ -1,5 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 
+console.log('Users.ts', process.env);
+
 const Users: CollectionConfig = {
   slug: 'users',
   auth: {
