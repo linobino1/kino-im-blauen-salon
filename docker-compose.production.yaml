@@ -44,10 +44,10 @@ services:
       - .env
     build:
       args:
-        VITE_HOST_API: https://${DOMAIN_UI}
+        VITE_HOST_API: https://${DOMAIN_API}
     environment:
       NODE_ENV:
-      VITE_HOST_API: https://${DOMAIN_UI}
+      VITE_HOST_API: https://${DOMAIN_API}
       VIRTUAL_HOST: ${DOMAIN_UI}
       LETSENCRYPT_HOST: ${DOMAIN_UI}
       LETSENCRYPT_EMAIL: ${EMAIL}
