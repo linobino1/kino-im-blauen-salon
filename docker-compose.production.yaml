@@ -13,6 +13,7 @@ services:
     env_file: .env
     build:
       args:
+        DOMAIN_UI: ${DOMAIN_UI}
         PAYLOAD_PUBLIC_DOMAIN_API: ${DOMAIN_API}
     environment:
       NODE_ENV:
