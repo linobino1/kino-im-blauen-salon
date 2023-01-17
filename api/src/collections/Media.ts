@@ -11,7 +11,7 @@ const Media: CollectionConfig = {
   fields: [],
   upload: {
     staticURL: '/media',
-    staticDir: 'media',
+    staticDir: process.env.MEDIA_DIR ?? 'media',
     imageSizes: [
       {
         name: 'thumbnail',

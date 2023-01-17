@@ -10,14 +10,18 @@ services:
     networks:
       - net
       - default
+    volumes:
+      - media:/media
     env_file: .env
     build:
       args:
         PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
         PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
+        MEDIA_DIR: /media
         CORS_ALLOW: .${TOPLEVEL_DOMAIN}
     environment:
       NODE_ENV:
+      MEDIA_DIR: /media
       PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
       PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
