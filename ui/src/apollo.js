@@ -3,7 +3,7 @@ import { provideApolloClient } from '@vue/apollo-composable';
 
 console.log('apollo.js', import.meta.env);
 
-const apiHost = import.meta.env['VITE_DOMAIN_API'] || 'https://localhost:3000';
+const apiHost = import.meta.env.VITE_DOMAIN_API ?? 'https://localhost:3000';
 console.log('apollo url', apiHost);
 const cache = new InMemoryCache({
   addTypename: false,
