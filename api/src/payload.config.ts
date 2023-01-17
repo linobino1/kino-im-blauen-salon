@@ -77,4 +77,9 @@ export default buildConfig({
       },
     },
   },
+  upload: {
+    limits: {
+      fileSize: 5000000, // 5MB
+    },
+  },
 });
