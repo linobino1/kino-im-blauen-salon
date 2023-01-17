@@ -27,8 +27,8 @@ const options: InitOptions = {
   },
 };
 
-// add email service if production
-if (process.env.NODE_ENV === 'production' && process.env.EMAIL_FROM_ADDRESS) {
+// add email service if configured
+if (process.env.EMAIL_FROM_ADDRESS) {
   options.email = {
     fromAddress: process.env.EMAIL_FROM_ADDRESS,
     fromName: process.env.EMAIL_FROM_NAME,
