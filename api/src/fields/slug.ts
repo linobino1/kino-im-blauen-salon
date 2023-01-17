@@ -11,7 +11,13 @@ function createSlugField(forField: string): Field {
       beforeValidate: [
         // 'value' is this field's specific incoming value
         // 'data' is all of the incoming values for the document
-        async ({ value, data }) => (data?.[forField] ? slugify(data[forField]) : value),
+        async ({ value, data }) => (
+          data?.[forField]
+            ? slugify(data[forField], {
+              lower: true,
+            })
+            : value
+        ),
       ],
     },
     admin: {
