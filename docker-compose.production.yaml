@@ -17,12 +17,10 @@ services:
       args:
         PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
         PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
-        AUTH_COOKIE_DOMAIN: ${TOPLEVEL_DOMAIN}
         MEDIA_DIR: /media
     environment:
       NODE_ENV:
       MEDIA_DIR: /media
-      AUTH_COOKIE_DOMAIN: ${TOPLEVEL_DOMAIN}
       PAYLOAD_PUBLIC_HOST_UI: https://${DOMAIN_UI}
       PAYLOAD_PUBLIC_HOST_API: https://${DOMAIN_API}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
