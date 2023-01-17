@@ -1,9 +1,13 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core';
 import { provideApolloClient } from '@vue/apollo-composable';
+import dotenv from 'dotenv';
 
-console.log('apollo url', import.meta.env);
+dotenv.config();
 
-const apiHost = import.meta.env.VITE_DOMAIN_API || 'https://localhost:3000';
+console.log('apollo.js', process?.env);
+
+const apiHost = process?.env.VITE_DOMAIN_API || 'https://localhost:3000';
+console.log('apollo url', apiHost);
 const cache = new InMemoryCache({
   addTypename: false,
 });
