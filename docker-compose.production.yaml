@@ -42,6 +42,9 @@ services:
       - default
     env_file:
       - .env
+    build:
+      args:
+        VITE_HOST_API: https://${DOMAIN_API}
     environment:
       NODE_ENV:
       VITE_HOST_API: https://${DOMAIN_API}
