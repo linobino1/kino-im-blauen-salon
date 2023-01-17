@@ -2,17 +2,17 @@ import { CollectionConfig } from 'payload/types';
 
 const Users: CollectionConfig = {
   slug: 'users',
-  auth: true,
-  // auth: {
-  //   cookies: {
-  //     // domain: 'http://127.0.0.1:5173',
-  //     secure: false,
-  //     sameSite: 'lax',
-  //   },
-  // },
+  auth: {
+    cookies: {
+      domain: process.env.DOMAIN_UI
+        ? `${process.env.DOMAIN_UI}`
+        : '',
+    },
+  },
   admin: {
     group: 'Auth',
     useAsTitle: 'name',
+    defaultColumns: ['name', 'role'],
   },
   access: {
     read: () => true,
