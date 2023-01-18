@@ -28,7 +28,7 @@ services:
       - .env
     environment:
       MEDIA_DIR: /media
-      MONGODB_URI: mongodb://localhost:27017/app
+      MONGODB_URI: mongodb://mongo:27017/app
       NODE_ENV: development
       PAYLOAD_SECRET: TESTING
 
@@ -38,6 +38,7 @@ services:
     ports:
       - 27017:27017
     volumes:
+      - ./db-share:/share
       - data:/data/db
 
   # mongo-gui:
