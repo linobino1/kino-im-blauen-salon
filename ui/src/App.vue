@@ -3,7 +3,7 @@ import { inject } from 'vue';
 import { RouterView } from 'vue-router';
 import MeStatus from './components/MeStatus.vue';
 import MainFooter from './components/MainFooter.vue';
-import DynamicNavigation from './components/DynamicNavigation.vue';
+import MainNavigation from './components/MainNavigation.vue';
 
 const conf = inject('conf');
 </script>
@@ -13,7 +13,7 @@ const conf = inject('conf');
     <RouterLink :to="{ name: 'home' }">
       <img class="main-logo" :src="conf.Site.favicon?.url" alt="logo" />
     </RouterLink>
-    <DynamicNavigation type="main" />
+    <MainNavigation />
     <MeStatus />
   </header>
 
@@ -26,8 +26,8 @@ const conf = inject('conf');
 
 <style>
 header.main {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
   width: 100%;
   padding: 0 10%;
   font-size: var(--font-size-small);
@@ -36,25 +36,40 @@ header.main > * {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: end;
+  justify-self: end;
+  width: fit-content;
   padding: .5rem;
+  border-right: 1px solid var(--color-light-grey);
+  grid-row: 1;
 }
 header.main > *:first-child {
+  justify-self: start;
   padding-left: 0;
 }
 header.main > *:last-child {
   padding-right: 0;
-}
-nav.main {
-  width: 85%;
-  border-left: 1px solid var(--color-light-grey);
-  border-right: 1px solid var(--color-light-grey);
+  border-right: 0;
 }
 .main-logo {
   width: 8rem;
   height: auto;
 }
 
+@media (max-width: 1024px) {
+  header.main {
+    padding: 0 1rem;
+  }
+  header.main > * {
+    border-right: 0;
+  }
+  header.main > *:last-child {
+    padding-left: 0;
+    grid-column: 2;
+  }
+  header.main > *:last-child > * {
+    padding-left: 0;
+  }
+}
 /* Main Navigation  ************************************************************/
 nav.main {
   justify-self: end;

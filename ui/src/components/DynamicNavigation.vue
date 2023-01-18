@@ -83,3 +83,29 @@ const nav = computed(() => result?.value?.Navigations?.docs[0]);
     </template>
   </nav>
 </template>
+
+<style>
+nav.social a {
+  display: block;
+  height: 1.5em;
+  box-sizing: content-box;
+  padding: .2em .7em;
+  position: relative;
+}
+nav.social a img {
+  height: 100%;
+  width: auto;
+}
+nav.social a::before {
+  content: ' ';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-color: var(--color-theme);
+  mix-blend-mode: darken;
+  opacity: 0;
+  transition: opacity .4s;
+}
+nav.social a:hover::before {
+  opacity: 1;
+}
+</style>

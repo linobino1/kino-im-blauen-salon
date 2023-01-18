@@ -25,13 +25,13 @@ const date = format(dateDT, 'PPP', { locale: de });
           class="link-theme"
         >
           <img
-            :src="post.header.url"
+            :src="post.header?.url"
             alt="post header image"
           />
         </RouterLink>
         <template v-else>
           <img
-            :src="post.header.url"
+            :src="post.header?.url"
             alt="post header image"
           />
         </template>

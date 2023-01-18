@@ -24,7 +24,7 @@ const props = defineProps({
   line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-big);
   text-transform: uppercase;
-  padding: 1rem .5rem;
+  padding: 1rem;
 }
 .page-header-title:first-child {
   margin-top: 2rem;

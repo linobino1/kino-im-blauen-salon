@@ -16,16 +16,10 @@ const { result } = useQuery(query);
 
 <template>
   <footer>
-    <div class="footer-adress">
-      <RichTextRender :input="result?.Site?.adress" />
-    </div>
-    <div class="footer-center">
-      <DynamicNavigation type="social" class="footer" />
-      <DynamicNavigation type="footer" />
-    </div>
-    <div class="footer-newsletter">
-      <a>newsletter</a>
-    </div>
+    <RichTextRender :input="result?.Site?.adress" class="address" />
+    <DynamicNavigation type="social" class="footer" />
+    <DynamicNavigation type="footer" />
+    <a class="newsletter">newsletter</a>
   </footer>
 </template>
 
@@ -36,60 +30,77 @@ footer {
   padding: 2% 10%;
   display: grid;
   grid-template-columns: 25% 50% 25%;
+  row-gap: 1rem;
 }
 
-.footer-adress * {
+/** Grid Layout ************************************************************************/
+footer .address {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+footer .address * {
   margin-top: 0;
   margin-bottom: 0;
   line-height: inherit;
 }
 
-.footer-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+footer nav.social.footer {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: flex-start;
 }
-.footer-center > * {
+footer nav.footer {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+}
+footer nav {
+  justify-self: center;
+}
+
+footer .newsletter {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  justify-content: end;
+}
+
+/** Navigations ************************************************************************/
+footer nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
   column-gap: 1em;
 }
-
-nav.social a {
-  display: block;
-  height: 1.5em;
-  box-sizing: content-box;
-  padding: .2em .7em;
-  position: relative;
-}
-nav.social a img {
-  height: 100%;
-  width: auto;
-}
-nav.social.footer a::before {
-  content: ' ';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background-color: var(--color-theme);
-  mix-blend-mode: darken;
-  opacity: 0;
-  transition: opacity .4s;
-}
-nav.social.footer a:hover::before {
-  opacity: 1;
-}
-
-nav.footer a {
-  display: inline-block;
+footer nav.footer a {
   color: inherit;
 }
-nav.footer a:hover {
+footer nav.footer a:hover {
   color: var(--color-theme);
 }
 
-.footer-newsletter {
-  display: flex;
-  justify-content: end;
+/** Mobile Grid Layout *****************************************************************/
+@media (max-width: 768px) {
+  footer {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+  footer > * {
+    grid-column: 1 !important;
+    justify-self: center;
+  }
+  footer .newsletter {
+    grid-row: 1;
+  }
+  footer nav.social.footer {
+    grid-row: 2;
+  }
+  footer .address {
+    grid-row: 3;
+    text-align: center;
+  }
+  footer nav.footer {
+    grid-row: 4;
+  }
 }
 </style>
