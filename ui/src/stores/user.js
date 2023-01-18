@@ -67,8 +67,13 @@ export default defineStore('user', () => {
         `,
       })
       .then(() => {
-        user.value = undefined;
         log.debug('logged out user');
+      })
+      .catch((err) => {
+        log.debug(err);
+      })
+      .finally(() => {
+        user.value = undefined;
       });
   }
 
