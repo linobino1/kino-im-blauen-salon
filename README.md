@@ -17,6 +17,12 @@ docker-compose -f docker-compose.yaml -f docker-compose.development.yaml up
 # api: https://localhost:3000
 ```
 
+After changing the database structure in the api, you might need to run:
+```
+docker-compose -f docker-compose.yaml -f docker-compose.development.yaml up -d api --force-recreate
+```
+
+
 ### Manually
 
 You will need NodeJS, Yarn and MongoDB to be installed.
