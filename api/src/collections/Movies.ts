@@ -4,6 +4,10 @@ import createSlugField from '../fields/slug';
 
 const Movies: CollectionConfig = {
   slug: 'movies',
+  labels: {
+    singular: t('Movie'),
+    plural: t('Movies'),
+  },
   admin: {
     group: t('Movies'),
     defaultColumns: ['title', 'director', 'year'],
@@ -16,10 +20,12 @@ const Movies: CollectionConfig = {
     createSlugField('title'),
     {
       name: 'title',
+      label: t('Title'),
       type: 'text',
     },
     {
       name: 'header',
+      label: t('Header Image'),
       type: 'upload',
       relationTo: 'media',
     },
@@ -36,13 +42,14 @@ const Movies: CollectionConfig = {
     },
     {
       name: 'director',
+      label: t('Director'),
       type: 'relationship',
       relationTo: 'directors',
       hasMany: false,
     },
     {
       name: 'year',
-      label: 'Publication Year',
+      label: t('Publication Year'),
       type: 'number',
     },
     {
