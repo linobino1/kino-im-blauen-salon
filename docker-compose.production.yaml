@@ -4,6 +4,7 @@ services:
 
   api:
     restart: always
+    build: ./api
     # do not publish any ports, will be reverse-proxied
     expose:
       - 3000

@@ -6,7 +6,6 @@ services:
 
   api:
     container_name: api
-    build: ./api
     depends_on:
       - mongo
 
