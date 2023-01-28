@@ -1,9 +1,14 @@
 import { CollectionConfig } from 'payload/types';
+import { t } from '../translations';
 
 const Media: CollectionConfig = {
   slug: 'media',
+  labels: {
+    singular: t('Upload'),
+    plural: t('Uploads'),
+  },
   admin: {
-    group: 'Media',
+    group: t('Media'),
   },
   access: {
     read: () => true,

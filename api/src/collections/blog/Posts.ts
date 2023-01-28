@@ -1,7 +1,8 @@
 import { CollectionConfig } from 'payload/types';
-import createSlugField from '../fields/slug';
+import { addSlugField } from '../../fields/slug';
+import { tLocale } from '../../translations';
 
-const Posts: CollectionConfig = {
+const Posts: CollectionConfig = addSlugField('title', {
   slug: 'posts',
   admin: {
     group: 'Blog',
@@ -22,9 +23,7 @@ const Posts: CollectionConfig = {
     },
   },
   versions: {
-    drafts: {
-      autosave: true,
-    },
+    drafts: true,
   },
   fields: [
     {
@@ -32,7 +31,6 @@ const Posts: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    createSlugField('title'),
     {
       name: 'date',
       type: 'date',
@@ -41,7 +39,7 @@ const Posts: CollectionConfig = {
       admin: {
         date: {
           pickerAppearance: 'dayOnly',
-          displayFormat: 'MM.dd.yyyy',
+          displayFormat: tLocale('dateFormatAdmin'),
         },
       },
     },
@@ -61,6 +59,6 @@ const Posts: CollectionConfig = {
       type: 'text',
     },
   ],
-};
+});
 
 export default Posts;

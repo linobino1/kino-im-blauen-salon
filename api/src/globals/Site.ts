@@ -1,9 +1,10 @@
 import { GlobalConfig } from 'payload/types';
+import { t } from '../translations';
 
 const Site: GlobalConfig = {
   slug: 'site',
   admin: {
-    group: 'Site',
+    group: t('Website'),
   },
   access: {
     read: () => true,
@@ -11,20 +12,24 @@ const Site: GlobalConfig = {
   fields: [
     {
       name: 'favicon',
+      label: t('Site Icon'),
       type: 'upload',
       relationTo: 'media',
     },
     {
       name: 'title',
+      label: t('Title'),
       type: 'text',
     },
     {
       name: 'homePage',
+      label: t('Home Page'),
       type: 'relationship',
       relationTo: 'pages',
     },
     {
-      name: 'adress',
+      name: 'address',
+      label: t('Address'),
       type: 'richText',
     },
   ],

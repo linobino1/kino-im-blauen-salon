@@ -1,9 +1,14 @@
 import { CollectionConfig } from 'payload/types';
+import { t, tLocale } from '../../translations';
 
 const Directors: CollectionConfig = {
   slug: 'directors',
+  labels: {
+    singular: t('Director'),
+    plural: t('Directors'),
+  },
   admin: {
-    group: 'Movies',
+    group: t('Movies'),
     defaultColumns: ['name'],
     useAsTitle: 'name',
   },
@@ -13,34 +18,32 @@ const Directors: CollectionConfig = {
   fields: [
     {
       name: 'name',
+      label: t('Name'),
       type: 'text',
+      required: true,
     },
     {
       name: 'dateOfBirth',
-      label: 'Born',
+      label: t('Born'),
       type: 'date',
       admin: {
         date: {
           pickerAppearance: 'dayOnly',
+          displayFormat: tLocale('dateFormatAdmin'),
         },
       },
     },
     {
       name: 'dateOfDeath',
-      label: 'Died',
+      label: t('Died'),
       type: 'date',
       admin: {
         date: {
           pickerAppearance: 'dayOnly',
+          displayFormat: tLocale('dateFormatAdmin'),
         },
       },
     },
-    // {
-    //   name: 'movies',
-    //   type: 'relationship',
-    //   relationTo: 'movies',
-    //   hasMany: true,
-    // },
   ],
 };
 

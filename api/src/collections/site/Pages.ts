@@ -1,36 +1,45 @@
 import { CollectionConfig } from 'payload/types';
-import createSlugField from '../fields/slug';
+import { addSlugField } from '../../fields/slug';
+import { t } from '../../translations';
 
-const Pages: CollectionConfig = {
+const Pages: CollectionConfig = addSlugField('title', {
   slug: 'pages',
+  labels: {
+    singular: t('Page'),
+    plural: t('Pages'),
+  },
   admin: {
-    group: 'Site',
+    group: t('Website'),
     defaultColumns: ['title'],
     useAsTitle: 'title',
   },
   access: {
     read: () => true,
   },
+  versions: {
+    drafts: true,
+  },
   fields: [
-    createSlugField('title'),
     {
       name: 'title',
+      label: t('Title'),
       type: 'text',
     },
     {
       name: 'type',
+      label: t('Type'),
       type: 'select',
       options: [
         {
-          label: 'Static Page',
+          label: t('Static Page'),
           value: 'static',
         },
         {
-          label: 'Screenings List',
+          label: t('Screenings List'),
           value: 'screenings_list',
         },
         {
-          label: 'Blog',
+          label: t('Blog'),
           value: 'posts_list',
         },
       ],
@@ -38,17 +47,19 @@ const Pages: CollectionConfig = {
     },
     {
       name: 'header',
+      label: t('Header Image'),
       type: 'upload',
       relationTo: 'media',
     },
     {
       name: 'mainContent',
+      label: t('Main Content'),
       type: 'richText',
       admin: {
         condition: (data) => data.type === 'static',
       },
     },
   ],
-};
+});
 
 export default Pages;

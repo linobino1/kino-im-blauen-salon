@@ -1,7 +1,12 @@
 import { CollectionConfig } from 'payload/types';
+import { t } from '../../translations';
 
 const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    singular: t('User'),
+    plural: t('Users'),
+  },
   auth: {
     cookies: {
       sameSite: 'none',
@@ -9,7 +14,7 @@ const Users: CollectionConfig = {
     },
   },
   admin: {
-    group: 'Auth',
+    group: t('Website'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'role'],
   },
@@ -20,18 +25,24 @@ const Users: CollectionConfig = {
     // Email added by default
     {
       name: 'name',
+      label: t('Name'),
       type: 'text',
     },
     {
       name: 'role',
+      label: t('Role'),
       type: 'select',
       options: [
         {
-          label: 'admin',
+          label: t('Admin'),
           value: 'admin',
         },
         {
-          label: 'insider',
+          label: t('Moderator'),
+          value: 'moderator',
+        },
+        {
+          label: t('Insider'),
           value: 'insider',
         },
       ],

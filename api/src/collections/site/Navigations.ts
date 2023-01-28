@@ -1,9 +1,14 @@
 import { CollectionConfig } from 'payload/types';
+import { t } from '../../translations';
 
 const Navigations: CollectionConfig = {
   slug: 'navigations',
+  labels: {
+    singular: t('Navigation'),
+    plural: t('Navigations'),
+  },
   admin: {
-    group: 'Site',
+    group: t('Website'),
     useAsTitle: 'type',
     defaultColumns: ['type'],
   },
@@ -13,26 +18,30 @@ const Navigations: CollectionConfig = {
   fields: [
     {
       name: 'type',
+      label: t('Type'),
       type: 'select',
       options: [
         {
-          label: 'Main',
+          label: t('Main Navigation'),
           value: 'main',
         },
         {
-          label: 'Footer',
+          label: t('Footer Navigation'),
           value: 'footer',
         },
         {
-          label: 'Social Media',
+          label: t('Social Media'),
           value: 'social',
         },
       ],
     },
     {
       name: 'items',
+      labels: {
+        singular: t('Item'),
+        plural: t('Items'),
+      },
       type: 'array',
-      required: true,
       minRows: 1,
       maxRows: 8,
       admin: {
@@ -43,31 +52,34 @@ const Navigations: CollectionConfig = {
       fields: [
         {
           name: 'type',
+          label: t('Type'),
           type: 'radio',
           defaultValue: 'internal',
           options: [
             {
-              label: 'Internal Link',
+              label: t('Internal Link'),
               value: 'internal',
             },
             {
-              label: 'External Link',
+              label: t('External Link'),
               value: 'external',
             },
             {
-              label: 'Submenu',
-              value: 'submenu',
+              label: t('Subnavigation'),
+              value: 'subnavigation',
             },
           ],
         },
         {
           name: 'name',
+          label: t('Name'),
           type: 'text',
           required: true,
         },
         // internal link
         {
           name: 'page',
+          label: t('Page'),
           type: 'relationship',
           relationTo: 'pages',
           required: true,
@@ -78,6 +90,7 @@ const Navigations: CollectionConfig = {
         // external link
         {
           name: 'url',
+          label: t('Url'),
           type: 'text',
           required: true,
           admin: {
@@ -86,19 +99,21 @@ const Navigations: CollectionConfig = {
         },
         {
           name: 'icon',
+          label: t('Icon'),
           type: 'upload',
           relationTo: 'media',
           admin: {
             condition: (data, siblingData) => siblingData.type === 'external',
           },
         },
-        // submenu
+        // subnavigation
         {
-          name: 'submenu',
+          name: 'subnavigation',
+          label: t('Subnavigation'),
           type: 'relationship',
           relationTo: 'navigations',
           admin: {
-            condition: (data, siblingData) => siblingData.type === 'submenu',
+            condition: (data, siblingData) => siblingData.type === 'subnavigation',
           },
         },
       ],

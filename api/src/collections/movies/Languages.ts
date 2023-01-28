@@ -1,9 +1,14 @@
 import { CollectionConfig } from 'payload/types';
+import { t } from '../../translations';
 
 const Languages: CollectionConfig = {
   slug: 'languages',
+  labels: {
+    singular: t('Language'),
+    plural: t('Languages'),
+  },
   admin: {
-    group: 'Movies',
+    group: t('Movies'),
     defaultColumns: ['name'],
     useAsTitle: 'name',
   },
@@ -13,7 +18,10 @@ const Languages: CollectionConfig = {
   fields: [
     {
       name: 'name',
+      label: t('Name'),
       type: 'text',
+      required: true,
+      unique: true,
     },
   ],
 };
