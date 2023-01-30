@@ -7,7 +7,7 @@ import RichTextRender from './RichTextRender.vue';
 const query = gql`
   query MainFooter {
     Site {
-      adress
+      address
     }
   }
 `;
@@ -16,7 +16,7 @@ const { result } = useQuery(query);
 
 <template>
   <footer>
-    <RichTextRender :input="result?.Site?.adress" class="address" />
+    <RichTextRender :input="result?.Site?.address" class="address" />
     <DynamicNavigation type="social" class="footer" />
     <DynamicNavigation type="footer" />
     <a class="newsletter">newsletter</a>

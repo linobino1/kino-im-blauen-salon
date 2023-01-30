@@ -10,7 +10,7 @@ const props = defineProps({
   },
 });
 
-// query navigation of given type including one layer of submenus
+// query navigation of given type including one layer of subnavigations
 const query = gql`
   query getNavigation($type: Navigation_type_Input) {
     Navigations(where: {type: { equals: $type } }) {
@@ -25,7 +25,7 @@ const query = gql`
           icon {
             url
           }
-          submenu {
+          subnavigation {
             items {
               type
               name
