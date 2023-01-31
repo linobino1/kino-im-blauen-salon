@@ -84,6 +84,9 @@ const Translations: { [key: string]: Translation } = {
     de: 'Bitte hier Infos zur Produktion und Trivia eingeben.',
     en: undefined,
   },
+  'Playing Time': {
+    de: 'Spieldauer',
+  },
   'Film Serie': {
     de: 'Filmreihe',
   },
