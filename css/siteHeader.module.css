@@ -1,0 +1,129 @@
+.header {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  width: 100%;
+}
+/** MAIN HEADER  ********************************************/
+.mainHeader {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  width: 100%;
+  padding: 0 10%;
+  font-size: var(--font-size-small);
+}
+.mainHeader > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: end;
+  width: fit-content;
+  padding: .5rem;
+  border-right: 1px solid var(--color-light-grey);
+  grid-row: 1;
+}
+.mainHeader > *:first-child {
+  justify-self: start;
+  padding-left: 0;
+}
+.mainHeader > *:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+.mainLogo {
+  width: 8rem;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .mainHeader {
+    padding: 0 1rem;
+  }
+  .mainHeader > * {
+    border-right: 0;
+  }
+  .mainHeader > *:last-child {
+    padding-left: 0;
+    grid-column: 2;
+  }
+  .mainHeader > *:last-child > * {
+    padding-left: 0;
+  }
+}
+/** IMAGE HEADER   ******************************************/
+.imageHeader {
+  width: 100vw;
+  height: 48vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+img.headerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  min-height: 2rem;
+}
+/** IMAGE HEADER OVERLAY  ***********************************/
+.imageHeaderOverlay {
+  position: absolute;
+  top: 2rem;
+  width: 100%;
+  padding: 0 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.backButton {
+  appearance: none;
+  border: none;
+  background: none;
+  color: var(--color-white);
+  font-family: sans-serif;
+  font-size: 2rem;
+}
+.backButton:hover {
+  cursor: pointer;
+  filter: brightness(0.5);
+  transition: filter 0.4s;
+}
+.backButton::before {
+  content: '\003C';
+}
+
+/* prettify hover */
+.imageHeader button:hover,
+.imageHeader a:hover {
+  cursor: pointer;
+  filter: brightness(0.5);
+  transition: filter 0.4s;
+}
+
+@media (max-width: 1024px) {
+  .imageHeader {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .imageHeader {
+    height: 275px;
+  }
+}
+/** TITLE HEADER   ******************************************/
+.titleHeader {
+  width: 100%;
+  color: var(--color-black);
+  background: var(--color-white);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-size: var(--font-size-xxx-big);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-big);
+  text-transform: uppercase;
+  padding: 1rem;
+}

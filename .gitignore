@@ -3,8 +3,13 @@
 # MacOS
 .DS_Store
 
-.env
+# NextJs
+.next
 
-# docker volumes
-media/
-data/
+.env
+out
+build
+dist
+media/*
+yarn-error.log
+node_modules

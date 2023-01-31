@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+}
+.nav.main {
+  justify-self: end;
+}
+.nav.socialMedia {
+  justify-self: end;
+}
+
+/** NAVIGATION ITEM  ***************************************/
+.navItem.active {
+  color: var(--color-black);
+}
+.navItem.active:hover {
+  color: inherit;
+}
+.navItem {
+  display: inline-block;
+  padding: .5rem 1rem;
+  color: var(--color-font-light);
+  text-transform: uppercase;
+  position: relative;
+}
+.navItem:hover {
+  color: var(--color-theme-contrast);
+}
+.navItem image {
+
+}
