@@ -14,7 +14,7 @@ export const Posts: React.FC<Type> = (props) => {
   return posts ? (
     <div className={classes.posts}>
       {posts.map((post) => (
-        <PostComponent post={post} />
+        <PostComponent post={post} key={post.slug} />
       ))}
     </div>
   ) : (
