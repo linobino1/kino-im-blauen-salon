@@ -1,30 +1,30 @@
 import React from 'react';
 import payload from 'payload';
 import { GetServerSideProps } from 'next';
-import getConfig from 'next/config';
-import { Type as PageType } from '../collections/Page';
+import { PageTypeEnum, Type as PageType } from '../collections/Pages';
 import { Type as SiteType } from '../globals/Site';
-import { NavigationTypesEnum, Navigation } from '../collections/Navigations';
+import { NavigationTypesEnum, Type as NavigationType } from '../collections/Navigations';
 import NotFound from '../components/NotFound';
 import Head from '../components/Head';
 import classes from '../css/page.module.css';
-import RenderBlocks from '../components/RenderBlocks';
 import SiteHeader from '../components/SiteHeader';
-
-const { publicRuntimeConfig: { SERVER_URL } } = getConfig();
+import RichText from '../components/RichText';
+import { Posts } from '../components/Posts';
+import { Type as PostType } from '../collections/Posts';
 
 export type Props = {
-  page?: PageType
   site?: SiteType
-  navigations?: Navigation[]
+  navigations?: NavigationType[]
+  page?: PageType
+  posts?: PostType[]
   statusCode: number
 };
 
-const Page: React.FC<Props> = (props) => {
-  const { page, site, navigations } = props;
-
+const Page: React.FC<Props> = ({
+  site, navigations, page, posts,
+}) => {
   const title: string = [
-    page?.meta?.title || page?.title,
+    page?.title,
     site?.title,
   ].filter(Boolean).join(' | ');
 
@@ -46,15 +46,15 @@ const Page: React.FC<Props> = (props) => {
         site={site}
         headerImage={page.image}
       />
-      <div className={classes.featuredImage}>
-        {page.image && (
-          <img
-            src={`${SERVER_URL}/media/${page.image.sizes?.feature?.filename || page.image.filename}`}
-            alt={page.image.alt}
-          />
+
+      <div className={classes.mainstage}>
+        <RichText content={page.content} />
+
+        {page.type === PageTypeEnum.posts && (
+          <Posts posts={posts} />
         )}
       </div>
-      <RenderBlocks layout={page.layout} />
+
       <footer className={classes.footer}>
         <hr />
         NextJS + Payload Server Boilerplate made by
@@ -85,14 +85,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     },
   });
 
-  if (!pageQuery.docs[0]) {
-    ctx.res.statusCode = 404;
-
-    return {
-      props: {},
-    };
-  }
-
   const siteQuery = await payload.findGlobal({
     slug: 'site',
   });
@@ -102,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     depth: 5,
   });
 
-  if (!siteQuery || !navigationsQuery) {
+  if (!pageQuery || !siteQuery || !navigationsQuery) {
     ctx.res.statusCode = 500;
 
     return {
@@ -110,11 +102,27 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
+  const site: SiteType = siteQuery;
+  const page: PageType = pageQuery.docs[0] || null;
+  const navigations: NavigationType[] = navigationsQuery.docs;
+
+  let posts: PostType[] = [];
+  if (page?.type === PageTypeEnum.posts) {
+    const postsQuery = await payload.find({
+      collection: 'posts',
+    });
+
+    if (postsQuery) {
+      posts = postsQuery.docs;
+    }
+  }
+
   return {
     props: {
-      page: pageQuery.docs[0],
-      site: siteQuery,
-      navigations: navigationsQuery.docs,
+      site,
+      navigations,
+      page,
+      posts,
     },
   };
 };
