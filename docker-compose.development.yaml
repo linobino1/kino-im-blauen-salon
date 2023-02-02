@@ -1,0 +1,26 @@
+services:
+  app:
+    image: node:18-alpine
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/home/node/app
+      - /home/node/app/node_modules
+      - /home/node/app/.next
+    working_dir: /home/node/app/
+    command: sh -c "yarn && yarn dev"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+      MONGO_URL: mongodb://db:27017/app
+
+  db:
+    ports:
+      - 27017:27017
+    volumes:
+      - ./dump:/dump  # for restoring db dumps
+      - data:/data/db
+  
+volumes:
+  data:

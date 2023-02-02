@@ -6,6 +6,9 @@
 # NextJs
 .next
 
+# mongo dump
+dump/
+
 .env
 out
 build
