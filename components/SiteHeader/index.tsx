@@ -3,11 +3,12 @@ import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Type as SiteType } from '../../globals/Site';
-import { Navigation as NavigationType } from '../../collections/Navigations';
+import { Type as NavigationType } from '../../collections/Navigations';
 import classes from '../../css/siteHeader.module.css';
 import Navigation from '../Navigation';
 import { MediaType } from '../../collections/Media';
 import { mediaLoader } from '../../utilities/mediaLoader';
+import { UserStatus } from '../UserStatus';
 
 type Props = {
   title: string
@@ -36,6 +37,7 @@ const SiteHeader: React.FC<Props> = ({
           />
         </Link>
         <Navigation navigation={mainNavigation} />
+        <UserStatus />
       </div>
       <div className={classes.imageHeader}>
         <Image

@@ -11,6 +11,9 @@ dotenv.config();
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  routes: {
+    api: '/payload',
+  },
   collections: [
     Users,
     Pages,
