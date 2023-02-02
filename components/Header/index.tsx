@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { Type as SiteType } from '../../globals/Site';
 import { Type as NavigationType } from '../../collections/Navigations';
-import classes from '../../css/siteHeader.module.css';
+import classes from '../../css/header.module.css';
 import Navigation from '../Navigation';
 import { MediaType } from '../../collections/Media';
 import { mediaLoader } from '../../utilities/mediaLoader';
@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({
             alt="logo"
           />
         </Link>
-        <Navigation navigation={mainNavigation} />
+        <Navigation navigation={mainNavigation} className={classes.navMain} />
         <UserStatus />
       </div>
       <div className={classes.imageHeader}>
@@ -54,7 +54,7 @@ const Header: React.FC<Props> = ({
             onClick={() => router.back()}
             aria-label="back"
           />
-          <Navigation navigation={socialNavigation} />
+          <Navigation navigation={socialNavigation} className={classes.navSocial} />
         </div>
       </div>
       <h1 className={classes.titleHeader}>

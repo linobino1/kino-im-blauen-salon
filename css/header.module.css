@@ -1,7 +1,8 @@
 .header {
   background-color: var(--color-white);
-  color: var(--color-black);
   width: 100%;
+  color: var(--color-font-light);
+  text-transform: uppercase;
 }
 /** MAIN HEADER  ********************************************/
 .mainHeader {
@@ -33,7 +34,9 @@
   width: 8rem;
   height: auto;
 }
-
+.navMain {
+  justify-self: end;
+}
 @media (max-width: 1024px) {
   .mainHeader {
     padding: 0 1rem;
@@ -76,6 +79,9 @@ img.headerImage {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+.navSocial {
+  justify-self: end;
 }
 .backButton {
   appearance: none;

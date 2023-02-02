@@ -1,3 +1,4 @@
+import { RichTextElement } from 'payload/dist/fields/config/types';
 import { GlobalConfig } from 'payload/types';
 import { MediaType } from '../collections/Media';
 import { Type as PageType } from '../collections/Pages';
@@ -7,6 +8,7 @@ export type Type = {
   favicon?: MediaType
   title: string
   homePage: PageType
+  address?: RichTextElement
 };
 
 export const Site: GlobalConfig = {
@@ -32,6 +34,12 @@ export const Site: GlobalConfig = {
       name: 'homePage',
       type: 'relationship',
       relationTo: 'pages',
+      required: true,
+    },
+    {
+      name: 'address',
+      label: t('Address'),
+      type: 'richText',
     },
   ],
 };

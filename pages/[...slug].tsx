@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import RichText from '../components/RichText';
 import { Posts } from '../components/Posts';
 import { Type as PostType } from '../collections/Posts';
+import Footer from '../components/Footer';
 
 export type Props = {
   site?: SiteType
@@ -33,41 +34,36 @@ const Page: React.FC<Props> = ({
   }
 
   return (
-    <main className={classes.page}>
-      <Head
-        title={title}
-        description={page.meta?.description}
-        keywords={page.meta?.keywords}
-      />
-      <Header
-        title={page.title}
-        mainNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.main)}
-        socialNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.socialMedia)}
+    <>
+      <main className={classes.page}>
+        <Head
+          title={title}
+          description={page.meta?.description}
+          keywords={page.meta?.keywords}
+        />
+        <Header
+          title={page.title}
+          mainNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.main)}
+          socialNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.socialMedia)}
+          site={site}
+          headerImage={page.image}
+        />
+
+        <div className={classes.mainstage}>
+          <RichText content={page.content} />
+
+          {page.type === PageTypeEnum.posts && (
+            <Posts posts={posts} />
+          )}
+        </div>
+
+      </main>
+      <Footer
         site={site}
-        headerImage={page.image}
+        footerNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.footer)}
+        socialNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.socialMedia)}
       />
-
-      <div className={classes.mainstage}>
-        <RichText content={page.content} />
-
-        {page.type === PageTypeEnum.posts && (
-          <Posts posts={posts} />
-        )}
-      </div>
-
-      <footer className={classes.footer}>
-        <hr />
-        NextJS + Payload Server Boilerplate made by
-        {' '}
-        <a
-          href="https://payloadcms.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Payload
-        </a>
-      </footer>
-    </main>
+    </>
   );
 };
 
