@@ -18,15 +18,6 @@ const nextConfig = {
       2560,
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/start',
-        permanent: false,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
