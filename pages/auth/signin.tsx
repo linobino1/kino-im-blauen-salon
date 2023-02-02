@@ -4,6 +4,8 @@ import { signIn, SignInOptions } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import payload from 'payload';
 import classes from '../../css/auth.module.css';
+import { _t } from '../../i18n';
+import Head from '../../components/Head';
 import { Input } from '../../components/Input';
 import { Type as SiteType } from '../../globals/Site';
 
@@ -31,20 +33,23 @@ export const SignIn: React.FC = (props: SiteType) => {
 
   return (
     <main className={classes.main}>
+      <Head
+        title={_t('Sign In')}
+      />
       <form onSubmit={handleSubmit} className={classes.centered}>
         <Input
-          label="Email"
+          label={_t('Email')}
           name="email"
           type="email"
         />
 
         <Input
-          label="Password"
+          label={_t('Password')}
           name="password"
           type="password"
         />
 
-        <button type="submit">Login</button>
+        <button type="submit">{_t('Sign In')}</button>
       </form>
     </main>
   );

@@ -10,7 +10,7 @@ export const UserStatus: React.FC = () => {
   return (
     <div className={classes.userStatus}>
       { session ? (
-        <Link href="/auth/me" className={classes.email}>{session.user.email}</Link>
+        <Link href="/auth/me" className={classes.name}>{session.user.name}</Link>
       ) : (
         <Link href="/auth/signin" className={classes.signIn}>
           {_t('Sign In')}

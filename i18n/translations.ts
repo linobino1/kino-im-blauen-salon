@@ -268,4 +268,23 @@ export const Translations: { [key: string]: Translation } = {
   'No posts.': {
     de: 'Keine Beiträge.',
   },
+  'Sign In': {
+    de: 'Anmelden',
+  },
+  Account: {
+    de: 'Konto',
+  },
+  'My Account': {
+    de: 'Mein Konto',
+  },
+  'Signed in as {name}': {
+    de: 'Eingeloggt als {name}',
+  },
+  'Sign Out': {
+    de: 'Abmelden',
+  },
+  Email: {},
+  Password: {
+    de: 'Passwort',
+  },
 };

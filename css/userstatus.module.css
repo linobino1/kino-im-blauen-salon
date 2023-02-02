@@ -5,15 +5,16 @@
   text-decoration: inherit;
 }
 
-.email,
+.name,
 .signIn {
   white-space: nowrap;
+  padding: 0.5rem;
 }
-.email:hover,
+.name:hover,
 .signIn:hover {
   color: var(--color-theme-contrast) !important;
 }
 
-.email {
+.name {
   text-transform: none;
 }

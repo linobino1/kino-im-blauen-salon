@@ -3,26 +3,37 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { _t } from '../../i18n';
 import classes from '../../css/auth.module.css';
+import Head from '../../components/Head';
 
 export const Me: React.FC = () => {
   const { data: session } = useSession();
 
   return (
     <main className={classes.main}>
+      <Head
+        title={_t('My Account')}
+      />
       <div className={classes.centered}>
         { session ? (
           <>
             <p>
-              Signed in as
-              {' '}
-              {session.user.email}
+              {_t('Signed in as {name}', {
+                name: session.user.name,
+              })}
             </p>
             <button type="button" onClick={() => signOut()}>
-              {_t('Sign out')}
+              {_t('Sign Out')}
             </button>
           </>
         ) : (
-          <Link href="/auth/signin">Sign In</Link>
+          <>
+            <p>{_t('Not signed in.')}</p>
+            <Link href="/auth/signin">
+              <button type="button">
+                {_t('Sign In')}
+              </button>
+            </Link>
+          </>
         )}
       </div>
     </main>
