@@ -1,6 +1,4 @@
 import { CollectionConfig } from 'payload/types';
-import { Type as PageType } from './Pages';
-import { MediaType } from './Media';
 import { t } from '../i18n';
 
 export enum NavigationItemTypesEnum {
@@ -9,26 +7,11 @@ export enum NavigationItemTypesEnum {
   subnavigation = 'subnavigation',
 }
 
-export type NavigationItem = {
-  id: string
-  type: NavigationItemTypesEnum
-  name: string
-  page?: PageType
-  url?: string
-  icon?: MediaType
-  subnavigation?: Type
-};
-
 export enum NavigationTypesEnum {
   main = 'main',
   footer = 'footer',
   socialMedia = 'socialMedia',
 }
-
-export type Type = {
-  type: NavigationTypesEnum
-  items: NavigationItem[]
-};
 
 export const Navigations: CollectionConfig = {
   slug: 'navigations',

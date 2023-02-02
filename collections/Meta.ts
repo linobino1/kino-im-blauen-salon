@@ -1,11 +1,6 @@
 import { Field } from 'payload/types';
 import { t } from '../i18n';
 
-export type Type = {
-  description?: string
-  keywords?: string
-};
-
 export const Meta: Field = {
   name: 'meta',
   label: t('Meta'),

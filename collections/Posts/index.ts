@@ -1,17 +1,6 @@
-import { RichTextElement } from 'payload/dist/fields/config/types';
 import { CollectionConfig } from 'payload/types';
-import { t } from '../../i18n';
+import { t, _t } from '../../i18n';
 import { slugField } from '../../utilities/slugField';
-import { MediaType } from '../Media';
-
-export type Type = {
-  title: string
-  slug: string
-  date: string
-  header: MediaType
-  content: RichTextElement
-  link: string
-};
 
 const Posts: CollectionConfig = {
   slug: 'posts',
@@ -51,7 +40,7 @@ const Posts: CollectionConfig = {
       admin: {
         date: {
           pickerAppearance: 'dayOnly',
-          // displayFormat: tLocale('dateFormatAdmin'),
+          displayFormat: _t('dateFormatAdmin'),
         },
       },
     },

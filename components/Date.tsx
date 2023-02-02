@@ -1,17 +1,29 @@
-import React from 'react';
-import { parseISO, format } from 'date-fns';
+import React, { Suspense } from 'react';
+import { parseISO } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
-export const Date: React.FC<{ dateString: string, className: string }> = ({
-  dateString, className,
+export type Props = {
+  iso: string
+  format?: string
+  className?: string
+};
+
+const tz = process.env.TIMEZONE;
+
+export const Date: React.FC<Props> = ({
+  iso, className, format,
 }) => {
-  const date = parseISO(dateString);
+  const date = parseISO(iso);
 
   return (
-    <time
-      className={className}
-      dateTime={dateString}
-    >
-      {format(date, 'LLLL d, yyyy')}
-    </time>
+    <Suspense>
+      <time
+        suppressHydrationWarning
+        className={className}
+        dateTime={iso}
+      >
+        {formatInTimeZone(date, tz, format ?? 'LLLL d, yyyy')}
+      </time>
+    </Suspense>
   );
 };

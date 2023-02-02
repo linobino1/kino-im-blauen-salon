@@ -1,28 +1,36 @@
+/* eslint-disable no-case-declarations */
 import React from 'react';
 import payload from 'payload';
 import { GetServerSideProps } from 'next';
-import { PageTypeEnum, Type as PageType } from '../collections/Pages';
-import { Type as SiteType } from '../globals/Site';
-import { NavigationTypesEnum, Type as NavigationType } from '../collections/Navigations';
+import {
+  Site as SiteType,
+  Page as PageType,
+  Navigation as NavigationType,
+  Post as PostType,
+  Screening as ScreeningType,
+} from '../payload-types';
+import { PageTypeEnum } from '../collections/Pages';
+import { NavigationTypesEnum } from '../collections/Navigations';
 import NotFound from '../components/NotFound';
 import Head from '../components/Head';
 import classes from '../css/page.module.css';
 import Header from '../components/Header';
 import RichText from '../components/RichText';
 import { Posts } from '../components/Posts';
-import { Type as PostType } from '../collections/Posts';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
+import { Screenings } from '../components/Screenings';
 
 export type Props = {
   site?: SiteType
   navigations?: NavigationType[]
   page?: PageType
   posts?: PostType[]
+  screenings?: ScreeningType[]
   statusCode: number
 };
 
 const Page: React.FC<Props> = ({
-  site, navigations, page, posts,
+  site, navigations, page, posts, screenings,
 }) => {
   const title: string = [
     page?.title,
@@ -54,6 +62,10 @@ const Page: React.FC<Props> = ({
 
           {page.type === PageTypeEnum.posts && (
             <Posts posts={posts} />
+          )}
+
+          {page.type === PageTypeEnum.screenings && (
+            <Screenings screenings={screenings} />
           )}
         </div>
 
@@ -103,14 +115,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const navigations: NavigationType[] = navigationsQuery.docs;
 
   let posts: PostType[] = [];
-  if (page?.type === PageTypeEnum.posts) {
-    const postsQuery = await payload.find({
-      collection: 'posts',
-    });
+  let screenings: ScreeningType[] = [];
+  switch (page?.type) {
+    case PageTypeEnum.posts:
+      const postsQuery = await payload.find({
+        collection: 'posts',
+      });
 
-    if (postsQuery) {
-      posts = postsQuery.docs;
-    }
+      if (postsQuery) {
+        posts = postsQuery.docs;
+      }
+      break;
+
+    case PageTypeEnum.screenings:
+      const screeningsQuery = await payload.find({
+        collection: 'screenings',
+        depth: 7,
+      });
+
+      if (screeningsQuery) {
+        screenings = screeningsQuery.docs;
+      }
+      break;
+
+    default:
   }
 
   return {
@@ -119,6 +147,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       navigations,
       page,
       posts,
+      screenings,
     },
   };
 };

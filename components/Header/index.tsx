@@ -2,11 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Type as SiteType } from '../../globals/Site';
-import { Type as NavigationType } from '../../collections/Navigations';
 import classes from '../../css/header.module.css';
+import {
+  Site as SiteType,
+  Navigation as NavigationType,
+  Media as MediaType,
+} from '../../payload-types';
 import Navigation from '../Navigation';
-import { MediaType } from '../../collections/Media';
 import { mediaLoader } from '../../utilities/mediaLoader';
 import { UserStatus } from '../UserStatus';
 
@@ -15,7 +17,7 @@ type Props = {
   mainNavigation?: NavigationType
   socialNavigation?: NavigationType
   site: SiteType
-  headerImage?: MediaType
+  headerImage?: string | MediaType
 };
 
 const Header: React.FC<Props> = ({

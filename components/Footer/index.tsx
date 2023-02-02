@@ -1,6 +1,8 @@
 import React from 'react';
-import { Type as SiteType } from '../../globals/Site';
-import { Type as NavigationType } from '../../collections/Navigations';
+import {
+  Site as SiteType,
+  Navigation as NavigationType,
+} from '../../payload-types';
 import classes from '../../css/footer.module.css';
 import Navigation from '../Navigation';
 import RichText from '../RichText';
@@ -11,7 +13,7 @@ type Props = {
   site: SiteType
 };
 
-const Footer: React.FC<Props> = ({
+export const Footer: React.FC<Props> = ({
   footerNavigation, socialNavigation, site,
 }) => (
   <footer className={classes.footer}>

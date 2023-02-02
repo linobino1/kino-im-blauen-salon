@@ -7,12 +7,6 @@ export enum RolesEnum {
   insider = 'insider',
 }
 
-export type Type = {
-  name: string
-  email: string
-  role: RolesEnum
-};
-
 const Users: CollectionConfig = {
   slug: 'users',
   labels: {

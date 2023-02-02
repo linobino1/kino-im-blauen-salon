@@ -126,3 +126,206 @@ export interface Post {
   createdAt: string;
   updatedAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "screenings".
+ */
+export interface Screening {
+  id: string;
+  filmprint?: string | FilmPrint;
+  title?: string;
+  slug?: string;
+  date?: string;
+  time?: string;
+  moderator?: string;
+  guest?: string;
+  _status?: 'draft' | 'published';
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "filmPrints".
+ */
+export interface FilmPrint {
+  id: string;
+  title?: string;
+  slug?: string;
+  movie?: string | Movie;
+  type?: 'analogue' | 'digital';
+  filmprintType: string | Type;
+  duration: number;
+  language: string | Language;
+  isOriginalLanguage?: boolean;
+  subtitles?: string | Language;
+  format: string | Format;
+  carrier: string | Carrier;
+  numActs: number;
+  aspectRatio: string | AspectRatio;
+  soundFormat: string | SoundFormat;
+  condition: string | Condition;
+  rightholder: string;
+  _status?: 'draft' | 'published';
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "movies".
+ */
+export interface Movie {
+  id: string;
+  originalTitle: string;
+  slug?: string;
+  titleDE: string;
+  header: string | Media;
+  poster: string | Media;
+  directors: string[] | Director[];
+  cast?: string | Actor;
+  country: string[] | Country[];
+  publicationDate: string;
+  genres?: string[] | Genre[];
+  synopsis: string;
+  info: {
+    [k: string]: unknown;
+  }[];
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "directors".
+ */
+export interface Director {
+  id: string;
+  name: string;
+  dateOfBirth?: string;
+  dateOfDeath?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "actors".
+ */
+export interface Actor {
+  id: string;
+  name: string;
+  dateOfBirth?: string;
+  dateOfDeath?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genres".
+ */
+export interface Genre {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "types".
+ */
+export interface Type {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "languages".
+ */
+export interface Language {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formats".
+ */
+export interface Format {
+  id: string;
+  type?: 'analogue' | 'digital';
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "carriers".
+ */
+export interface Carrier {
+  id: string;
+  type?: 'analogue' | 'digital';
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aspectRatios".
+ */
+export interface AspectRatio {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "soundFormats".
+ */
+export interface SoundFormat {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conditions".
+ */
+export interface Condition {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "rightholders".
+ */
+export interface Rightholder {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "series".
+ */
+export interface Series {
+  id: string;
+  title: string;
+  movies: string[] | Movie[];
+  createdAt: string;
+  updatedAt: string;
+}

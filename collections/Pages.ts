@@ -1,24 +1,13 @@
-import { RichTextElement } from 'payload/dist/fields/config/types';
 import { CollectionConfig } from 'payload/types';
 import { t } from '../i18n';
 import { slugField } from '../utilities/slugField';
-import { MediaType } from './Media';
-import { Meta, Type as MetaType } from './Meta';
+import { Meta } from './Meta';
 
 export enum PageTypeEnum {
   static = 'static',
   screenings = 'screenings',
   posts = 'posts',
 }
-
-export type Type = {
-  title: string
-  slug: string
-  type: PageTypeEnum
-  image?: MediaType
-  content?: RichTextElement
-  meta: MetaType
-};
 
 const Pages: CollectionConfig = {
   slug: 'pages',

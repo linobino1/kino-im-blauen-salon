@@ -12,7 +12,7 @@ export type Type = {
 export const Component: React.FC<Type> = ({ post }) => (
   <div className={classes.post}>
 
-    <Date className={classes.postDate} dateString={post.date} />
+    <Date className={classes.postDate} iso={post.date} />
     <h2 className={classes.postTitle}>{post.title}</h2>
 
     <div className={classes.postPreview}>
