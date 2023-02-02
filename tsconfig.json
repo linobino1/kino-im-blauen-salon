@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "blocks/Image/sizes.js"
+    "next.config.mjs",
   ],
   "exclude": [
     "node_modules"

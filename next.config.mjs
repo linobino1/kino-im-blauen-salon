@@ -1,7 +1,7 @@
-require('dotenv').config();
-const { sizes } = require('./blocks/Image/sizes');
-
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
   publicRuntimeConfig: {
     SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   },
@@ -10,7 +10,13 @@ module.exports = {
       'localhost',
       // Your domain(s) here
     ],
-    deviceSizes: sizes,
+    deviceSizes: [
+      480,
+      1024,
+      1280,
+      1920,
+      2560,
+    ],
   },
   async redirects() {
     return [
@@ -19,6 +25,8 @@ module.exports = {
         destination: '/start',
         permanent: false,
       },
-    ]
+    ];
   },
 };
+
+export default nextConfig;
