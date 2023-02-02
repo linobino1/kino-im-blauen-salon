@@ -21,12 +21,12 @@ const Users: CollectionConfig = {
   },
   auth: {
     cookies: {
-      sameSite: 'none',
+      sameSite: 'strict',
       secure: true,
     },
   },
   admin: {
-    group: t('Website'),
+    group: t('Site'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'role'],
   },
