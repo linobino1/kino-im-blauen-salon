@@ -21,6 +21,7 @@
     "generate:types": "payload generate:types"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "@babel/core": "^7.20.12",
     "@babel/register": "^7.18.9",
     "date-fns": "^2.29.3",
@@ -47,7 +48,6 @@
     "@types/react": "^18.0.27",
     "@typescript-eslint/eslint-plugin": "5.49.0",
     "@typescript-eslint/parser": "5.49.0",
-    "cross-env": "^7.0.3",
     "eslint": "^8.33.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
