@@ -26,6 +26,7 @@ if (!process.env.NEXT_BUILD) {
   const nextHandler = nextApp.getRequestHandler();
 
   server.get('*', (req, res) => nextHandler(req, res));
+  server.post('*', (req, res) => nextHandler(req, res));
 
   nextApp.prepare().then(() => {
     console.log('NextJS started');
