@@ -1,27 +1,31 @@
 import React from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { _t } from '../../i18n';
-
-const callbackUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/`;
+import classes from '../../css/auth.module.css';
 
 export const Me: React.FC = () => {
   const { data: session } = useSession();
 
-  return session ? (
-    <>
-      <p>
-        Signed in as
-        {' '}
-        {session.user.email}
-      </p>
-      <button type="button" onClick={() => signOut()}>
-        {_t('Sign out')}
-      </button>
-    </>
-  ) : (
-    <button type="button" onClick={() => signIn(undefined, { callbackUrl })}>
-      {_t('Sign in')}
-    </button>
+  return (
+    <main className={classes.main}>
+      <div className={classes.centered}>
+        { session ? (
+          <>
+            <p>
+              Signed in as
+              {' '}
+              {session.user.email}
+            </p>
+            <button type="button" onClick={() => signOut()}>
+              {_t('Sign out')}
+            </button>
+          </>
+        ) : (
+          <Link href="/auth/signin">Sign In</Link>
+        )}
+      </div>
+    </main>
   );
 };
 

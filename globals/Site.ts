@@ -1,6 +1,7 @@
 import { GlobalConfig } from 'payload/types';
 import { MediaType } from '../collections/Media';
-import { Type as PageType } from '../collections/Page';
+import { Type as PageType } from '../collections/Pages';
+import { t } from '../i18n';
 
 export type Type = {
   favicon?: MediaType
@@ -12,6 +13,9 @@ export const Site: GlobalConfig = {
   slug: 'site',
   access: {
     read: (): boolean => true,
+  },
+  admin: {
+    group: t('Site'),
   },
   fields: [
     {
