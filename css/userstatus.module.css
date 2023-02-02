@@ -1,0 +1,19 @@
+.userStatus a,
+.userStatus a:active,
+.userStatus a:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.email,
+.signIn {
+  white-space: nowrap;
+}
+.email:hover,
+.signIn:hover {
+  color: var(--color-theme-contrast) !important;
+}
+
+.email {
+  text-transform: none;
+}
