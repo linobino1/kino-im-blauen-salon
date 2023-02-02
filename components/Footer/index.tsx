@@ -18,7 +18,7 @@ const Footer: React.FC<Props> = ({
     <RichText content={site.address} className={classes.address} />
     <Navigation navigation={footerNavigation} className={classes.navFooter} />
     <Navigation navigation={socialNavigation} className={classes.navSocial} />
-    <div className="newsletter">newsletter</div>
+    <div className={classes.newsletter}>newsletter</div>
   </footer>
 );
 
