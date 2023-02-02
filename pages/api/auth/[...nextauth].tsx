@@ -29,19 +29,26 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      if (user) return true;
-      return false;
+    async jwt({ token, user }) {
+      // Persist the the users role to the token right after signin
+      const res = token;
+
+      if (user) {
+        res.role = user.role;
+      }
+      return res;
     },
-    async session({ session }) {
-      // session.user.isLoggedIn = true;
-      return session;
-    },
-    async jwt({ token }) {
-      return token;
+    async session({ session, token }) {
+      // add the users role to session.user
+      const res = session;
+
+      if (session?.user) {
+        res.user.role = token.role;
+      }
+
+      return res;
     },
   },
-  // use env variable in production
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin',
