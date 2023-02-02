@@ -1,0 +1,11 @@
+services:
+  app:
+    container_name: app
+    depends_on:
+      - db
+  
+  db:
+    container_name: db
+    image: mongo:latest
+    command:
+      - --storageEngine=wiredTiger

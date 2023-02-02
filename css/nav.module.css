@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+}
+
+/** NAVIGATION ITEM  ***************************************/
+.navItem,
+.navItem:active,
+.navItem:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
+.navItem.active {
+  color: var(--color-black);
+}
+.navItem.active:hover {
+  color: inherit;
+}
+.navItem {
+  display: inline-block;
+  padding: .5rem 1rem;
+  position: relative;
+}
+.navItem:hover {
+  color: var(--color-theme-contrast);
+}
