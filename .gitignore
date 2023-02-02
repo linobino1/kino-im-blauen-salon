@@ -1,1 +1,18 @@
 .vscode
+
+# MacOS
+.DS_Store
+
+# NextJs
+.next
+
+# mongo dump
+dump/
+
+.env
+out
+build
+dist
+media/*
+yarn-error.log
+node_modules
