@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: ./
+      target: runner
+    ports:
+      - 80:3000
+    volumes:
+      - media:/app/media
+    env_file:
+      - .env
+    environment:
+      MONGO_URL: mongodb://db:27017/app
+
+  db:
+    ports:
+      - 27017:27017
+    volumes:
+      - ./dump:/dump  # for restoring db dumps
+      - data:/data/db
+  
+volumes:
+  data:
+  media:
