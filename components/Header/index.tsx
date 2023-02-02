@@ -18,7 +18,7 @@ type Props = {
   headerImage?: MediaType
 };
 
-const SiteHeader: React.FC<Props> = ({
+const Header: React.FC<Props> = ({
   title, mainNavigation, socialNavigation, site, headerImage,
 }) => {
   const router = useRouter();
@@ -64,4 +64,4 @@ const SiteHeader: React.FC<Props> = ({
   );
 };
 
-export default SiteHeader;
+export default Header;

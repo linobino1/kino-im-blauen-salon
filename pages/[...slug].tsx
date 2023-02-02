@@ -7,7 +7,7 @@ import { NavigationTypesEnum, Type as NavigationType } from '../collections/Navi
 import NotFound from '../components/NotFound';
 import Head from '../components/Head';
 import classes from '../css/page.module.css';
-import SiteHeader from '../components/SiteHeader';
+import Header from '../components/Header';
 import RichText from '../components/RichText';
 import { Posts } from '../components/Posts';
 import { Type as PostType } from '../collections/Posts';
@@ -39,7 +39,7 @@ const Page: React.FC<Props> = ({
         description={page.meta?.description}
         keywords={page.meta?.keywords}
       />
-      <SiteHeader
+      <Header
         title={page.title}
         mainNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.main)}
         socialNavigation={navigations?.find((x) => x.type === NavigationTypesEnum.socialMedia)}
