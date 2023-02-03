@@ -12,6 +12,12 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
+ARG MONGO_URL
+ENV MONGO_URL=${MONGO_URL}
+
+ARG PAYLOAD_PUBLIC_SERVER_URL
+ENV PAYLOAD_PUBLIC_SERVER_URL=${PAYLOAD_PUBLIC_SERVER_URL}
+
 RUN yarn build
 
 FROM node:18-alpine AS runner
@@ -19,6 +25,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV PAYLOAD_CONFIG_PATH=/app/dist/payload.config.js
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
