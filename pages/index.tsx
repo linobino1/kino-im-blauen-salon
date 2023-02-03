@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
       revalidate: 60, // fetch homepage on each request but max. once per minute
     };
-  } catch (exc) {
+  } catch {
     return {
       props: {},
     };
