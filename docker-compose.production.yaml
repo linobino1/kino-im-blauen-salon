@@ -11,13 +11,16 @@ services:
       - .env
     environment:
       MONGO_URL: mongodb://db:27017/app
+    restart: always
 
   db:
-    ports:
-      - 27017:27017
+    image: mongo:4.4.18 # last version running without CPU flag AVX
+    expose:
+      - 27017
     volumes:
       - ./dump:/dump  # for restoring db dumps
       - data:/data/db
+    restart: always
   
 volumes:
   data:
