@@ -2,7 +2,12 @@ import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 import classes from '../../css/screenings.module.css';
-import { Screening as ScreeningType } from '../../payload-types';
+import {
+  Media,
+  FilmPrint,
+  Movie,
+  Screening as ScreeningType,
+} from '../../payload-types';
 import { mediaLoader } from '../../utilities/mediaLoader';
 import { _t } from '../../i18n';
 import { Date } from '../Date';
@@ -41,8 +46,8 @@ export const Screening: React.FC<Props> = ({ screening }) => {
         <div className={classes.imgWrapper}>
           <Image
             loader={mediaLoader}
-            src={screening.filmprint.movie.header.filename}
-            alt={screening.filmprint.movie.header.alt}
+            src={(((screening.filmprint as FilmPrint)?.movie as Movie)?.header as Media)?.filename}
+            alt={(((screening.filmprint as FilmPrint)?.movie as Movie)?.header as Media)?.alt}
             fill
           />
         </div>

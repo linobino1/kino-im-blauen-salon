@@ -4,21 +4,20 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import classes from '../../css/header.module.css';
 import {
-  Site as SiteType,
+  Site,
+  Media,
   Navigation as NavigationType,
-  Media as MediaType,
 } from '../../payload-types';
-import Navigation from '../Navigation';
+import { Navigation } from '../Navigation';
 import { mediaLoader } from '../../utilities/mediaLoader';
 import { UserStatus } from '../UserStatus';
-import { isMediaType } from '../../utilities/isMediaType';
 
 type Props = {
   title: string
   mainNavigation?: NavigationType
   socialNavigation?: NavigationType
-  site: SiteType
-  headerImage?: string | MediaType
+  site: Site
+  headerImage?: string | Media
 };
 
 const Header: React.FC<Props> = ({
@@ -33,7 +32,7 @@ const Header: React.FC<Props> = ({
           <Image
             className={classes.mainLogo}
             loader={mediaLoader}
-            src={isMediaType(site.favicon) && site.favicon.filename}
+            src={(site.favicon as Media)?.filename}
             width={200}
             height={50}
             alt="logo"
@@ -46,9 +45,9 @@ const Header: React.FC<Props> = ({
         <Image
           className={classes.headerImage}
           loader={mediaLoader}
-          src={isMediaType(headerImage) && headerImage.filename}
+          src={(headerImage as Media)?.filename}
           fill
-          alt={isMediaType(headerImage) && headerImage.alt}
+          alt={(headerImage as Media)?.alt}
         />
         <div className={classes.imageHeaderOverlay}>
           <button

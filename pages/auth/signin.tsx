@@ -2,7 +2,6 @@
 import React from 'react';
 import { signIn, SignInOptions } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import payload from 'payload';
 import classes from '../../css/auth.module.css';
 import { _t } from '../../i18n';
 import Head from '../../components/Head';
@@ -51,16 +50,6 @@ export const SignIn: React.FC = () => {
       </form>
     </main>
   );
-};
-
-export const getStaticProps = async () => {
-  const res = await payload.findGlobal({
-    slug: 'site',
-  });
-
-  return {
-    props: res,
-  };
 };
 
 export default SignIn;

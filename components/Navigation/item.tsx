@@ -2,36 +2,49 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import {
+  Page,
+  Media,
+  Navigation as NavigationType,
+} from '../../payload-types';
 // eslint-disable-next-line import/no-cycle
-import Navigation from '.';
-import { NavigationItem as NavigationItemType, NavigationItemTypesEnum } from '../../collections/Navigations';
+import { Navigation as NavigationComponent } from '.';
+import { NavigationItemTypesEnum } from '../../collections/Navigations';
 import classes from '../../css/nav.module.css';
 import { mediaLoader } from '../../utilities/mediaLoader';
 
-type Props = {
-  item: NavigationItemType
+export type Props = {
+  type?: NavigationItemTypesEnum
+  name: string;
+  page: string | Page;
+  url: string;
+  icon?: string | Media;
+  subnavigation?: string | NavigationType;
+  id?: string;
 };
 
-const NavigationItem: React.FC<Props> = ({ item }) => {
+export const NavigationItem: React.FC<Props> = ({
+  type, name, page, url, icon, subnavigation,
+}) => {
   const router = useRouter();
   let isActive = false;
-  const inner: React.ReactNode = item.icon ? (
+  const inner: React.ReactNode = icon ? (
     <Image
       loader={mediaLoader}
-      src={item.icon.filename}
-      alt={item.icon.alt}
+      src={(icon as Media)?.filename}
+      alt={(icon as Media)?.alt}
       fill
     />
   ) : (
-    <span>{item.name}</span>
+    <span>{name}</span>
   );
 
-  switch (item.type) {
+  switch (type) {
     case NavigationItemTypesEnum.internal:
-      isActive = (router.asPath === `/${item?.page?.slug}`);
+      isActive = (router.asPath === `/${(page as Page)?.slug}`);
       return (
         <Link
-          href={`/${item.page.slug}`}
+          href={`/${(page as Page)?.slug}`}
           className={`${classes.navItem} ${isActive && classes.active}`}
         >
           {inner}
@@ -44,7 +57,7 @@ const NavigationItem: React.FC<Props> = ({ item }) => {
           className={classes.navItem}
           target="_blank"
           rel="noreferrer"
-          href={item.url}
+          href={url}
         >
           {inner}
         </a>
@@ -52,7 +65,7 @@ const NavigationItem: React.FC<Props> = ({ item }) => {
 
     case NavigationItemTypesEnum.subnavigation:
       return (
-        <Navigation navigation={item.subnavigation} />
+        <NavigationComponent navigation={subnavigation as NavigationType} />
       );
     default:
       return null;

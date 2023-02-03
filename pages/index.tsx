@@ -14,6 +14,7 @@ export const Page: React.FC = () => (
 export const getStaticProps: GetStaticProps = async () => {
   const site = await payload.findGlobal({
     slug: 'site',
+    locale: 'en',
   });
   return {
     redirect: {

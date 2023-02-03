@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../../css/posts.module.css';
 import { Post as PostType } from '../../payload-types';
-import { Component as PostComponent } from './Post';
+import { Post } from './Post';
 import { _t } from '../../i18n';
 
 type Props = {
@@ -14,7 +14,7 @@ export const Posts: React.FC<Props> = (props) => {
   return posts ? (
     <div className={classes.posts}>
       {posts.map((post) => (
-        <PostComponent post={post} key={post.slug} />
+        <Post post={post} key={post.slug} />
       ))}
     </div>
   ) : (

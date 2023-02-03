@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from '../../css/posts.module.css';
-import { Post as PostType } from '../../payload-types';
+import { Media, Post as PostType } from '../../payload-types';
 import RichText from '../RichText';
 import { PostImage } from './PostImage';
 import { Date } from '../Date';
@@ -9,7 +9,7 @@ type Props = {
   post: PostType
 };
 
-export const Component: React.FC<Props> = ({ post }) => (
+export const Post: React.FC<Props> = ({ post }) => (
   <div className={classes.post}>
 
     <Date className={classes.postDate} iso={post.date} />
@@ -19,10 +19,10 @@ export const Component: React.FC<Props> = ({ post }) => (
       <div className={classes.postImageWrapper}>
         {post.link ? (
           <a href={post.link}>
-            <PostImage image={post.header} />
+            <PostImage image={post.header as Media} />
           </a>
         ) : (
-          <PostImage image={post.header} />
+          <PostImage image={post.header as Media} />
         )}
       </div>
       <RichText content={post.content} className={classes.postContent} />

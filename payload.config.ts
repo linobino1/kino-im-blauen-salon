@@ -30,6 +30,17 @@ export default buildConfig({
   routes: {
     api: '/payload',
   },
+  localization: {
+    locales: [
+      'de',
+      'en',
+    ],
+    defaultLocale: 'en',
+  },
+  // i18n: {
+  //   lng: 'en',
+  //   fallbackLng: 'en',
+  // },
   collections: [
     // Site
     Users,
