@@ -7,10 +7,8 @@ import classes from '../../css/auth.module.css';
 import { _t } from '../../i18n';
 import Head from '../../components/Head';
 import { Input } from '../../components/Input';
-import { Type as SiteType } from '../../globals/Site';
 
-export const SignIn: React.FC = (props: SiteType) => {
-  const { homePage: { slug } } = props;
+export const SignIn: React.FC = () => {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -27,7 +25,7 @@ export const SignIn: React.FC = (props: SiteType) => {
     if (!res.ok) {
       alert('wrong credentials');
     } else {
-      router.push(`${process.env.NEXT_PUBLIC_SERVER_URL}/${slug}`);
+      router.push(process.env.NEXT_PUBLIC_SERVER_URL);
     }
   };
 
