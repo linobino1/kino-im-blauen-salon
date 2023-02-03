@@ -7,11 +7,11 @@ import { mediaLoader } from '../../utilities/mediaLoader';
 import { _t } from '../../i18n';
 import { Date } from '../Date';
 
-export type Type = {
+type Props = {
   screening: ScreeningType
 };
 
-export const Screening: React.FC<Type> = ({ screening }) => {
+export const Screening: React.FC<Props> = ({ screening }) => {
   const url = `/${screening.slug}`;
 
   return (

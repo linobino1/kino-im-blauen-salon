@@ -1,14 +1,14 @@
 import React from 'react';
 import classes from '../../css/posts.module.css';
-import { Type as PostType } from '../../collections/Posts';
+import { Post as PostType } from '../../payload-types';
 import { Component as PostComponent } from './Post';
 import { _t } from '../../i18n';
 
-export type Type = {
+type Props = {
   posts: PostType[]
 };
 
-export const Posts: React.FC<Type> = (props) => {
+export const Posts: React.FC<Props> = (props) => {
   const { posts } = props;
 
   return posts ? (

@@ -1,15 +1,5 @@
-import { RichTextElement } from 'payload/dist/fields/config/types';
 import { GlobalConfig } from 'payload/types';
-import { MediaType } from '../collections/Media';
-import { Type as PageType } from '../collections/Pages';
 import { t } from '../i18n';
-
-export type Type = {
-  favicon?: MediaType
-  title: string
-  homePage: PageType
-  address?: RichTextElement
-};
 
 export const Site: GlobalConfig = {
   slug: 'site',

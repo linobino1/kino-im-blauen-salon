@@ -20,7 +20,7 @@ import { Posts } from '../components/Posts';
 import { Footer } from '../components/Footer';
 import { Screenings } from '../components/Screenings';
 
-export type Props = {
+type Props = {
   site?: SiteType
   navigations?: NavigationType[]
   page?: PageType

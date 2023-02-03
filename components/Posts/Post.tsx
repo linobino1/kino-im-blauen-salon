@@ -1,15 +1,15 @@
 import React from 'react';
 import classes from '../../css/posts.module.css';
-import { Type as PostType } from '../../collections/Posts';
+import { Post as PostType } from '../../payload-types';
 import RichText from '../RichText';
 import { PostImage } from './PostImage';
 import { Date } from '../Date';
 
-export type Type = {
+type Props = {
   post: PostType
 };
 
-export const Component: React.FC<Type> = ({ post }) => (
+export const Component: React.FC<Props> = ({ post }) => (
   <div className={classes.post}>
 
     <Date className={classes.postDate} iso={post.date} />

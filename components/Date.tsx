@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { parseISO } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 
-export type Props = {
+type Props = {
   iso: string
   format?: string
   className?: string

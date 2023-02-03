@@ -1,5 +1,5 @@
 import React from 'react';
-import { Type as NavigationType } from '../../collections/Navigations';
+import { Navigation as NavigationType } from '../../payload-types';
 import classes from '../../css/nav.module.css';
 // eslint-disable-next-line import/no-cycle
 import NavigationItem from './item';
