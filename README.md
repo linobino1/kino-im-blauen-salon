@@ -17,10 +17,27 @@ spin up dev server:
 yarn dev
 ```
 
+Or use `docker-compose`:
+
+### Docker
+
+```
+docker compose -f docker-compose.yaml -f docker-compose.development.yaml up -d
+```
+
 ### Typescript
 
 After changing PayloadCMS collections or globals, their types can be automatically updated by running:
 
 ```
 yarn generate:types
+```
+
+## Deployment
+
+create `.env` like `.env.template`, fill in your domain, fresh secrets, PORT=80 and a timezone used for formatting the
+times on the website.
+
+```
+docker compose -f docker-compose.yaml -f docker-compose.production.yaml up -d
 ```

@@ -3,6 +3,8 @@ services:
     build:
       context: ./
       target: runner
+      args:
+        MONGO_URL: mongodb://db:27017/app 
     ports:
       - 80:3000
     volumes:
