@@ -1,9 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Fragment } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
 
 // eslint-disable-next-line no-use-before-define
-type Children = Leaf[]
+type Children = Leaf[];
 
 type Leaf = {
   type: string
@@ -14,7 +15,7 @@ type Leaf = {
   children?: Children
   url?: string
   [key: string]: unknown
-}
+};
 
 const serialize = (children: Children): React.ReactElement[] => children.map((node, i) => {
   if (Text.isText(node)) {

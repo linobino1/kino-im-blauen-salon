@@ -18,7 +18,9 @@ type Props = {
   keywords?: string,
 };
 
-const Head: React.FC<Props> = ({ title, description, ogImage, keywords }) => {
+const Head: React.FC<Props> = ({
+  title, description, ogImage, keywords,
+}) => {
   const { asPath } = useRouter();
 
   const getTitle = () => {

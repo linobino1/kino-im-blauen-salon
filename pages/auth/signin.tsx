@@ -25,7 +25,7 @@ export const SignIn: React.FC = (props: SiteType) => {
     const res = await signIn('login', data);
 
     if (!res.ok) {
-      alert('wrong credentials')
+      alert('wrong credentials');
     } else {
       router.push(`${process.env.NEXT_PUBLIC_SERVER_URL}/${slug}`);
     }
