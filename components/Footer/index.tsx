@@ -4,7 +4,7 @@ import {
   Navigation as NavigationType,
 } from '../../payload-types';
 import classes from '../../css/footer.module.css';
-import Navigation from '../Navigation';
+import { Navigation } from '../Navigation';
 import RichText from '../RichText';
 
 type Props = {
