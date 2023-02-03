@@ -12,17 +12,22 @@ export const Page: React.FC = () => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const site = await payload.findGlobal({
-    slug: 'site',
-    locale: 'en',
-  });
-  return {
-    redirect: {
-      destination: `/${site.homePage.slug}`,
-      permanent: false,
-    },
-    revalidate: 60, // fetch homepage on each request but max. once per minute
-  };
+  try {
+    const site = await payload.findGlobal({
+      slug: 'site',
+    });
+    return {
+      redirect: {
+        destination: `/${site.homePage.slug}`,
+        permanent: false,
+      },
+      revalidate: 60, // fetch homepage on each request but max. once per minute
+    };
+  } catch (exc) {
+    return {
+      props: {},
+    };
+  }
 };
 
 export default Page;
