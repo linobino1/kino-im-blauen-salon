@@ -11,6 +11,7 @@ import {
 import Navigation from '../Navigation';
 import { mediaLoader } from '../../utilities/mediaLoader';
 import { UserStatus } from '../UserStatus';
+import { isMediaType } from '../../utilities/isMediaType';
 
 type Props = {
   title: string
@@ -32,7 +33,7 @@ const Header: React.FC<Props> = ({
           <Image
             className={classes.mainLogo}
             loader={mediaLoader}
-            src={site.favicon.filename}
+            src={isMediaType(site.favicon) && site.favicon.filename}
             width={200}
             height={50}
             alt="logo"
@@ -45,9 +46,9 @@ const Header: React.FC<Props> = ({
         <Image
           className={classes.headerImage}
           loader={mediaLoader}
-          src={headerImage.filename}
+          src={isMediaType(headerImage) && headerImage.filename}
           fill
-          alt={headerImage.alt}
+          alt={isMediaType(headerImage) && headerImage.alt}
         />
         <div className={classes.imageHeaderOverlay}>
           <button
