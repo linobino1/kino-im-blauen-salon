@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -25,6 +26,14 @@ const Header: React.FC<Props> = ({
 }) => {
   const router = useRouter();
 
+  const [menuVisible, setMenuVisible] = React.useState<boolean>();
+  const menuOpen = () => {
+    setMenuVisible(true);
+  };
+
+  const menuClose = () => {
+    setMenuVisible(false);
+  };
   return (
     <header className={classes.header}>
       <div className={classes.mainHeader}>
@@ -38,7 +47,19 @@ const Header: React.FC<Props> = ({
             alt="logo"
           />
         </Link>
-        <Navigation navigation={mainNavigation} className={classes.navMain} />
+        <button
+          onClick={menuOpen}
+          type="button"
+          className={classes.menuOpen}
+        />
+        <div className={`${classes.navMainContainer} ${menuVisible && classes.visible}`}>
+          <button
+            onClick={menuClose}
+            type="button"
+            className={classes.menuClose}
+          />
+          <Navigation navigation={mainNavigation} className={classes.navMain} />
+        </div>
         <UserStatus />
       </div>
       <div className={classes.imageHeader}>
