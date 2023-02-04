@@ -13,6 +13,8 @@ services:
       - 3000
     volumes:
       - media:/app/media
+    networks:
+      - net
     env_file:
       - .env
     environment:
@@ -42,6 +44,8 @@ services:
     image: nginx
     expose:
       - 80
+    networks:
+      - net
     volumes:
       - media:/usr/share/nginx/html
     environment:
