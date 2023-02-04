@@ -12,7 +12,7 @@ import { mediaLoader } from '../../utilities/mediaLoader';
 // eslint-disable-next-line import/no-cycle
 
 type Props = {
-  navigation: NavigationType
+  navigation?: NavigationType
   className?: string
 };
 
@@ -21,7 +21,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
 
   return (
     <nav className={`${classes.nav} ${classes[navigation?.type]} ${className}`}>
-      {navigation.items.map(({
+      {navigation?.items.map(({
         id, icon, subnavigation, page, url, name,
       }) => {
         const href = (page as Page)?.slug || url;

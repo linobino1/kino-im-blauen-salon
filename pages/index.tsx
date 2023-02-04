@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import payload from 'payload';
 import React from 'react';
 import { _t } from '../i18n';
@@ -11,7 +11,7 @@ export const Page: React.FC = () => (
   </p>
 );
 
-export const getServerSideProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const site = await payload.findGlobal({
       slug: 'site',
