@@ -24,6 +24,7 @@ const start = async () => {
   }).catch((e) => {
     console.log('payloadInit() failed:');
     console.log(e);
+    throw e;
   });
 
   if (!process.env.NEXT_BUILD) {
