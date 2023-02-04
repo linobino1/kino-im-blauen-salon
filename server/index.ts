@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 /* eslint-disable no-console */
 import path from 'path';
 import next from 'next';
@@ -14,31 +13,41 @@ dotenv({
 const dev = process.env.NODE_ENV !== 'production';
 const server = express();
 
-if (!process.env.NEXT_BUILD) {
-  payload.init({
-    secret: process.env.PAYLOAD_SECRET_KEY,
+const start = async () => {
+  await payload.init({
+    secret: process.env.PAYLOAD_SECRET,
     mongoURL: process.env.MONGO_URL,
     express: server,
+    onInit: () => {
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+    },
+  }).catch((e) => {
+    console.log('payloadInit() failed:');
+    console.log(e);
   });
 
-  const nextApp = next({ dev });
+  if (!process.env.NEXT_BUILD) {
+    const nextApp = next({ dev });
 
-  const nextHandler = nextApp.getRequestHandler();
+    const nextHandler = nextApp.getRequestHandler();
 
-  server.get('*', (req, res) => nextHandler(req, res));
-  server.post('*', (req, res) => nextHandler(req, res));
+    server.get('*', (req, res) => nextHandler(req, res));
+    server.post('*', (req, res) => nextHandler(req, res));
 
-  nextApp.prepare().then(() => {
-    console.log('NextJS started');
+    nextApp.prepare().then(() => {
+      console.log('NextJS started');
 
-    server.listen(process.env.PORT, async () => {
-      console.log(`Server listening on ${process.env.PORT}...`);
+      server.listen(process.env.PORT, async () => {
+        console.log(`Server listening on ${process.env.PORT}...`);
+      });
     });
-  });
-} else {
-  server.listen(process.env.PORT, async () => {
-    console.log('NextJS is now building...');
-    await nextBuild(path.join(__dirname, '../'));
-    process.exit();
-  });
-}
+  } else {
+    server.listen(process.env.PORT, async () => {
+      console.log('NextJS is now building...');
+      await nextBuild(path.join(__dirname, '../'));
+      process.exit();
+    });
+  }
+};
+
+start();
