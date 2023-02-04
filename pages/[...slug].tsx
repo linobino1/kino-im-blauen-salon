@@ -3,11 +3,12 @@ import React from 'react';
 import payload from 'payload';
 import { GetServerSideProps } from 'next';
 import {
-  Site as SiteType,
+  Site,
   Page as PageType,
-  Navigation as NavigationType,
-  Post as PostType,
-  Screening as ScreeningType,
+  Navigation,
+  Post,
+  Screening,
+  Media,
 } from '../payload-types';
 import { PageTypeEnum } from '../collections/Pages';
 import { NavigationTypesEnum } from '../collections/Navigations';
@@ -21,11 +22,11 @@ import { Footer } from '../components/Footer';
 import { Screenings } from '../components/Screenings';
 
 type Props = {
-  site?: SiteType
-  navigations?: NavigationType[]
+  site?: Site
+  navigations?: Navigation[]
   page?: PageType
-  posts?: PostType[]
-  screenings?: ScreeningType[]
+  posts?: Post[]
+  screenings?: Screening[]
   statusCode: number
 };
 
@@ -48,6 +49,7 @@ const Page: React.FC<Props> = ({
           title={title}
           description={page.meta?.description}
           keywords={page.meta?.keywords}
+          favicon={site.favicon as Media}
         />
         <Header
           title={page.title}
@@ -110,12 +112,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  const site: SiteType = siteQuery;
+  const site: Site = siteQuery;
   const page: PageType = pageQuery.docs[0] || null;
-  const navigations: NavigationType[] = navigationsQuery.docs;
+  const navigations: Navigation[] = navigationsQuery.docs;
 
-  let posts: PostType[] = [];
-  let screenings: ScreeningType[] = [];
+  let posts: Post[] = [];
+  let screenings: Screening[] = [];
   switch (page?.type) {
     case PageTypeEnum.posts:
       const postsQuery = await payload.find({

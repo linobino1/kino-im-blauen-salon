@@ -1,6 +1,8 @@
 import React from 'react';
 import NextHead from 'next/head';
 import { useRouter } from 'next/router';
+import { Media } from '../../payload-types';
+import { Favicon } from '../Favicon';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -13,12 +15,13 @@ const defaultKeywords = 'NextJS, Payload CMS, boilerplate';
 type Props = {
   title?: string,
   description?: string,
+  favicon?: Media,
   ogImage?: string,
   keywords?: string,
 };
 
 const Head: React.FC<Props> = ({
-  title, description, ogImage, keywords,
+  title, description, ogImage, keywords, favicon,
 }) => {
   const { asPath } = useRouter();
 
@@ -32,11 +35,7 @@ const Head: React.FC<Props> = ({
       <title>
         {getTitle()}
       </title>
-      <link
-        rel="icon"
-        type="image/x-icon"
-        href="/favicon.svg"
-      />
+      <Favicon favicon={favicon} />
       <meta
         name="description"
         content={description || defaultDescription}
