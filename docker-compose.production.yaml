@@ -12,7 +12,7 @@ services:
     expose:
       - 3000
     volumes:
-      - ./media:/app/media:rw
+      - media:/app/media:rw
     networks:
       - net
     env_file:
@@ -88,10 +88,10 @@ services:
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
-
   
 volumes:
   data:
+  media:
   certs:
   html:
   vhost:
