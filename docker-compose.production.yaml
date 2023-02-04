@@ -35,6 +35,8 @@ services:
     image: mongo:4.4.18 # last version running without CPU flag AVX
     expose:
       - 27017
+    networks:
+      - net
     volumes:
       - ./dump:/dump  # for restoring db dumps
       - data:/data/db
