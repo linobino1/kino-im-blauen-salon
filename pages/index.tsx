@@ -4,14 +4,14 @@ import React from 'react';
 import { _t } from '../i18n';
 
 // this "page" should always redirect to the page that is set to be the
-// homepage within getStaticProps()
+// homepage within getServerSideProps()
 export const Page: React.FC = () => (
   <p>
     {_t('Welcome')}
   </p>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetStaticProps = async () => {
   try {
     const site = await payload.findGlobal({
       slug: 'site',
@@ -21,7 +21,6 @@ export const getStaticProps: GetStaticProps = async () => {
         destination: `/${site.homePage.slug}`,
         permanent: false,
       },
-      revalidate: 60, // fetch homepage on each request but max. once per minute
     };
   } catch {
     return {
