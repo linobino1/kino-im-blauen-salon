@@ -1,10 +1,12 @@
+version: '3.8'
+
 services:
   app:
     build:
       context: ./
       target: runner
       args:
-        MONGO_URL: mongodb://db:27017/app 
+        PAYLOAD_PUBLIC_SERVER_URL: http://${HOSTNAME}
     ports:
       - 80:3000
     volumes:
@@ -13,7 +15,12 @@ services:
       - .env
     environment:
       MONGO_URL: mongodb://db:27017/app
-    restart: always
+      PAYLOAD_CONFIG_PATH: /app/dist/payload.config.js
+      PAYLOAD_PUBLIC_SERVER_URL: http://${HOSTNAME}
+      NEXT_PUBLIC_SERVER_URL: http://${HOSTNAME}
+      NEXTAUTH_URL: http://${HOSTNAME}
+      HOSTNAME:
+    restart: unless-stopped
 
   db:
     image: mongo:4.4.18 # last version running without CPU flag AVX
@@ -22,7 +29,7 @@ services:
     volumes:
       - ./dump:/dump  # for restoring db dumps
       - data:/data/db
-    restart: always
+    restart: unless-stopped
   
 volumes:
   data:

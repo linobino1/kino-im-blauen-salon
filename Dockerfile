@@ -1,39 +1,40 @@
-FROM node:18-alpine AS deps
+FROM node:18-alpine as base
+
+# NodeJS dependencies
+FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN  yarn install --production
+RUN  yarn install
 
-FROM node:18-alpine AS builder
+# Build Stage
+FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
-
-ARG MONGO_URL
-ENV MONGO_URL=${MONGO_URL}
-
 ARG PAYLOAD_PUBLIC_SERVER_URL
 ENV PAYLOAD_PUBLIC_SERVER_URL=${PAYLOAD_PUBLIC_SERVER_URL}
 
 RUN yarn build
 
-FROM node:18-alpine AS runner
+# Run Stage
+FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV PAYLOAD_CONFIG_PATH=/app/dist/payload.config.js
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/dist ./dist
+COPY --from=builder --chown=nextjs:nodejs /app/build ./build
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 
 USER nextjs
 
