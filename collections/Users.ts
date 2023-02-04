@@ -16,7 +16,7 @@ const Users: CollectionConfig = {
   auth: {
     cookies: {
       sameSite: 'strict',
-      secure: true,
+      secure: false,
     },
   },
   admin: {
