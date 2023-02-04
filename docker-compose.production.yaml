@@ -45,9 +45,8 @@ services:
     volumes:
       - media:/usr/share/nginx/html
     environment:
-      - name=value
-    VIRTUAL_HOST: media.${HOSTNAME}
-    LETSENCRYPT_HOST: media.${HOSTNAME}
+      VIRTUAL_HOST: media.${HOSTNAME}
+      LETSENCRYPT_HOST: media.${HOSTNAME}
     
   proxy:
     container_name: proxy
