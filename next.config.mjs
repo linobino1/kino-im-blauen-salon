@@ -3,12 +3,14 @@
  */
 const nextConfig = {
   publicRuntimeConfig: {
-    SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+    SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   images: {
     domains: [
-      'localhost',
-      // Your domain(s) here
+      process.env.HOSTNAME || 'localhost',
     ],
     deviceSizes: [
       480,

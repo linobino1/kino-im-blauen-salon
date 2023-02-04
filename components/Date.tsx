@@ -8,7 +8,7 @@ type Props = {
   className?: string
 };
 
-const tz = process.env.TIMEZONE;
+const tz = process.env.TIMEZONE || 'UTC';
 
 export const Date: React.FC<Props> = ({
   iso, className, format,

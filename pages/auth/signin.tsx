@@ -24,7 +24,7 @@ export const SignIn: React.FC = () => {
     if (!res.ok) {
       alert('wrong credentials');
     } else {
-      router.push(process.env.NEXT_PUBLIC_SERVER_URL);
+      router.push(process.env.NEXT_PUBLIC_SERVER_URL || '/');
     }
   };
 
