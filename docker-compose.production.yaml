@@ -12,7 +12,7 @@ services:
     expose:
       - 3000
     volumes:
-      - media:/app/media
+      - ./media:/app/media:rw
     networks:
       - net
     env_file:
@@ -92,7 +92,6 @@ services:
   
 volumes:
   data:
-  media:
   certs:
   html:
   vhost:
