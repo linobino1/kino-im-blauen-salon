@@ -9,8 +9,8 @@ services:
         PAYLOAD_PUBLIC_SERVER_URL: http://${HOSTNAME}
         PAYLOAD_SECRET: ${PAYLOAD_SECRET}
         MONGO_URL: mongodb://db:27017/app
-    ports:
-      - 80:3000
+    expose:
+      - 3000
     volumes:
       - media:/app/media
     env_file:
@@ -25,6 +25,8 @@ services:
       HOSTNAME:
       PAYLOAD_SECRET:
       NEXTAUTH_SECRET:
+      VIRTUAL_HOST: ${HOSTNAME}
+      LETSENCRYPT_HOST: ${HOSTNAME}
     restart: unless-stopped
 
   db:
@@ -35,6 +37,63 @@ services:
       - ./dump:/dump  # for restoring db dumps
       - data:/data/db
     restart: unless-stopped
+
+  media:
+    image: nginx
+    expose:
+      - 80
+    volumes:
+      - media:/usr/share/nginx/html
+    environment:
+      - name=value
+    VIRTUAL_HOST: media.${HOSTNAME}
+    LETSENCRYPT_HOST: media.${HOSTNAME}
+    
+  proxy:
+    container_name: proxy
+    image: jwilder/nginx-proxy:alpine
+    volumes:
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:ro
+      - /run/docker.sock:/tmp/docker.sock:ro
+    networks: 
+      - net
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+
+  # redirect www (http/https) -> non-www (https)
+  redirect:
+    container_name: redirect
+    image: adamkdean/redirect
+    networks:
+      - net
+    environment:
+      VIRTUAL_HOST: www.${HOSTNAME}
+      LETSENCRYPT_HOST: www.${HOSTNAME}
+      REDIRECT_LOCATION: https://${HOSTNAME}
+      REDIRECT_STATUS_CODE: 301
+      PRESERVE_URL: true
+    restart: always
+  
+  certbot:
+    image: nginxproxy/acme-companion
+    container_name: certbot
+    volumes_from:
+      - proxy
+    environment:
+      NGINX_PROXY_CONTAINER: proxy
+      DEFAULT_EMAIL: ${EMAIL_ADMIN}
+      ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # staging
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
+
   
 volumes:
   data:
