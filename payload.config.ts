@@ -26,7 +26,7 @@ import Countries from './collections/Movies/Countries';
 dotenv.config();
 
 export default buildConfig({
-  serverURL: `http://${process.env.PAYLOAD_PUBLIC_SERVER_URL}` || 'http://localhost:3000',
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
   routes: {
     api: '/payload',
   },
