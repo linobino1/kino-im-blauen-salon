@@ -6,6 +6,7 @@ export const Media: CollectionConfig = {
     read: (): boolean => true, // Everyone can read Media
   },
   upload: {
+    staticDir: process.env.MEDIA_DIR || 'media',
     adminThumbnail: 'card',
     imageSizes: [
       {

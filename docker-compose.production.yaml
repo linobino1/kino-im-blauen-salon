@@ -25,6 +25,7 @@ services:
       PAYLOAD_PUBLIC_SERVER_URL: https://${HOSTNAME}
       NEXT_PUBLIC_SERVER_URL: https://${HOSTNAME}
       NEXTAUTH_URL: https://${HOSTNAME}
+      MEDIA_DIR: /app/media
       HOSTNAME:
       PAYLOAD_SECRET:
       NEXTAUTH_SECRET:
