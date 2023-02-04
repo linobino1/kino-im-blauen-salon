@@ -42,18 +42,6 @@ services:
       - data:/data/db
     restart: unless-stopped
 
-  media:
-    image: nginx
-    expose:
-      - 80
-    networks:
-      - net
-    volumes:
-      - media:/usr/share/nginx/html
-    environment:
-      VIRTUAL_HOST: media.${HOSTNAME}
-      LETSENCRYPT_HOST: media.${HOSTNAME}
-    
   proxy:
     container_name: proxy
     image: jwilder/nginx-proxy:alpine
