@@ -1,9 +1,8 @@
 import React from 'react';
 import NextHead from 'next/head';
-import getConfig from 'next/config';
 import { useRouter } from 'next/router';
 
-const { publicRuntimeConfig: { SERVER_URL } } = getConfig();
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const defaultDescription = 'Boilerplate for combining Payload CMS and NextJS into a single Node server';
 const defaultTitle = 'Payload CMS + NextJS Custom Server';
