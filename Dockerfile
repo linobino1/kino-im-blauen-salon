@@ -43,6 +43,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/dist ./dist
 COPY --from=builder --chown=nextjs:nodejs /app/build ./build
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 
+RUN mkdir /app/media
+RUN chown nextjs:nodejs /app/media
+
 USER nextjs
 
 EXPOSE 3000
