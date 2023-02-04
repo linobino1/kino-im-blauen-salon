@@ -15,7 +15,7 @@ const server = express();
 const start = async () => {
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
-    mongoURL: process.env.MONGO_URL,
+    mongoURL: process.env.MONGO_URL || 'mongodb://localhost:27017/app',
     express: server,
     onInit: () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
@@ -35,8 +35,8 @@ const start = async () => {
   nextApp.prepare().then(() => {
     console.log('NextJS started');
 
-    server.listen(process.env.PORT, async () => {
-      console.log(`Server listening on ${process.env.PORT}...`);
+    server.listen(process.env.PORT || 3000, async () => {
+      console.log(`Server listening on ${process.env.PORT || 3000}...`);
     });
   });
 };
