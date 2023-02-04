@@ -97,3 +97,13 @@ services:
 volumes:
   data:
   media:
+  certs:
+  html:
+  vhost:
+  dhparam:
+  acme:
+
+networks:
+  net:
+    name: net
+    external: true
