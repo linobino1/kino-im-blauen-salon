@@ -15,9 +15,9 @@
     "build:server": "tsc --project tsconfig.server.json",
     "build:payload": "payload build",
     "copyfiles": "copyfiles \"css/**\" dist/",
-    "build": "yarn copyfiles && cross-env NODE_ENV=production yarn build:payload && yarn build:server && cross-env NEXT_BUILD=true node dist/server.js",
+    "build": "yarn copyfiles && cross-env NODE_ENV=production yarn build:payload && yarn build:server && cross-env NEXT_BUILD=true node dist/server/index.js",
     "dev": "node dev.js",
-    "serve": "cross-env NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/payload.config.js node dist/server.js",
+    "serve": "cross-env NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/payload.config.js node dist/server/index.js",
     "generate:types": "payload generate:types"
   },
   "dependencies": {
