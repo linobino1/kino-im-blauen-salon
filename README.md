@@ -1,7 +1,8 @@
 # Kino Im Blauen Salon
 
 This repository contains the sourcecode for the website of a cinema.  
-It consists of a [PayloadCMS](https://payloadcms.com/) backend and a [NextJS](https://nextjs.org/) frontend. NextJS communicates with PayloadCMS via the local API.
+It consists of a [PayloadCMS](https://payloadcms.com/) backend and a [NextJS](https://nextjs.org/) frontend.  
+NextJS communicates with PayloadCMS via GraphQL.
 
 ## Setup
 
@@ -30,8 +31,22 @@ docker compose -f docker-compose.yaml -f docker-compose.development.yaml up -d
 After changing PayloadCMS collections or globals, their types can be automatically updated by running:
 
 ```
+cd backend/
 yarn generate:types
 ```
+
+### GraphQL Schema
+
+install the VSCode extension "Apollo GraphQL" to get autocomplete functionality when typing GraphQL queries in the
+frontend. Whenever you change the data structure, update the schema like this:
+
+```
+cd backend
+yarn generate:graphQLSchema
+```
+and in VSCode command palette: `Apollo: Reload Schema`.  
+The Apollo plugin usually dies when two queries have the same name, in this case, rename one of the queries and use
+VSCode: `Developer: Reload Window`.
 
 ## Deployment
 
