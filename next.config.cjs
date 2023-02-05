@@ -1,3 +1,5 @@
+require('./utilities/imageSizes')
+
 /**
  * @type {import('next').NextConfig}
  */
@@ -9,13 +11,7 @@ const nextConfig = {
     domains: [
       process.env.HOSTNAME || 'localhost',
     ],
-    deviceSizes: [
-      480,
-      1024,
-      1280,
-      1920,
-      2560,
-    ],
+    deviceSizes: ImageSizes.map((x) => x.width),
   },
 };
 
