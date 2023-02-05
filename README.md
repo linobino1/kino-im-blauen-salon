@@ -5,7 +5,9 @@ It consists of a [PayloadCMS](https://payloadcms.com/) backend and a [NextJS](ht
 
 ## Setup
 
-create `.env` like `.env.template`.
+create `.env` like `.env.template`. 
+
+### Yarn
 
 install dependencies:
 ```
@@ -16,8 +18,6 @@ spin up dev server:
 ```
 yarn dev
 ```
-
-Or use `docker-compose`:
 
 ### Docker
 
@@ -35,9 +35,30 @@ yarn generate:types
 
 ## Deployment
 
-create `.env` like `.env.template`, fill in your domain, fresh secrets, PORT=80 and a timezone used for formatting the
-times on the website.
+create `.env` like `.env.template`, fill in your domain, fresh secrets, a timezone used for formatting the
+times on the website, and an admin email adress for the letsencrypt process.
 
 ```
 docker compose -f docker-compose.yaml -f docker-compose.production.yaml up -d
+
+# should there be an error, try spinning up the db container first:
+docker compose -f docker-compose.yaml -f docker-compose.production.yaml up -d db
 ```
+
+## Migration
+
+### MongoDB
+
+```
+# upload the mongo dump into ./dump ... maybe with iTerm2 util ...
+
+# terminal in the mongo container
+docker exec -it db sh
+
+# app in dump/app is the name of the dumped database
+mongorestore --db app dump/app
+```
+
+### Media
+
+*TODO*
