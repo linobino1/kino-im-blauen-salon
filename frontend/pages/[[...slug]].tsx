@@ -83,7 +83,35 @@ const Page: React.FC<Props> = ({
 export default Page;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const slug = ctx.params?.slug ? (ctx.params.slug as string[])?.join('/') : 'home';
+  const slug: string | undefined = (ctx.params?.slug as string[])?.join('/');
+
+  const revalidate = 10;  // revalidate with each request but max each 10 sec
+
+  // redirect / to home page
+  if (!slug) {
+    const { data: homePageData } = await apollo.query({
+      query: gql`
+        query HomePage {
+          Site {
+            homePage {
+              slug
+            }
+          }
+        }
+      `,
+    })
+    if (homePageData) {
+      const location = `/${homePageData.Site.homePage.slug}`;
+      console.log("redirect home to", location)
+      return {
+        redirect: {
+          destination: location,
+          permanent: false,
+        },
+        revalidate,
+      };
+    }
+  }
 
   const { data, error } = await apollo.query({
     query: gql`
@@ -139,7 +167,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   if (error) {
     return {
-      props: {}
+      props: {},
+      revalidate,
     }
   }
 
@@ -147,6 +176,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   if (!page) {
     return {
       notFound: true,
+      revalidate,
     }
   }
 
@@ -218,14 +248,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       posts,
       screenings,
     },
-    revalidate: 10,
+    revalidate,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = [];
 
-  const { data, error } = await apollo.query({
+  const paths: any[] = [];
+
+  const { data } = await apollo.query({
     query: gql`
       query Paths {
         Pages {
@@ -256,7 +287,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     });
   });
 
-  const { data: postsData, error: postsError } = await apollo.query({
+  const { data: postsData } = await apollo.query({
     query: gql`
       query PostPages {
         Pages(where: { type: { equals: posts }}) {
@@ -279,7 +310,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     });
   });
 
-  const { data: screeningsData, error: screeningsError } = await apollo.query({
+  const { data: screeningsData } = await apollo.query({
     query: gql`
       query ScreeningPages {
         Pages(where: { type: { equals: screenings }}) {
@@ -304,6 +335,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: 'blocking',
+    fallback: true,
   }
 };
