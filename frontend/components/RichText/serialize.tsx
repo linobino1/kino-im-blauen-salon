@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Fragment } from 'react';
-import escapeHTML from 'escape-html';
+import { escape } from 'html-escaper';
 import { Text } from 'slate';
 
 // eslint-disable-next-line no-use-before-define
@@ -19,7 +19,7 @@ type Leaf = {
 
 const serialize = (children: Children): React.ReactElement[] => children.map((node, i) => {
   if (Text.isText(node)) {
-    let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />;
+    let text = <span dangerouslySetInnerHTML={{ __html: escape(node.text) }} />;
 
     if (node.bold) {
       text = (
@@ -75,84 +75,84 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
   }
 
   if (!node) {
-    return null;
+    return (<></>);
   }
 
   switch (node.type) {
     case 'h1':
       return (
         <h1 key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </h1>
       );
     case 'h2':
       return (
         <h2 key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </h2>
       );
     case 'h3':
       return (
         <h3 key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </h3>
       );
     case 'h4':
       return (
         <h4 key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </h4>
       );
     case 'h5':
       return (
         <h5 key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </h5>
       );
     case 'h6':
       return (
         <h6 key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </h6>
       );
     case 'quote':
       return (
         <blockquote key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </blockquote>
       );
     case 'ul':
       return (
         <ul key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </ul>
       );
     case 'ol':
       return (
         <ol key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </ol>
       );
     case 'li':
       return (
         <li key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </li>
       );
     case 'link':
       return (
         <a
-          href={escapeHTML(node.url)}
+          href={escape(node.url ?? '')}
           key={i}
         >
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </a>
       );
 
     default:
       return (
         <p key={i}>
-          {serialize(node.children)}
+          {serialize(node.children as Children)}
         </p>
       );
   }
