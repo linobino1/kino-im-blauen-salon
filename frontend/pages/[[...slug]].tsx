@@ -197,6 +197,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
                   alt
                 }
                 content
+                date
               }
             }
           }
@@ -231,7 +232,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
           }
         `,
       });
-      console.log(screeningsData)
       if (screeningsData) {
         screenings = screeningsData.Screenings.docs;
       }

@@ -15,19 +15,17 @@ export const Date: React.FC<Props> = ({
 }) => {
   const date = parseISO(iso);
   if (!date || isNaN(date.getMilliseconds())) {
+    console.log('encountered invalid date', iso)
     return (<></>);
   }
   const str = formatInTimeZone(date, tz, format ?? 'LLLL d, yyyy')
 
   return (
-    <Suspense>
-      <time
-        suppressHydrationWarning
-        className={className}
-        dateTime={iso}
-      >
-        {str}
-      </time>
-    </Suspense>
+    <time
+      className={className}
+      dateTime={iso}
+    >
+      {str}
+    </time>
   );
 };
