@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      args:
+        GRAPHQL_LOCALHOST: http://host.docker.internal:3000/api/graphql  # works from one docker container to another
+    ports:
+      - 80:3000
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      NEXT_PUBLIC_SERVER_URL: http://${HOSTNAME}
+      NEXTAUTH_URL: http://${HOSTNAME}
+      GRAPHQL_LOCALHOST: http://backend:3000/api/graphql  # works from one docker container to another
+      NEXT_PUBLIC_MEDIA_URL: http://${HOSTNAME}:3000/media  # works in public internet
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    working_dir: /app/
+    volumes:
+      - media:/app/media:rw
+    env_file:
+      - .env
+    environment:
+      PAYLOAD_PUBLIC_SERVER_URL: http://${HOSTNAME}:3000
+      MONGODB_URI: mongodb://db:27017/app
+    restart: unless-stopped
+
+  db:
+    ports:
+      - 27017:27017
+    volumes:
+      - ./dump:/dump  # for restoring db dumps
+      - data:/data/db
+    restart: unless-stopped
+  
+volumes:
+  data:
+  media:

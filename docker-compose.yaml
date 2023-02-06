@@ -1,6 +1,8 @@
 services:
   frontend:
     container_name: frontend
+    depends_on:
+      - backend
 
   backend:
     container_name: backend
