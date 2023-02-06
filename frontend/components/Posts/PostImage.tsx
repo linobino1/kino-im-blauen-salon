@@ -6,7 +6,7 @@ import { Media } from '@/payload-types';
 export const PostImage: React.FC<{ image: Media }> = ({ image }) => (
   <Image
     loader={mediaLoader}
-    src={image.filename}
+    src={image.filename as string}
     alt={image.alt}
     fill
   />

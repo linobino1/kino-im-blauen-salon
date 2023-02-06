@@ -11,12 +11,17 @@ export const SignIn: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation();
 
-  const handleSubmit: FormEventHandler = async (event) => {
-    event.preventDefault();
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
 
     const data: SignInOptions = {
-      email: event?.target.email?.value,
-      password: event?.target?.password?.value,
+      email: target.email?.value,
+      password: target.password?.value,
       callbackUrl: window.location.origin,
       redirect: false,
     };
