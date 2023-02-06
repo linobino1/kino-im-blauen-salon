@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next'
 
-import '../css/style.css';
+import '../css/global.css';
 
 const MyApp = ({ Component, pageProps }: AppProps): React.ReactElement => (
   <SessionProvider session={pageProps.session}>
