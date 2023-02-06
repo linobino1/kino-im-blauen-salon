@@ -10,7 +10,7 @@ import {
 // eslint-disable-next-line import/no-cycle
 import { Navigation as NavigationComponent } from '.';
 import classes from '@/css/nav.module.css';
-import { mediaLoader } from '@/util/mediaLoader';
+import { mediaUrl } from '@/util/mediaLoader';
 
 export type Props = {
   type?: 'internal' | 'external' | 'subnavigation'
@@ -29,10 +29,10 @@ export const NavigationItem: React.FC<Props> = ({
   let isActive = false;
   const inner: React.ReactNode = icon ? (
     <Image
-      loader={mediaLoader}
-      src={(icon as Media)?.filename as string}
+      src={mediaUrl(icon as Media)}
       alt={(icon as Media)?.alt}
-      fill
+      width={32}
+      height={32}
     />
   ) : (
     <span>{name}</span>

@@ -10,7 +10,7 @@ import {
   Navigation as NavigationType,
 } from '@/payload-types';
 import { Navigation } from '../Navigation';
-import { mediaLoader } from '@/util/mediaLoader';
+import { mediaUrl } from '@/util/mediaLoader';
 import { UserStatus } from '../UserStatus';
 
 type Props = {
@@ -42,8 +42,7 @@ const Header: React.FC<Props> = ({
           {site.favicon as Media && (
             <Image
               className={classes.mainLogo}
-              loader={mediaLoader}
-              src={(site.favicon as Media).filename as string}
+              src={mediaUrl(site.favicon as Media)}
               width={200}
               height={50}
               alt="logo"
@@ -69,8 +68,7 @@ const Header: React.FC<Props> = ({
         <div className={classes.imageHeader}>
           <Image
             className={classes.headerImage}
-            loader={mediaLoader}
-            src={(headerImage as Media)?.filename as string}
+            src={mediaUrl(headerImage as Media)}
             alt={(headerImage as Media)?.alt}
             fill
             priority

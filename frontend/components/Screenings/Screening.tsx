@@ -8,9 +8,9 @@ import {
   Movie,
   Screening as ScreeningType,
 } from '@/payload-types';
-import { mediaLoader } from '@/util/mediaLoader';
 import { Date } from '../Date';
 import { useTranslation } from 'next-i18next';
+import { mediaUrl } from '@/util/mediaLoader';
 
 type Props = {
   screening: ScreeningType
@@ -46,8 +46,7 @@ export const Screening: React.FC<Props> = ({ screening }) => {
         </div>
         <div className={classes.imgWrapper}>
           <Image
-            loader={mediaLoader}
-            src={(((screening.filmprint as FilmPrint)?.movie as Movie)?.header as Media)?.filename as string}
+            src={mediaUrl(((screening.filmprint as FilmPrint)?.movie as Movie)?.header as Media)}
             alt={(((screening.filmprint as FilmPrint)?.movie as Movie)?.header as Media)?.alt}
             fill
           />

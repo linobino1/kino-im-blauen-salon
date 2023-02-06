@@ -22,6 +22,11 @@ yarn dev
 
 ### Docker
 
+:warning:
+it is important to run this project on a domain other than localhost!  
+NextJS needs to fetch the media from PayloadCMS from server and client by the same URL (otherwise there would be a hydration error). If the project would be run on localhost, the domain doesn't resolve to the PayloadCMS container in the NextJS container.  
+Edit your hosts file and make a new entry for 127.0.0.1 that is not localhost and set it in your `.env` file as the hostname.
+
 ```
 docker compose -f docker-compose.yaml -f docker-compose.development.yaml up -d
 ```

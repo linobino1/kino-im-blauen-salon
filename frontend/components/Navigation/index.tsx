@@ -8,8 +8,7 @@ import {
   Navigation as NavigationType,
 } from '@/payload-types';
 import classes from '@/css/nav.module.css';
-import { mediaLoader } from '@/util/mediaLoader';
-// eslint-disable-next-line import/no-cycle
+import { mediaUrl } from '@/util/mediaLoader';
 
 type Props = {
   navigation?: NavigationType
@@ -32,8 +31,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
         // image or plain text
         const inner: React.ReactNode = icon ? (
           <Image
-            loader={mediaLoader}
-            src={(icon as Media)?.filename as string}
+            src={mediaUrl(icon as Media)}
             alt={(icon as Media)?.alt}
             fill
           />
