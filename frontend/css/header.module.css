@@ -126,8 +126,7 @@ img.headerImage {
   width: 100%;
   color: var(--color-black);
   background: var(--color-white);
-  display: flex;
-  justify-content: center;
+  text-align: center;
   margin: 0;
   font-size: var(--font-size-xxx-big);
   font-weight: var(--font-weight-bold);
