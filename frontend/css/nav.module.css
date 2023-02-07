@@ -1,6 +1,10 @@
 .nav {
   display: flex;
 }
+.nav.socialMedia {
+  height: 1.3rem;
+  column-gap: .5rem;
+}
 
 /** NAVIGATION ITEM  ***************************************/
 .navItem,
