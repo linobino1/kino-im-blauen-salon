@@ -9,6 +9,16 @@ const Posts: CollectionConfig = {
     defaultColumns: ['date', 'title', '_status'],
     useAsTitle: 'title',
   },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        const url = (`${process.env.FRONTEND_HOST}/api/revalidate/post?secret=${process.env.REVALIDATION_SECRET}&slug=${doc.slug}`)
+        try {
+          await fetch(url)
+        } catch {}
+      }
+    ]
+  },
   access: {
     read: ({ req }) => {
       // admin -> everything
