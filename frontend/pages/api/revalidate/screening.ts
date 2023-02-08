@@ -14,10 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const slug = req.query.slug;
 
-  const postPagesQuery = await apollo.query({
+  const screeningPagesQuery = await apollo.query({
     query: gql`
-      query PagesWithPosts {
-        Pages(where: { type: { equals: posts }}) {
+      query PagesWithScreenings {
+        Pages(where: { type: { equals: screenings }}) {
           docs {
             slug
           }
@@ -25,10 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     `,
   });
-  const postPages: Page[] = postPagesQuery.data.Pages.docs;
+  const screeningPages: Page[] = screeningPagesQuery.data.Pages.docs;
 
   let errors = false;
-  postPages.forEach(async (page) => {
+  screeningPages.forEach(async (page) => {
     try {
       await res.revalidate(`/${page.slug}`);
       await res.revalidate(`/${page.slug}/${slug}`);

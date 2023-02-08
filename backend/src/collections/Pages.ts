@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 import { t } from '../i18n';
 import { slugField } from '../util/slugField';
+import { addTriggerRevalidation } from '../util/triggerRevalidation';
 import { Meta } from './Meta';
 
 export enum PageTypeEnum {
@@ -22,6 +23,11 @@ const Pages: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      addTriggerRevalidation('page', 'slug'),
+    ],
   },
   fields: [
     {

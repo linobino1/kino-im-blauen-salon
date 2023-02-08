@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 import { t, _t } from '../../i18n';
 import { slugField } from '../../util/slugField';
+import { addTriggerRevalidation } from '../../util/triggerRevalidation';
 
 const Movies: CollectionConfig = {
   slug: 'movies',
@@ -12,6 +13,11 @@ const Movies: CollectionConfig = {
     group: t('Movies'),
     defaultColumns: ['originalTitle', 'directors', 'publicationDate'],
     useAsTitle: 'originalTitle',
+  },
+  hooks: {
+    afterChange: [
+      addTriggerRevalidation('movie', 'slug'),
+    ],
   },
   access: {
     read: () => true,

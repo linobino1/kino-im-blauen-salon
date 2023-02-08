@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 import { slugField } from '../../util/slugField';
 import { t, _t } from '../../i18n';
+import { addTriggerRevalidation } from '../../util/triggerRevalidation';
 
 const Posts: CollectionConfig = {
   slug: 'posts',
@@ -11,13 +12,8 @@ const Posts: CollectionConfig = {
   },
   hooks: {
     afterChange: [
-      async ({ doc }) => {
-        const url = (`${process.env.FRONTEND_HOST}/api/revalidate/post?secret=${process.env.REVALIDATION_SECRET}&slug=${doc.slug}`)
-        try {
-          await fetch(url)
-        } catch {}
-      }
-    ]
+      addTriggerRevalidation('post', 'slug')
+    ],
   },
   access: {
     read: ({ req }) => {
