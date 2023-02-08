@@ -10,23 +10,26 @@ import { allPosts } from '@/lib/allPosts';
 import { allScreenings } from '@/lib/allScreenings';
 import { ParsedUrlQuery } from 'querystring';
 import { allPages } from '@/lib/allPages';
+import { getSiteConf, SiteConf } from '@/lib/siteConf';
+import DefaultLayout from '@/layouts/default';
 
 type Props = {
   post?: Post
   screening?: Screening
+  siteConf: SiteConf
 };
 
-export const Item: React.FC<Props> = ({ post, screening }) => {
-  if (post) return (
-    <PostComponent post={post} />
-  );
-  if (screening) return (
-    <ScreeningComponent screening={screening} />
-  );
-  else return (
-    <p>item not found</p>
-  );
-};
+export const Item: React.FC<Props> = ({ post, screening, siteConf }) => (
+  <DefaultLayout siteConf={siteConf}>
+    { post ? (
+      <PostComponent post={post} />
+    ) : screening ? (
+      <ScreeningComponent screening={screening} />
+    ) : (
+      <p>item not found</p>
+    )}
+  </DefaultLayout>
+);
 
 export default Item;
 
@@ -37,8 +40,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   return {
     props: {
-      post: (page.type === 'posts' && await postBySlug(slug).catch((e) => { console.log(e) })) ?? null,
-      screening: (page.type === 'screenings' && await screeningBySlug(slug).catch((e) => { console.log(e) })) ?? null,
+      siteConf: await getSiteConf(),
+      post: (page?.type === 'posts' && await postBySlug(slug).catch((e) => { console.log(e) })) ?? null,
+      screening: (page?.type === 'screenings' && await screeningBySlug(slug).catch((e) => { console.log(e) })) ?? null,
     }
   }
 };

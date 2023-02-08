@@ -6,8 +6,16 @@ import classes from '@/css/auth.module.css';
 import Head from '@/components/Head';
 import { Input } from '@/components/Input';
 import { useTranslation } from 'next-i18next';
+import { Page } from '@/types/page';
+import { GetStaticProps } from 'next';
+import { SiteConf, getSiteConf } from '@/lib/siteConf';
+import AuthLayout from '@/layouts/auth';
 
-export const SignIn: React.FC = () => {
+export type Props = {
+  siteConf: SiteConf
+};
+
+export const SignIn: Page<Props> = ({ siteConf }) => {
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -35,11 +43,11 @@ export const SignIn: React.FC = () => {
   };
 
   return (
-    <main className={classes.main}>
+    <AuthLayout siteConf={siteConf} >
       <Head
         title={t('Sign In') as string}
       />
-      <form onSubmit={handleSubmit} className={classes.centered}>
+      <form onSubmit={handleSubmit} className={classes.signInForm}>
         <Input
           label={t('Email')}
           name="email"
@@ -54,8 +62,17 @@ export const SignIn: React.FC = () => {
 
         <button type="submit">{t('Sign In')}</button>
       </form>
-    </main>
+    </AuthLayout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      siteConf: await getSiteConf(),
+    },
+    revalidate: 10,
+  };
 };
 
 export default SignIn;

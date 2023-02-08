@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const Navigation: React.FC<Props> = ({ navigation, className }) => {
-  const router = useRouter();
+  const { asPath } = useRouter();
 
   // each item renders as either an internal link, an external link with an icon or text, or another navigation
   return navigation ? (
@@ -24,9 +24,11 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
       {navigation?.items.map(({
         id, icon, subnavigation, page, url, name,
       }) => {
-        const href = (page as Page)?.slug || url;
+        const href = page as Page ? `/${(page as Page).slug}` : url;
 
-        const isActive: boolean = (router.asPath === `/${(page as Page)?.slug}`);
+        const isActive = (
+          asPath === `/${(page as Page)?.slug}`
+        );
 
         // image or plain text
         const inner: React.ReactNode = icon ? (
@@ -43,11 +45,11 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
         return subnavigation ? (
           <Navigation
             navigation={subnavigation as NavigationType}
-            key={name}
+            key={id}
           />
         ) : (
           <Link
-            key={name}
+            key={id}
             href={href}
             className={`${classes.navItem} ${isActive && classes.active}`}
           >

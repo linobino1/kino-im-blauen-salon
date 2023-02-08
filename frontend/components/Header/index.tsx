@@ -14,7 +14,7 @@ import { mediaUrl } from '@/util/mediaUrl';
 import { UserStatus } from '../UserStatus';
 
 type Props = {
-  title: string
+  title?: string
   mainNavigation?: NavigationType
   socialNavigation?: NavigationType
   site: Site
@@ -84,9 +84,11 @@ const Header: React.FC<Props> = ({
           </div>
         </div>
       )}
-      <h1 className={classes.titleHeader}>
-        {title}
-      </h1>
+      { title && (
+        <h1 className={classes.titleHeader}>
+          {title}
+        </h1>
+      )}
     </header>
   );
 };

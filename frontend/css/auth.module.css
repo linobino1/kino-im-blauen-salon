@@ -1,18 +1,6 @@
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  background-color: var(--color-theme);
-  margin: 0;
-  padding-bottom: 23vh;
-}
-.centered {
+.signInForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--color-white);
-  padding: 1em;
   row-gap: 1em;
 }

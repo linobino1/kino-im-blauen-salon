@@ -1,16 +1,16 @@
 import apollo from "@/graphql/apollo";
-import { Navigation, Page, Site } from "@/payload-types";
+import { Page } from "@/payload-types";
 import { gql } from "@apollo/client";
+import { SiteConf } from "./siteConf";
 
-export type Returns = {
-  site: Site
+export type PageConf = SiteConf & {
   page: Page
-  navigations: Navigation[]
-}
-export const getPageConf = async (pageSlug: string): Promise<Returns> => {
+};
+
+export const pageConf = async (pageSlug: string): Promise<PageConf> => {
   const data = (await apollo.query({
     query: gql`
-      query getPageConf($pageSlug: String!) {
+      query pageConf($pageSlug: String!) {
         Site {
           title
           favicon {
@@ -66,3 +66,8 @@ export const getPageConf = async (pageSlug: string): Promise<Returns> => {
     navigations: data.Navigations.docs,
   };
 }
+
+export const pageConfToSiteConf = (pageConf: PageConf): SiteConf => ({
+  site: pageConf.site,
+  navigations: pageConf.navigations,
+});

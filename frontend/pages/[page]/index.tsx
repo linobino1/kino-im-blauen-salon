@@ -2,95 +2,65 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import {
-  Site,
-  Page as PageType,
-  Navigation,
   Post,
   Screening,
-  Media,
 } from '@/payload-types';
 import NotFound from '@/components/NotFound';
 import Head from '@/components/Head';
 import classes from '@/css/page.module.css';
-import Header from '@/components/Header';
 import RichText from '@/components/RichText';
 import { Posts } from '@/components/Posts';
-import { Footer } from '@/components/Footer';
 import { Screenings } from '@/components/Screenings';
-import { getPageConf } from '@/lib/pageConf';
+import { pageConf as getPageConf, PageConf, pageConfToSiteConf } from '@/lib/pageConf';
 import { allPosts } from '@/lib/allPosts';
 import { allScreenings } from '@/lib/allScreenings';
 import { allPagesSlugs } from '@/lib/allPagesSlugs';
+import { DefaultLayout } from '@/layouts/default';
 
 type Props = {
-  site: Site
-  navigations?: Navigation[]
-  page?: PageType
+  pageConf: PageConf
   posts?: Post[]
   screenings?: Screening[]
 };
 
-const Page: React.FC<Props> = ({
-  site, navigations, page, posts, screenings,
+export const Page: React.FC<Props> = ({
+  pageConf, posts, screenings,
 }) => {
-  const title: string = [
-    page?.title,
-    site?.title,
-  ].filter(Boolean).join(' | ');
+  const { page } = pageConf;
 
   if (!page) {
     return <NotFound />;
   }
 
   return (
-    <>
-      <main className={classes.page}>
-        <Head
-          title={title}
-          description={page.meta?.description}
-          keywords={page.meta?.keywords}
-          favicon={site.favicon as Media}
-        />
-        <Header
-          title={page.title}
-          mainNavigation={navigations && navigations.find((x) => x.type === 'main')}
-          socialNavigation={navigations && navigations.find((x) => x.type === 'socialMedia')}
-          site={site}
-          headerImage={page.image}
-        />
-
-        <div className={classes.mainstage}>
-          <RichText content={page.content} />
-
-          {page.type === 'posts' && (
-            <Posts posts={posts} />
-          )}
-
-          {page.type === 'screenings' && (
-            <Screenings screenings={screenings} />
-          )}
-        </div>
-
-      </main>
-      <Footer
-        site={site}
-        footerNavigation={navigations?.find((x) => x.type === 'footer')}
-        socialNavigation={navigations?.find((x) => x.type === 'socialMedia')}
+    <DefaultLayout siteConf={pageConfToSiteConf(pageConf)}>
+      <Head
+        title={page.title}
+        description={page.meta?.description}
+        keywords={page.meta?.keywords}
       />
-    </>
+
+      <RichText content={page.content} />
+
+      {page.type === 'posts' && (
+        <Posts posts={posts} />
+      )}
+
+      {page.type === 'screenings' && (
+        <Screenings screenings={screenings} />
+      )}
+
+    </DefaultLayout>
   );
 };
 
-export default Page;
-
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { site, page, navigations } = await getPageConf(ctx.params?.page as string);
+  const pageConf = await getPageConf(ctx.params?.page as string);
+  const { page } = pageConf;
 
-  return page ? {
+  return pageConf ? {
     props: {
-      site,
-      page,
-      navigations,
+      pageConf,
       posts: (page.type === 'posts' && await allPosts()) ?? null,
       screenings: (page.type === 'screenings' && await allScreenings()) ?? null,
     },
@@ -116,3 +86,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking', // revalidate if unknown slug encountered
   };
 };
+
+export default Page;
