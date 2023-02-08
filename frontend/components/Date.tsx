@@ -22,6 +22,7 @@ export const Date: React.FC<Props> = ({
 
   return (
     <time
+      suppressHydrationWarning
       className={className}
       dateTime={iso}
     >
