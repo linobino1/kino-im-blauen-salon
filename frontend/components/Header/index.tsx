@@ -10,7 +10,7 @@ import {
   Navigation as NavigationType,
 } from '@/payload-types';
 import { Navigation } from '../Navigation';
-import { mediaUrl } from '@/util/mediaLoader';
+import { mediaUrl } from '@/util/mediaUrl';
 import { UserStatus } from '../UserStatus';
 
 type Props = {

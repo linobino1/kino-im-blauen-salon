@@ -35,7 +35,7 @@ const Head: React.FC<Props> = ({
       <title>
         {getTitle()}
       </title>
-      <Favicon favicon={favicon} />
+      <Favicon favicon={favicon as Media} />
       <meta
         name="description"
         content={description || defaultDescription}

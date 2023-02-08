@@ -8,7 +8,7 @@ import {
   Navigation as NavigationType,
 } from '@/payload-types';
 import classes from '@/css/nav.module.css';
-import { mediaUrl } from '@/util/mediaLoader';
+import { mediaUrl } from '@/util/mediaUrl';
 
 type Props = {
   navigation?: NavigationType

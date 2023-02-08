@@ -1,13 +1,13 @@
 import React from 'react';
 import { Media } from '@/payload-types';
-import { mediaLoader } from '@/util/mediaLoader';
+import { mediaUrl } from '@/util/mediaUrl';
 
 type Props = {
-  favicon?: Media
+  favicon: Media
 };
 
 export const Favicon: React.FC<Props> = ({ favicon }) => favicon ? (
-  <link rel="icon" href={`${process.env.NEXT_PUBLIC_MEDIA_URL}/${favicon.filename}`} />
+  <link rel="icon" href={mediaUrl(favicon)} />
 ) : (
   <></>
 );

@@ -10,7 +10,7 @@ import {
 } from '@/payload-types';
 import { Date } from '../Date';
 import { useTranslation } from 'next-i18next';
-import { mediaUrl } from '@/util/mediaLoader';
+import { mediaUrl } from '@/util/mediaUrl';
 
 type Props = {
   screening: ScreeningType
