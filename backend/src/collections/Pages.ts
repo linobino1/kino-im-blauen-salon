@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { t } from '../i18n';
-import { slugField } from '../fields/slugField';
+import { slugField } from '../util/slugField';
 import { Meta } from './Meta';
 
 export enum PageTypeEnum {

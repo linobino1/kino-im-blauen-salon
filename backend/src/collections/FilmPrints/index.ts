@@ -1,7 +1,7 @@
 import payload from 'payload';
 import { CollectionConfig } from 'payload/types';
 import { t } from '../../i18n';
-import { slugField } from '../../fields/slugField';
+import { slugField } from '../../util/slugField';
 import analogueDigitalTypeField from './fields';
 
 const FilmPrints: CollectionConfig = {

@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { t, _t } from '../../i18n';
-import { slugField } from '../../fields/slugField';
+import { slugField } from '../../util/slugField';
 
 const Movies: CollectionConfig = {
   slug: 'movies',

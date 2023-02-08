@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import { slugField } from '../../fields/slugField';
+import { slugField } from '../../util/slugField';
 import { t, _t } from '../../i18n';
 
 const Posts: CollectionConfig = {
