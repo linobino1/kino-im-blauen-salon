@@ -42,19 +42,21 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
         );
 
         // subnavigation or link
-        return subnavigation ? (
-          <Navigation
-            navigation={subnavigation as NavigationType}
-            key={id}
-          />
-        ) : (
-          <Link
-            key={id}
-            href={href}
-            className={`${classes.navItem} ${isActive && classes.active}`}
-          >
-            {inner}
-          </Link>
+        return (
+          <div key={id}>
+            { subnavigation ? (
+              <Navigation
+                navigation={subnavigation as NavigationType}
+              />
+            ) : (
+              <Link
+                href={href}
+                className={`${classes.navItem} ${isActive && classes.active}`}
+              >
+                {inner}
+              </Link>
+            )}
+          </div>
         );
       })}
     </nav>

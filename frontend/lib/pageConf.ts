@@ -25,6 +25,7 @@ export const pageConf = async (pageSlug: string): Promise<PageConf> => {
           docs {
             type
             items {
+              id
               type
               name
               url
