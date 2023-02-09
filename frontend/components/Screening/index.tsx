@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import classes from '@/css/screenings.module.css';
+import classes from '@/css/screening.module.css';
 import {
   Media,
   FilmPrint,
@@ -20,7 +20,7 @@ export const Screening: React.FC<Props> = ({ screening }) => {
 
   return (
     <div
-      className={classes.item}
+      className={classes.screening}
     >
       <div className={classes.date}>
         <Date

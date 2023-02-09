@@ -9,7 +9,6 @@ export const pageBySlug = async (slug: string): Promise<Page> => {
         Pages(where: { slug: { equals: $slug }}) {
           docs {
             title
-            type
             image {
               filename
               alt
@@ -18,7 +17,21 @@ export const pageBySlug = async (slug: string): Promise<Page> => {
               keywords
               description
             }
-            content
+            layout {
+              __typename
+              ... on Content {
+                blockType
+                content
+              }
+              ... on PostsList {
+                blockType
+                from
+              }
+              ... on ScreeningsList {
+                blockType
+                from
+              }
+            }
           }
         }
       }

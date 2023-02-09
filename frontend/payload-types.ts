@@ -50,11 +50,29 @@ export interface Page {
   id: string;
   title: string;
   slug?: string;
-  type?: 'static' | 'screenings' | 'posts';
   image?: string | Media;
-  content?: {
-    [k: string]: unknown;
-  }[];
+  layout: (
+    | {
+        content?: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'content';
+      }
+    | {
+        from?: string;
+        id?: string;
+        blockName?: string;
+        blockType: 'postsList';
+      }
+    | {
+        from?: string;
+        id?: string;
+        blockName?: string;
+        blockType: 'screeningsList';
+      }
+  )[];
   meta: {
     description?: string;
     keywords?: string;

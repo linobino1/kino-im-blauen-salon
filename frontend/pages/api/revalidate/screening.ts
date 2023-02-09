@@ -1,6 +1,5 @@
-import apollo from '@/graphql/apollo'
 import { Page } from '@/payload-types'
-import { gql } from '@apollo/client'
+import rest from '@/rest'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -14,21 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const slug = req.query.slug;
 
-  const screeningPagesQuery = await apollo.query({
-    query: gql`
-      query PagesWithScreenings {
-        Pages(where: { type: { equals: screenings }}) {
-          docs {
-            slug
-          }
-        }
-      }
-    `,
-  });
-  const screeningPages: Page[] = screeningPagesQuery.data.Pages.docs;
+  const screeningPages = (await rest.get('pages?where[layout__blockType][contains]=screeningsList')).data.docs;
 
   let errors = false;
-  screeningPages.forEach(async (page) => {
+  screeningPages.forEach(async (page: Page) => {
     try {
       await res.revalidate(`/${page.slug}`);
       await res.revalidate(`/${page.slug}/${slug}`);

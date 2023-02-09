@@ -1,4 +1,7 @@
 import { CollectionConfig } from 'payload/types';
+import { Content } from '../blocks/Content';
+import { PostsList } from '../blocks/PostsList';
+import ScreeningsList from '../blocks/ScreeningsList';
 import { t } from '../i18n';
 import { slugField } from '../util/slugField';
 import { addTriggerRevalidation } from '../util/triggerRevalidation';
@@ -38,39 +41,21 @@ const Pages: CollectionConfig = {
     },
     slugField('title'),
     {
-      name: 'type',
-      label: t('Type'),
-      type: 'select',
-      required: true,
-      options: [
-        {
-          label: t('Static Page'),
-          value: PageTypeEnum.static,
-        },
-        {
-          label: t('Screenings List'),
-          value: PageTypeEnum.screenings,
-        },
-        {
-          label: t('Posts List'),
-          value: PageTypeEnum.posts,
-        },
-      ],
-      defaultValue: 'static',
-    },
-    {
       name: 'image',
       label: t('Header Image'),
       type: 'upload',
       relationTo: 'media',
     },
     {
-      name: 'content',
+      name: 'layout',
       label: t('Content'),
-      type: 'richText',
-      admin: {
-        condition: (data) => data.type === 'static',
-      },
+      type: 'blocks',
+      minRows: 1,
+      blocks: [
+        Content,
+        PostsList,
+        ScreeningsList,
+      ],
     },
     Meta,
   ],

@@ -7,15 +7,12 @@ import {
 } from '@/payload-types';
 import NotFound from '@/components/NotFound';
 import Head from '@/components/Head';
-import classes from '@/css/page.module.css';
-import RichText from '@/components/RichText';
-import { Posts } from '@/components/Posts';
-import { Screenings } from '@/components/Screenings';
 import { pageConf as getPageConf, PageConf, pageConfToSiteConf } from '@/lib/pageConf';
 import { allPosts } from '@/lib/allPosts';
 import { allScreenings } from '@/lib/allScreenings';
 import { allPagesSlugs } from '@/lib/allPagesSlugs';
 import { DefaultLayout } from '@/layouts/default';
+import Blocks from '@/components/Blocks';
 
 type Props = {
   pageConf: PageConf
@@ -40,15 +37,7 @@ export const Page: React.FC<Props> = ({
         keywords={page.meta?.keywords}
       />
 
-      <RichText content={page.content} />
-
-      {page.type === 'posts' && (
-        <Posts posts={posts} />
-      )}
-
-      {page.type === 'screenings' && (
-        <Screenings screenings={screenings} />
-      )}
+      <Blocks layout={page.layout} posts={posts} screenings={screenings} />
 
     </DefaultLayout>
   );
@@ -56,13 +45,15 @@ export const Page: React.FC<Props> = ({
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const pageConf = await getPageConf(ctx.params?.page as string);
-  const { page } = pageConf;
+
+  const hasPosts = pageConf.page.layout?.some((item) => item.blockType === 'postsList');
+  const hasScreenings = pageConf.page.layout?.some((item) => item.blockType === 'screeningsList');
 
   return pageConf ? {
     props: {
       pageConf,
-      posts: (page.type === 'posts' && await allPosts()) ?? null,
-      screenings: (page.type === 'screenings' && await allScreenings()) ?? null,
+      posts: (hasPosts && await allPosts()) ?? null,
+      screenings: (hasScreenings && await allScreenings()) ?? null,
     },
     revalidate: 10,
   } : {

@@ -1,6 +1,5 @@
-import apollo from '@/graphql/apollo'
 import { Page } from '@/payload-types'
-import { gql } from '@apollo/client'
+import rest from '@/rest'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -14,21 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const slug = req.query.slug;
 
-  const postPagesQuery = await apollo.query({
-    query: gql`
-      query PagesWithPosts {
-        Pages(where: { type: { equals: posts }}) {
-          docs {
-            slug
-          }
-        }
-      }
-    `,
-  });
-  const postPages: Page[] = postPagesQuery.data.Pages.docs;
+  const postPages = (await rest.get('pages?where[layout__blockType][contains]=postsList')).data.docs;
 
   let errors = false;
-  postPages.forEach(async (page) => {
+  postPages.forEach(async (page: Page) => {
     try {
       await res.revalidate(`/${page.slug}`);
       await res.revalidate(`/${page.slug}/${slug}`);

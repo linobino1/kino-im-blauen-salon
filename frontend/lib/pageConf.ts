@@ -8,7 +8,7 @@ export type PageConf = SiteConf & {
 };
 
 export const pageConf = async (pageSlug: string): Promise<PageConf> => {
-  const data = (await apollo.query({
+  const { data } = (await apollo.query({
     query: gql`
       query pageConf($pageSlug: String!) {
         Site {
@@ -42,7 +42,6 @@ export const pageConf = async (pageSlug: string): Promise<PageConf> => {
         Pages (where: {slug: { equals: $pageSlug }}) {
           docs {
             title
-            type
             image {
               filename
               alt
@@ -51,15 +50,29 @@ export const pageConf = async (pageSlug: string): Promise<PageConf> => {
               keywords
               description
             }
-            content
+            layout {
+              __typename
+              ... on Content {
+                blockType
+                content
+              }
+              ... on PostsList {
+                blockType
+                from
+              }
+              ... on ScreeningsList {
+                blockType
+                from
+              }
+            }
           }
         }
       }
     `,
     variables: {
       pageSlug,
-    }
-  })).data;
+    },
+  }));
 
   return {
     site: data.Site,

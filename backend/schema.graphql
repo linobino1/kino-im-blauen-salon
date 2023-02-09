@@ -378,18 +378,11 @@ type Page {
   id: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  title: String
+  title: String!
   slug: String
-  type: Page_type
   image(locale: LocaleInputType, fallbackLocale: FallbackLocaleInputType, where: Page_Image_where): Media
-  content(depth: Int): JSON
+  layout: [Page_Layout!]
   meta: Page_Meta
-}
-
-enum Page_type {
-  static
-  screenings
-  posts
 }
 
 type Media {
@@ -708,6 +701,29 @@ input Page_Image_where_and {
   id: Page_Image_id_operator
 }
 
+union Page_Layout = Content | PostsList | ScreeningsList
+
+type Content {
+  content(depth: Int): JSON
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type PostsList {
+  from: DateTime
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type ScreeningsList {
+  from: DateTime
+  id: String
+  blockName: String
+  blockType: String
+}
+
 type Page_Meta {
   description: String
   keywords: String
@@ -730,9 +746,7 @@ type Pages {
 input Page_where {
   title: Page_title_operator
   slug: Page_slug_operator
-  type: Page_type_operator
   image: Page_image_operator
-  content: Page_content_operator
   meta__description: Page_meta__description_operator
   meta__keywords: Page_meta__keywords_operator
   id: Page_id_operator
@@ -750,7 +764,6 @@ input Page_title_operator {
   in: [String]
   not_in: [String]
   all: [String]
-  exists: Boolean
 }
 
 input Page_slug_operator {
@@ -764,32 +777,9 @@ input Page_slug_operator {
   exists: Boolean
 }
 
-input Page_type_operator {
-  equals: Page_type_Input
-  not_equals: Page_type_Input
-  in: [Page_type_Input]
-  not_in: [Page_type_Input]
-  all: [Page_type_Input]
-  exists: Boolean
-}
-
-enum Page_type_Input {
-  static
-  screenings
-  posts
-}
-
 input Page_image_operator {
   equals: String
   not_equals: String
-  exists: Boolean
-}
-
-input Page_content_operator {
-  equals: JSON
-  not_equals: JSON
-  like: JSON
-  contains: JSON
   exists: Boolean
 }
 
@@ -846,9 +836,7 @@ input Page_updatedAt_operator {
 input Page_where_or {
   title: Page_title_operator
   slug: Page_slug_operator
-  type: Page_type_operator
   image: Page_image_operator
-  content: Page_content_operator
   meta__description: Page_meta__description_operator
   meta__keywords: Page_meta__keywords_operator
   id: Page_id_operator
@@ -859,9 +847,7 @@ input Page_where_or {
 input Page_where_and {
   title: Page_title_operator
   slug: Page_slug_operator
-  type: Page_type_operator
   image: Page_image_operator
-  content: Page_content_operator
   meta__description: Page_meta__description_operator
   meta__keywords: Page_meta__keywords_operator
   id: Page_id_operator
@@ -880,9 +866,8 @@ type pagesDocAccess {
 type PagesDocAccessFields {
   title: PagesDocAccessFields_title
   slug: PagesDocAccessFields_slug
-  type: PagesDocAccessFields_type
   image: PagesDocAccessFields_image
-  content: PagesDocAccessFields_content
+  layout: PagesDocAccessFields_layout
   meta: PagesDocAccessFields_meta
 }
 
@@ -932,29 +917,6 @@ type PagesDocAccessFields_slug_Delete {
   permission: Boolean!
 }
 
-type PagesDocAccessFields_type {
-  create: PagesDocAccessFields_type_Create
-  read: PagesDocAccessFields_type_Read
-  update: PagesDocAccessFields_type_Update
-  delete: PagesDocAccessFields_type_Delete
-}
-
-type PagesDocAccessFields_type_Create {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_type_Read {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_type_Update {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_type_Delete {
-  permission: Boolean!
-}
-
 type PagesDocAccessFields_image {
   create: PagesDocAccessFields_image_Create
   read: PagesDocAccessFields_image_Read
@@ -978,26 +940,26 @@ type PagesDocAccessFields_image_Delete {
   permission: Boolean!
 }
 
-type PagesDocAccessFields_content {
-  create: PagesDocAccessFields_content_Create
-  read: PagesDocAccessFields_content_Read
-  update: PagesDocAccessFields_content_Update
-  delete: PagesDocAccessFields_content_Delete
+type PagesDocAccessFields_layout {
+  create: PagesDocAccessFields_layout_Create
+  read: PagesDocAccessFields_layout_Read
+  update: PagesDocAccessFields_layout_Update
+  delete: PagesDocAccessFields_layout_Delete
 }
 
-type PagesDocAccessFields_content_Create {
+type PagesDocAccessFields_layout_Create {
   permission: Boolean!
 }
 
-type PagesDocAccessFields_content_Read {
+type PagesDocAccessFields_layout_Read {
   permission: Boolean!
 }
 
-type PagesDocAccessFields_content_Update {
+type PagesDocAccessFields_layout_Update {
   permission: Boolean!
 }
 
-type PagesDocAccessFields_content_Delete {
+type PagesDocAccessFields_layout_Delete {
   permission: Boolean!
 }
 
@@ -1992,7 +1954,7 @@ type Navigation {
   id: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  type: Navigation_type
+  type: Navigation_type!
   items: [Navigation_Items!]
 }
 
@@ -2333,7 +2295,6 @@ input Navigation_type_operator {
   in: [Navigation_type_Input]
   not_in: [Navigation_type_Input]
   all: [Navigation_type_Input]
-  exists: Boolean
 }
 
 enum Navigation_type_Input {
@@ -8696,9 +8657,8 @@ type pagesAccess {
 type PagesFields {
   title: PagesFields_title
   slug: PagesFields_slug
-  type: PagesFields_type
   image: PagesFields_image
-  content: PagesFields_content
+  layout: PagesFields_layout
   meta: PagesFields_meta
 }
 
@@ -8748,29 +8708,6 @@ type PagesFields_slug_Delete {
   permission: Boolean!
 }
 
-type PagesFields_type {
-  create: PagesFields_type_Create
-  read: PagesFields_type_Read
-  update: PagesFields_type_Update
-  delete: PagesFields_type_Delete
-}
-
-type PagesFields_type_Create {
-  permission: Boolean!
-}
-
-type PagesFields_type_Read {
-  permission: Boolean!
-}
-
-type PagesFields_type_Update {
-  permission: Boolean!
-}
-
-type PagesFields_type_Delete {
-  permission: Boolean!
-}
-
 type PagesFields_image {
   create: PagesFields_image_Create
   read: PagesFields_image_Read
@@ -8794,26 +8731,26 @@ type PagesFields_image_Delete {
   permission: Boolean!
 }
 
-type PagesFields_content {
-  create: PagesFields_content_Create
-  read: PagesFields_content_Read
-  update: PagesFields_content_Update
-  delete: PagesFields_content_Delete
+type PagesFields_layout {
+  create: PagesFields_layout_Create
+  read: PagesFields_layout_Read
+  update: PagesFields_layout_Update
+  delete: PagesFields_layout_Delete
 }
 
-type PagesFields_content_Create {
+type PagesFields_layout_Create {
   permission: Boolean!
 }
 
-type PagesFields_content_Read {
+type PagesFields_layout_Read {
   permission: Boolean!
 }
 
-type PagesFields_content_Update {
+type PagesFields_layout_Update {
   permission: Boolean!
 }
 
-type PagesFields_content_Delete {
+type PagesFields_layout_Delete {
   permission: Boolean!
 }
 
@@ -12004,18 +11941,11 @@ type usersResetPassword {
 }
 
 input mutationPageInput {
-  title: String
+  title: String!
   slug: String
-  type: Page_type_MutationInput
   image: String
-  content: JSON
+  layout: JSON
   meta: mutationPage_MetaInput
-}
-
-enum Page_type_MutationInput {
-  static
-  screenings
-  posts
 }
 
 input mutationPage_MetaInput {
@@ -12026,16 +11956,9 @@ input mutationPage_MetaInput {
 input mutationPageUpdateInput {
   title: String
   slug: String
-  type: PageUpdate_type_MutationInput
   image: String
-  content: JSON
+  layout: JSON
   meta: mutationPageUpdate_MetaInput
-}
-
-enum PageUpdate_type_MutationInput {
-  static
-  screenings
-  posts
 }
 
 input mutationPageUpdate_MetaInput {
@@ -12112,7 +12035,7 @@ input mutationMediaUpdate_Sizes_FeatureInput {
 }
 
 input mutationNavigationInput {
-  type: Navigation_type_MutationInput
+  type: Navigation_type_MutationInput!
   items: [mutationNavigation_ItemsInput]
 }
 

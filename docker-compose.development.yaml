@@ -25,6 +25,7 @@ services:
       NEXT_PUBLIC_SERVER_URL: http://${HOSTNAME}
       NEXTAUTH_URL: http://${HOSTNAME}
       GRAPHQL_LOCALHOST: http://backend:3000/api/graphql  # works from one docker container to another
+      REST_LOCALHOST: http://backend:3000/api  # works from one docker container to another
       NEXT_PUBLIC_HOSTNAME: ${HOSTNAME}
       NEXT_PUBLIC_MEDIA_URL: http://${HOSTNAME}:3000/media  # works in public internet
       REVALIDATION_SECRET:

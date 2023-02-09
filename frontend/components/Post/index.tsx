@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '@/css/posts.module.css';
+import classes from '@/css/post.module.css';
 import { Media, Post as PostType } from '@/payload-types';
 import RichText from '../RichText';
 import { PostImage } from './PostImage';
