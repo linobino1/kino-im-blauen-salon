@@ -55,12 +55,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       pageConf,
       posts: (postsList && await getPosts(
-        postsList.from as string && parseISO(postsList.from as string) || undefined,
-        postsList.until as string && parseISO(postsList.until as string) || undefined
+        postsList.from as string ? parseISO(postsList.from as string) : undefined,
+        postsList.until as string ? parseISO(postsList.until as string) : undefined
       )) ?? null,
       screenings: (screeningsList && await getScreenings(
-        screeningsList.from as string && parseISO(screeningsList.from as string) || undefined,
-        screeningsList.until as string && parseISO(screeningsList.until as string) || undefined
+        screeningsList.from as string ? parseISO(screeningsList.from as string) : undefined,
+        screeningsList.until as string ? parseISO(screeningsList.until as string) : undefined
       )) ?? null,
     },
     revalidate: 10,

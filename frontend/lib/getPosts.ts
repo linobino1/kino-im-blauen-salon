@@ -15,7 +15,8 @@ export const getPosts = async (from?: Date, until?: Date): Promise<Post[]> => {
       query getPosts($from: DateTime!, $until: DateTime!) {
         Posts(
           where: {
-            date: { greater_than_equal: $from, less_than_equal: $until }
+            date: { greater_than_equal: $from},
+            AND: { date: { less_than_equal: $until }},
           }
           sort: "-date"
         ) {

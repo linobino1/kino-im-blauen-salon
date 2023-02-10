@@ -15,7 +15,8 @@ export const getScreenings = async (from?: Date, until?: Date): Promise<Screenin
       query getScreenings($from: DateTime!, $until: DateTime!) {
         Screenings(
           where: {
-            date: { greater_than_equal: $from, less_than_equal: $until }
+            date: { greater_than_equal: $from},
+            AND: { date: { less_than_equal: $until }},
           }
           sort: "date"
         ) {
