@@ -38,5 +38,9 @@ export const getScreenings = async (from?: Date, until?: Date): Promise<Screenin
         }
       }
     `,
+    variables: {
+      from,
+      until,
+    }
   })).data.Screenings.docs;
 }
