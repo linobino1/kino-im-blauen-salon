@@ -7,6 +7,10 @@ export const ScreeningsList: Block = {
       name: 'from',
       type: 'date',
     },
+    {
+      name: 'until',
+      type: 'date',
+    },
   ],
 };
 

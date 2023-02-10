@@ -7,12 +7,6 @@ import { slugField } from '../util/slugField';
 import { addTriggerRevalidation } from '../util/triggerRevalidation';
 import { Meta } from './Meta';
 
-export enum PageTypeEnum {
-  static = 'static',
-  screenings = 'screenings',
-  posts = 'posts',
-}
-
 const Pages: CollectionConfig = {
   slug: 'pages',
   labels: {

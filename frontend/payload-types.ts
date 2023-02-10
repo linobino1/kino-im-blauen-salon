@@ -62,12 +62,14 @@ export interface Page {
       }
     | {
         from?: string;
+        until?: string;
         id?: string;
         blockName?: string;
         blockType: 'postsList';
       }
     | {
         from?: string;
+        until?: string;
         id?: string;
         blockName?: string;
         blockType: 'screeningsList';

@@ -1,13 +1,13 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Post, Screening } from '@/payload-types';
+import { Page, Post, Screening } from '@/payload-types';
 import { Post as PostComponent } from '@/components/Post';
 import { Screening as ScreeningComponent } from '@/components/Screening';
 import { postBySlug } from '@/lib/postBySlug';
 import { pageBySlug } from '@/lib/pageBySlug';
 import { screeningBySlug } from '@/lib/screeningBySlug';
-import { allPosts } from '@/lib/allPosts';
-import { allScreenings } from '@/lib/allScreenings';
+import { getPosts } from '@/lib/getPosts';
+import { getScreenings } from '@/lib/getScreenings';
 import { ParsedUrlQuery } from 'querystring';
 import { allPages } from '@/lib/allPages';
 import { getSiteConf, SiteConf } from '@/lib/siteConf';
@@ -37,8 +37,19 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const page = await pageBySlug(ctx.params?.page as string);
   const slug = ctx.params?.item as string;
 
+  if (!(page as Page)) {
+    return {
+      props: {
+        siteConf: await getSiteConf(),
+        post: null,
+        screening: null,
+      }
+    }
+  }
+
   const isPost = page.layout?.some((item) => item.blockType === 'postsList');
   const isScreening = page.layout?.some((item) => item.blockType === 'screeningsList');
+
   return {
     props: {
       siteConf: await getSiteConf(),
@@ -55,7 +66,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     // all posts
     if (page.layout?.some((i) => i.blockType === 'postsList')) {
-      (await allPosts()).forEach((item) => {
+      (await getPosts()).forEach((item) => {
         paths.push({
           params: {
             page: page.slug,
@@ -67,7 +78,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     // all screenings
     if (page.layout?.some((i) => i.blockType === 'screeningsList')) {
-      (await allScreenings()).forEach((item) => {
+      (await getScreenings()).forEach((item) => {
         paths.push({
           params: {
             page: page.slug,

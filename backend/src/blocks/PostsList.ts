@@ -7,6 +7,10 @@ export const PostsList: Block = {
       name: 'from',
       type: 'date',
     },
+    {
+      name: 'until',
+      type: 'date',
+    },
   ],
 };
 

@@ -8,11 +8,13 @@ import {
 import NotFound from '@/components/NotFound';
 import Head from '@/components/Head';
 import { pageConf as getPageConf, PageConf, pageConfToSiteConf } from '@/lib/pageConf';
-import { allPosts } from '@/lib/allPosts';
-import { allScreenings } from '@/lib/allScreenings';
+import { getPosts } from '@/lib/getPosts';
+import { getScreenings } from '@/lib/getScreenings';
 import { allPagesSlugs } from '@/lib/allPagesSlugs';
 import { DefaultLayout } from '@/layouts/default';
 import Blocks from '@/components/Blocks';
+import { parseISO } from 'date-fns';
+import { isPostsList, isScreeningsList, PostsListBlock, ScreeningsListBlock } from '@/types/blocks';
 
 type Props = {
   pageConf: PageConf
@@ -46,14 +48,25 @@ export const Page: React.FC<Props> = ({
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const pageConf = await getPageConf(ctx.params?.page as string);
 
-  const hasPosts = pageConf.page.layout?.some((item) => item.blockType === 'postsList');
-  const hasScreenings = pageConf.page.layout?.some((item) => item.blockType === 'screeningsList');
+  const postsList: PostsListBlock | undefined = pageConf.page.layout?.find(isPostsList);
+  const screeningsList: ScreeningsListBlock | undefined = pageConf.page.layout?.find(isScreeningsList);
+
+  console.log('postslist')
+  console.log(postsList)
+  console.log('screeningslist')
+  console.log(screeningsList)
 
   return pageConf ? {
     props: {
       pageConf,
-      posts: (hasPosts && await allPosts()) ?? null,
-      screenings: (hasScreenings && await allScreenings()) ?? null,
+      posts: (postsList && await getPosts(
+        postsList.from as string && parseISO(postsList.from as string) || undefined,
+        postsList.until as string && parseISO(postsList.until as string) || undefined
+      )) ?? null,
+      screenings: (screeningsList && await getScreenings(
+        screeningsList.from as string && parseISO(screeningsList.from as string) || undefined,
+        screeningsList.until as string && parseISO(screeningsList.until as string) || undefined
+      )) ?? null,
     },
     revalidate: 10,
   } : {
