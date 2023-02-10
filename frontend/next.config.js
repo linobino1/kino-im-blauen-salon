@@ -10,7 +10,7 @@ const nextConfig = {
     domains: [
       // may not include protocol!
       'localhost',
-      process.env.NEXT_PUBLIC_HOSTNAME ?? '',
+      process.env.DOMAIN_BACKEND ?? '',
     ],
   },
 };

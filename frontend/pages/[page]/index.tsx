@@ -51,11 +51,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const postsList: PostsListBlock | undefined = pageConf.page.layout?.find(isPostsList);
   const screeningsList: ScreeningsListBlock | undefined = pageConf.page.layout?.find(isScreeningsList);
 
-  console.log('postslist')
-  console.log(postsList)
-  console.log('screeningslist')
-  console.log(screeningsList)
-
   return pageConf ? {
     props: {
       pageConf,

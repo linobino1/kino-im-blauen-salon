@@ -7,7 +7,7 @@ const cache = new InMemoryCache({
 export const apollo = new ApolloClient({
   cache,
   link: new HttpLink({
-    uri: process.env.GRAPHQL_LOCALHOST || 'http://localhost:3000/api/graphql',
+    uri: `${process.env.INTERNAL_HOST_BACKEND || 'http://localhost:3000'}/api/graphql`,
   }),
 });
 

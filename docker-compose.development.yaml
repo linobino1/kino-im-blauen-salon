@@ -18,22 +18,29 @@ services:
     env_file:
       - .env
     extra_hosts:
-      ${HOSTNAME}: 172.17.0.1
+      - ${HOSTNAME_BACKEND}:172.17.0.1  # hack that allows frontend to get backend routes by the public URL
     environment:
+      HOSTNAME:
       NODE_ENV: development
       PORT: 3000
       NEXT_PUBLIC_SERVER_URL: http://${HOSTNAME}
+      NEXTAUTH_SECRET: secret123
       NEXTAUTH_URL: http://${HOSTNAME}
-      GRAPHQL_LOCALHOST: http://backend:3000/api/graphql  # works from one docker container to another
-      REST_LOCALHOST: http://backend:3000/api  # works from one docker container to another
-      NEXT_PUBLIC_HOSTNAME: ${HOSTNAME}
-      NEXT_PUBLIC_MEDIA_URL: http://${HOSTNAME}:3000/media  # works in public internet
-      REVALIDATION_SECRET:
+
+      TIMEZONE: Europe/Berlin
+
+      DOMAIN_BACKEND: ${HOSTNAME_BACKEND}
+      NEXT_PUBLIC_HOST_BACKEND: http://${HOSTNAME_BACKEND}:3000
+      INTERNAL_HOST_BACKEND: http://backend:3000  # works from one docker container to another
+
+      REVALIDATION_SECRET: secret123
 
   backend:
     image: node:18-alpine
     ports:
       - 3000:3000
+    expose:
+      - 3000
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -42,11 +49,14 @@ services:
     env_file:
       - .env
     environment:
+      HOSTNAME:
       NODE_ENV: development
-      PAYLOAD_PUBLIC_SERVER_URL: http://${HOSTNAME}:3000
-      FRONTEND_HOST: http://frontend:3000
+      PAYLOAD_PUBLIC_SERVER_URL: http://${HOSTNAME_BACKEND}:3000
       MONGODB_URI: mongodb://db:27017/app
-      REVALIDATION_SECRET:
+      PAYLOAD_SECRET: secret123
+
+      FRONTEND_HOST: http://frontend:3000
+      REVALIDATION_SECRET: secret123
 
   db:
     ports:
