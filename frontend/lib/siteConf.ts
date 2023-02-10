@@ -24,6 +24,7 @@ export const getSiteConf = async (): Promise<SiteConf> => {
           docs {
             type
             items {
+              id
               type
               name
               url
