@@ -17,7 +17,7 @@ export const getPosts = async (from?: Date, until?: Date): Promise<Post[]> => {
           where: {
             date: { greater_than_equal: $from, less_than_equal: $until }
           }
-          sort: "date"
+          sort: "-date"
         ) {
           docs {
             title
