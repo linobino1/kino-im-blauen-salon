@@ -13,5 +13,8 @@ module.exports = {
       'frontend/**/*.ts',
       'frontend/**/*.tsx',
     ],
+    excludes: [
+      'frontend/node_modules/**/*.*',
+    ],
   },
 };
